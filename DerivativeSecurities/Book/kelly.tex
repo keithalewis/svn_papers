@@ -1,0 +1,27 @@
+\chapter{Kelly Criterion}
+
+\section{Introduction}
+In \cite{kel56}, J. L. Kelly proposes an investment strategy
+of maximizing expected logarithmic return. If $x\in\R^m$
+are the prices of $m$ instruments at the beginning of a
+period and $X\colon\Omega\to\R^m$ are the prices at the
+end of the period as a function of the outcome over the
+period, then given a probability distribution, $P$, on
+$\Omega$ the Kelly criterion is to maximize $E[\log \xi\cdot X]$
+given $\xi\cdot x = 1$. Using Lagrangian multipliers, put
+$\Phi(\xi, \lambda) = E\log \xi\cdot X - \lambda(\xi\cdot x - 1)$.
+We have $E[X/\xi\cdot X] - \lambda x = 0$. Using $\xi\cdot x = 1$
+implies $\lambda = 1$, hence $x = E[X/\xi\cdot X]$. Note that
+we automatically have $\xi\cdot x = 1$. We can also write the
+solution as $x = E[X/R_\xi]$, where $R_\xi = \xi\cdot X/\xi\cdot x$
+is the realized return.
+
+If the one period model is arbitrage free and a zero coupon bond
+exists, i.e., a $\zeta\in\R^m$ with $\zeta\cdot X(\omega) = 1$ for
+all $\omega\in\Omega$, then there exists a probability measure, $P$,
+such that $x = E[X/R_\zeta]$. In this case, the Kelly criteria
+is to invest in the zero coupon bond.
+
+For the binomial model $x = (1, s)$, $X(\pm) = (R, S_\pm)$
+with $P(\{\pm\}) = p_\pm$, solving $\max_{m + ns = 1} E[\log(mR + nS)]$
+for $m$, $n$ we get $n = p_+/(Rs - S_-) - p_-/(S_+ - Rs)$, m = 1 - ns$.

@@ -1,0 +1,169 @@
+% This is the main '.tex' file for the questions for the quant book
+
+\documentclass[11pt,righttag,verbatim]{amsbook}
+ \usepackage{microtype}
+% the next line sets the paper for createspace
+\usepackage[paperwidth = 7in, paperheight = 10in, twoside]{geometry}
+% for Lulu comment previous line and uncomment next few lines
+% this makes the text in the Lulu version identical to the Createspace version
+%\usepackage[paperwidth = 18.91cm, paperheight = 24.589cm, 
+%textwidth = 12.446cm, textheight=17.78cm, twoside]{geometry}
+
+%\usepackage[a4,cam,noinfo,center]{crop} % for printing on A4 paper,
+%                                        % remove when final  
+
+\usepackage{ifthen}
+\usepackage{graphicx}
+%\usepackage{makeidx}
+\makeindex
+
+%The TeX Gyre Termes family of fonts is based on the Nimbus Roman
+% No9 L family, but heavily extended.  
+\usepackage[T1]{fontenc}
+\usepackage{tgtermes}
+
+
+% here follow a bunch of possible alternative fonts which i didn't like... 
+
+% KP Fonts Serif family of fonts is based on the URW Palladio fonts as
+% a starting point, but all the glyphs have been redesigned. The
+% mathematics fonts include all the AMS fonts, in both normal and bold
+% weights.  
+%\usepackage[T1]{fontenc}
+% \usepackage{kpfonts}
+
+%The TeX Gyre Bonum family of fonts is based on the URW Bookman L
+%family, but heavily extended. 
+%\usepackage[T1]{fontenc}
+% \usepackage{tgbonum}
+
+%Kurier
+%\usepackage[T1]{fontenc}
+%\usepackage[math]{kurier}
+
+% The TeX Gyre Schola family of fonts is based on the New Century
+% Schoolbook family, but heavily extended. 
+%\usepackage[T1]{fontenc}
+%\usepackage{tgschola}
+
+% latin modern
+%\usepackage[T1]{fontenc}
+%\usepackage{lmodern}
+
+%The TeX Gyre Pagella family of fonts is based on the URW Palladio
+%family, but heavily extended. 
+%\usepackage[T1]{fontenc}
+%\usepackage{tgpagella}
+
+%Utopia Regular with Math Design
+%\usepackage[T1]{fontenc}
+%\usepackage[adobe-utopia]{mathdesign}
+
+% make index do see instead of see also
+\renewcommand{\seename}{see}
+
+\usepackage{bbm}
+\newtheorem{thm}{Theorem}[section] \newtheorem{lemma}{Lemma}[section]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}[section]
+\newtheorem{defn}{Definition}[section] \theoremstyle{definition}
+\newtheorem{example}{Example}[section] \theoremstyle{remark}
+\newtheorem{claim}{Claim} \newtheorem{question}{Question}
+\numberwithin{section}{chapter}
+\numberwithin{question}{chapter} 
+\numberwithin{figure}{chapter}
+\numberwithin{equation}{chapter}
+%\newtheorem{solution}{Solution}
+%\numberwithin{solution}{subsection}
+\newenvironment{solution}{Solution}{\hfill $\Box$ \vspace{0.5cm}}
+%
+\def \supp {\mbox{supp}} \def \mrn {{\Bbb R}^n} \def \mr {{\Bbb R}}
+\def \mc {{\Bbb C}} \def \mcn {{\Bbb C}^n} \def \mrno {{\Bbb R}^{n+1}}
+\def \Z {{\Bbb Z}}
+\def \mcno {{\Bbb C}^{n+1}} \def \eps {\epsilon} \def \smcomp
+{C_{0}^{\infty}} \newcommand{\Id}{\operatorname{Id}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\Berm}{\operatorname{Berm}}
+%\newcommand{\ha}{\frac{1}{2}}
+\def \ha {\frac{1}{2}} \def \lap {\Delta}
+\newcommand{\WF}{\operatorname{WF}} \def \st {:} \def \p {\partial}
+\def \hd {\Omega^{\frac{1}{2}}} \def \nbf {\frac{n}{4}} \def \sub
+{\subset} \def \subeq {\subseteq} \def \rao#1 {\frac{\p}{\p #1} #1}
+\def \rad#1{#1 \frac{\p}{\p #1} } \def \dd#1{\frac{\p}{\p #1} } \def
+\parti#1#2{\frac{\p #1}{\p #2}} \def
+\fdl#1#2{\fracwithdelims(){#1}{#2}} \def \pa#1#2{\frac{\p #1}{\p #2}}
+\def \tensor {\otimes} \def \plusminus {\pm}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\cha}{\operatorname{char}}
+\newcommand{\Max}{\operatorname{max}} \def \la {\langle} \def \ra
+{\rangle}
+\def \P {{\Bbb P}}
+\def \BS {\operatorname{BS}}
+
+\parskip 6pt
+%\pagestyle{plain}
+%\setlength{\oddsidemargin}{.25in}
+%\setlength{\textwidth}{6.5in}
+%\setlength{\topmargin}{-.25in}
+%\setlength{\textheight}{620pt}
+
+%\numberwithin{equation}{section}
+
+\frenchspacing
+\renewcommand{\baselinestretch}{1.1} 
+
+\title{Quant Job Interview Questions and Answers} 
+\author{Mark Joshi} 
+\author{Nick Denson}
+\author{Andrew Downes} 
+\date{\today}
+
+
+        
+        % Greek letters (just the common, more annoying ones)
+        \newcommand{\ga}{\alpha} \newcommand{\gb}{\beta}
+        \newcommand{\gd}{\delta}
+        \newcommand{\ep}{\epsilon} % can't use \ge
+        \newcommand{\gm}{\gamma} % can't use \gg
+        \newcommand{\gk}{\kappa} \newcommand{\gl}{\lambda}
+        \newcommand{\go}{\omega} \newcommand{\gw}{\omega}
+        \newcommand{\gs}{\sigma} \newcommand{\gt}{\theta}
+        \newcommand{\gvp}{\varphi} \newcommand{\gz}{\zeta}
+        \newcommand{\gG}{\Gamma} \newcommand{\gD}{\Delta}
+        \newcommand{\gL}{\Lambda} \newcommand{\gS}{\Sigma}
+        \newcommand{\gO}{\Omega} \newcommand{\gW}{\Omega}
+        \newcommand{\gT}{\Theta}
+
+        \newcommand{\ito}{It\^o}
+     \newcommand{\pd}[3]{\ifthenelse{\equal{#1}{1}}{
+                \frac{\partial#2}{\partial#3}}{
+                \frac{\partial^{#1}#2}{\partial#3^#1}}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\SR}{\operatorname{SR}}
+                
+
+\newcommand{\e}{\E}
+\newcommand{\E}{{\Bbb E}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\ind}{\mathbbm{1}} 
+\newcommand \code[1] {{\ttfamily{#1}}}
+
+
+\begin{document}
+\pagenumbering{roman}
+\maketitle
+\copyright{Mark Joshi, Nick Denson, Andrew Downes 2008}
+{\begin{center} Version 1.01 \end{center}}
+\setcounter{tocdepth}{2}
+\tableofcontents
+\cleardoublepage
+%\input{Introduction.tex} intro here
+\cleardoublepage
+\pagenumbering{arabic}
+%main text here
+
+\begin{thebibliography}{aaa}
+
+\end{thebibliography}
+\printindex
+\end{document}

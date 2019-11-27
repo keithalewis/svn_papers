@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+</head>
+<body>
+
+<title>
+Useful Formulas
+</title>
+
+</head>
+<body>
+
+<h1>
+Useful Formulas
+</h1>
+<p>
+<div class="ue">
+\begin{equation}
+1 = \int_{-\infty}^\infty e^{-\pi x^2}\, dx
+\end{equation}
+</div>
+Let \(I = \int_{-\infty}^\infty e^{-\pi x^2}\, dx\), then 
+\(I^2 = \int_{-\infty}^\infty\int_{-\infty}^\infty e^{-\pi x^2}e^{-\pi y^2}\,dx\,dy \)
+\(= \int_{0}^{2\pi}\int_0^\infty e^{-\pi r^2}\,r\,dr\,d\theta \)
+\(= \int_{0}^{2\pi} [-e^{-\pi r^2}/2\pi|_0^\infty]\,d\theta \)
+\(= \int_{0}^{2\pi} 1/2\pi\,d\theta = 1\).
+</p>
+<p>
+<div class="ue">
+\begin{equation}
+\sqrt{\pi/\alpha} = \int_{-\infty}^\infty e^{-\alpha x^2}\,dx
+\end{equation}
+</div>
+Put \(\alpha x^2 = \pi y^2\), then \(dx = \sqrt{\pi/\alpha}\,dy\).
+Note \(\int_{-\infty}^\infty e^{-x^2/2}\,dx = \sqrt{2\pi}\).
+</p>
+<p>
+<div class="ue">
+\begin{equation}
+\sqrt{2\pi} = \int_{-\infty}^\infty x^2e^{-x^2/2}\,dx
+\end{equation}
+</div>
+Let \(u = x\) and \(dv = xe^{-x^2/2}\,dx\) so \(du = dx\) and
+\(v = -e^{-x^2/2}\) so the integral is
+\(-x e^{-x^2/2}|_{-\infty}^\infty + \int_{-\infty}^\infty e^{-x^2/2}\,dx = \sqrt{2\pi}\).
+</p>
+<p>
+This shows the <em>standard normal distribution</em>
+\(\phi(x) = e^{-x^2/2}/\sqrt{2\pi}\), \(-\infty\lt x\lt\infty\) has variance 1.
+The <em>cumulative standard normal distribution function</em> is denoted
+\(\Phi(x) = \int_{-\infty}^x \phi(u)\,du\).
+</p>
+<h2>
+Normal Distributions
+</h2>
+<p>
+Let \(X\) be a random variable having a stanard normal distribution. 
+Every normally distributed random variable can be written
+\(N = \mu + \sigma X\) where \(\mu\) is the mean and \(\sigma^2\) is the variance. 
+<div class="ue">
+\begin{equation}
+E[e^Nf(N)] = E[e^N]E[f(N + \Var(N))]
+\end{equation}
+</div>
+More generally, if \(N\), \(N_1,\dots\) are jointly normal then
+<div class="ue">
+\begin{equation}
+E[e^Nf(N_1,\dots)] = E[e^N]E[f(N + \Cov(N, N_1),\dots)]
+\end{equation}
+</div>
+If \(X\) is standard normal, \( E[e^{\sigma X} f(\sigma X)]\)
+\( = \int_{-\infty}^\infty e^{\sigma x} f(\sigma x) e^{-x^2/2}\,dx/\sqrt{2\pi}\)
+\( = e^{\sigma^2/2}\int_{-\infty}^\infty f(\sigma x) e^{-(x - \sigma)^2/2}\,dx/\sqrt{2\pi}\)
+\( = e^{\sigma^2/2}\int_{-\infty}^\infty f(\sigma (x + \sigma)) e^{-x^2/2}\,dx/\sqrt{2\pi}\)
+\( = E[e^{\sigma X}] E[f(\sigma X + \Var(X))]\).
+</p>
+<h2>Options</h2>
+<p>
+Let \(F\) be lognormal, then \(E[\max\{k - F, 0\}]\)
+\( = E[(k - F)1(F\le k)]\)
+\( = k E[1(F\le k)] - E[F 1(F\le k)]\)
+\( = k P(F\le k) - fP(Fe^\gamma\le k)]\),
+where \(\gamma = \Var\log F\).
+If \((B_t)\) is standard Brownian motion and
+\(F = fe^{-\sigma^2t/2 + \sigma B_t}\),
+then \(E[F] = f\) and \(E[\max\{k - F, 0\}]\)
+\( = kP(B_t \le (\log k/f + \sigma^2 t/2)/\sigma))
+- fP(B_t \le (\log k/f - \sigma^2 t/2)/\sigma))\)
+\( = k\Phi(-d_2) - f\Phi(-d_1)\),
+where \(d_1 = (\log f/k + \sigma^2 t/2)/\sigma\sqrt{t}\)
+and \(d2 = d1 - \sigma\sqrt{t}\).
+</p>
+<p>
+For any stochastic process \((X_t)\) define the <em>cumulant</em>
+of \(X_t\) by \(\kappa(t,s) = \log E[e^{sX_t}]\). If 
+\(F = fe^{-\kappa(t,s) + sX_t}\) then \(E[F] = f\) and
+<div class="ue">
+\begin{equation}
+E[\max\{k - F, 0\}]
+= k E[1(F\le k)] - E[F 1(F\le k)]
+= k P(F\le k) - fP^*(F\le k)],
+\end{equation}
+</div>
+where \(P^*\) is the Esscher transform probability measure
+defined by \(dP^*/dP = F/f = e^{-\kappa(t,s) + sX_t}\).
+</p>
+<p>
+Call option formulas are determined by put-call parity:
+\(E[(F - k)^+] - E[(k - F)^+] = f - k\).
+</p>
+<p>
+Twice differentiable payoffs can be priced using cash, a forward contract,
+and a portfolio of puts and calls via
+<div class="ue">
+\begin{equation}
+\phi(x) = \phi(a) + \phi'(a)(x - a) + \int_0^a \phi''(k) (k - x)^+\,dk
++ \int_a^\infty \phi''(k) (x - k)^+\,dk,
+\end{equation}
+</div>
+where \(\phi\colon [0,\infty)\to\R\).
+The formula clearly holds for \(x = a\).
+The derivative of the right hand side is
+\(\phi'(a) - \int_0^a \phi''(k) 1(k \le x)^+\,dk
++ \int_a^\infty \phi''(k) 1(x \ge k)^+\,dk\),
+which evaluates to \(\phi'(a)\) at \(x = a\).
+The second derivative is \(\phi''(x)\) no matter the value of \(a\).
+</p>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>L&eacute;vy Processes</title>
+</head>
+
+<body>
+<h1>L&eacute;vy Processes</h1>
+<p>
+A stochastic process has <em>independent increments</em> if \(X_{t + s}
+- X_s\) and \({\cal A}_s\) are independent for all \(s,t\ge 0\).  A process
+is <em>stationary</em> if \((X_t - X_0)_{t\ge 0}\) has the same law
+as \((X_{t + s} - X_s)_{t\ge 0}\), for all \(s\ge 0\).  A L&eacute;vy
+process is any process having these two properties (plus the technical
+condition that \(X_s\to X_t\) in probability as \(s\to t\) and we assume
+\(X_0 = 0\)).
+
+</p>
+<p>
+<span class="ex">Exercise.</span>
+<span class="it">
+If the process \((X_t)\) has independent increments and \(t_0\lt
+t_1\lt\cdots\lt t_n\) then \(X_{t_0}, X_{t_1} - X_{t_0}, \dots, X_{t_n}
+- X_{t_{n-1}}\) are independent.
+
+</span>
+</p>
+<p>
+If we know the cdfs at each point in time, then we can determine
+the finite joint distributions using the fact that the increments are
+stationary and independent.
+
+</p>
+<p>
+Define the <em>cumulant</em> of a random variable \(X\) by \(\kappa(s)
+= \log E[\exp(sX)]\). It is closely related to the Laplace transform
+of the density function of \(X\) and often the cumulant is sufficent to
+determine the distrbution of \(X\).
+
+</p>
+<p>
+<span class="ex">Exercise.</span>
+<span class="it">
+For any cumulant show (i) \(\kappa(0) = 0\) (ii) \(\kappa'(0) = E[X]\)
+(iii) \(\kappa''(0) = \Var(X)\).
+</span>
+</p>
+<p>
+The higher order derivatives have more disappointing characterizations,
+but there is a simple relation between the cumulant of \(X_t\) and the
+cumulant of \(X_1\).
+
+</p>
+<p>
+<span class="lem">Lemma.</span>
+<span class="it">If \((X_t)_t\) is a L&eacute;vy process then the cumulant of
+\(X_t\) is \(t\kappa(s)\) where \(\kappa(s)\) is the cumulant of \(X_1\).
+</span>
+</p>
+<p>
+Fix \(s\) and let \(f(t) = \log E[e^{sX_t}]\), then 
+\(
+e^{f(t + u)} = E[e^{sX_{t + u}}]
+    = E[e^{sX_{t + u} - sX_t +sX_t}]
+    = E[e^{sX_{t + u} - sX_t}]E[e^{sX_t}]
+    = E[e^{sX_u}]E[e^{sX_t}]
+    = e^{f(u)}e^{f(t)}
+\)
+so \(f(t + u) = f(t) + f(u)\). Continuity in probability implies \(f\)
+is continuous so \(f(t) = ct\) for some constant \(c\). Since \(f(1) =
+\kappa(s)\) the result follows.
+
+</p>
+<p>
+This shows the distribution of the L&eacute;vy process is completely determined
+by its distribution at one point in time.
+</p>
+<p>
+A random variable, \(X\), is <em>infinitely divisible</em> if for every
+integer \(n\) there exist independent, identically distributed random
+variables, \(X_1,\dots,X_n\) such that \(X_1 + \cdots + X_n\) has the
+same law as \(X\).  Since \(X_1 = X_1 - X_{1-1/n} + X_{1-1/n} - \cdots +
+X_{1/n} - X_0\) and \(X_{(j+1)/n} - X_{j/n}\) are independent and have the
+same law as \(X_{1/n}\) it follows that \(X_1\) is infinitely divisible.
+
+</p>
+<p>
+<span class="thm">Theorem.</span> (Kolomogorov's 1932 precursor to L&eacute;vy-Khintchine)
+<span class="it">
+If \(X\) is infinitely divisible and has finite variance then there exist
+\(\gamma\in\R\) and a non-decreasing bounded function \(G\) such that
+\[
+\log E[e^{iuX}] = i\gamma u + \int_{-\infty}^\infty \frac{e^{iux} - 1 - iux}{x^2} dG(x).
+\]
+Furthurmore, \(\Var(X) = G(\infty) - G(-\infty)\).
+</span>
+</p>
+<p>
+The L&eacute;vy and Khintchine version handles the case of infinite variance.
+</p>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>
+Homework 8
+</title>
+
+</head>
+<body>
+
+<h1>
+Math 628 Sp12 Homework 8
+</h1>
+<h4>
+Due Apr. 5, 2012 at 6:40PM
+</h4>
+<p>
+Your job is to provide a convincing argument that what you claim
+is correct.
+</p>
+<p>
+Using the notation used in class, let \(F_j = F(t_j;t_j, t_{j+1})\),
+\(\delta_j = \delta(t_j,t_{j+1})\), \(D_{j,j+1} = D(t_j, t_{j+1})\),
+and \(D_j = D_{t_j}\). Recall \(E_{j-1}D_j = D_{j-1,j}D_{j-1}\) and
+\(
+E F_{j-1}\delta_{j-1}D_j
+= E (1/D_{j-1,j} - 1)D_j
+= E D_j/D_{j-1,j} - D_j
+= E E_{j-1} D_j/D_{j-1,j}  - E D_j
+= E D_{j-1} - E D_j
+= D_{0,j-1} - D_{0,j}
+\)
+</p>
+
+<p>
+<span class="ex">Exercise 1.</span>
+<span class="it">
+For an in-arrears swap we need to calculate \(E F_j\delta_j D_j\).
+Show \(E F_j\delta_j D_j = E(F_j\delta_j + F_j^2\delta_j^2)D_{j+1}\).
+What can you conclude about the relationship between a regular
+swap and an in-arrears swap?
+</span>
+[Hint: First show \(E_j(D_j - D_{j+1}) = D_jF_j\delta_jD_{j,j+1}\).]
+</p>
+<p>
+Update the <code>rutgers</code> branch of <code>xllpwflat</code>.
+You will find a spreadsheet in <code>rutgers/hw8</code> called
+<code>LMM.xls</code> that implements a simplified LIBOR market model.
+</p>
+<p>
+<span class="ex">Exercise 2.</span>
+<span class="it">
+Find the expected value of the cap.
+</span>
+</p>
+<p>
+<span class="ex">Exercise 3.</span>
+<span class="it">
+Find the expected value of the in-arrears cap.
+</span>
+</p>
+<p>
+<span class="ex">Exercise 4.</span>
+<span class="it">
+Find the expected value of the ratchet cap.
+</span>
+</p>
+
+</body>
+</html>

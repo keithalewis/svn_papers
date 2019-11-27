@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>
+Homework 7
+</title>
+
+</head>
+<body>
+
+<h1>
+Math 628 Sp12 Homework 7
+</h1>
+<h4>
+Due Mar. 29, 2012 at 6:40PM
+</h4>
+<p>
+Your job is to provide a convincing argument that what you claim
+is correct.
+</p>
+<p>
+Suppose \((F_t)_{t\ge0}\) is a forward rate process expiring at
+time \(u\)
+that is an Ito
+diffusion satisfying the SDE \(dF_t/F_t = \sigma(F_t, t)\,dB_t\),
+\(F_0 = f\).  Let \(C(k,t;f) = E_t(F_u - k)^+\) be the forward price
+of a caplet. Recall \(\phi(k,t;f) = \partial^2 C/\partial k^2\)
+is the forward density of \(F_t\). The Fokker-Planck equation says the density
+satisfies \( \frac{1}{2}\frac{\partial^2}{\partial f^2}(\sigma^2 f^2\phi)
+= \frac{\partial\phi}{\partial t}\).
+
+</p>
+
+<p>
+<span class="ex">Exercise 1.</span>
+<span class="it">
+Show \(\frac{\partial C}{\partial t} = \int_k^\infty (f - k)
+\frac{1}{2}\frac{\partial^2}{\partial f^2}(\sigma^2f^2\phi)\,df\).
+
+</span>
+</p>
+<p>
+Since \(C(k,t;f) = E(F_u - k)^+ = \int_k^\infty (f - k)\phi(f)\,df\)
+we have \(\partial C/\partial t
+= \int_k^\infty (f - k)\partial\phi/\partial t\,df
+= \int_k^\infty (f - k)\frac{1}{2}\frac{\partial^2}
+{\partial f^2}(\sigma^2 f^2\phi)\,df\).
+
+</p>
+
+<p>
+<span class="ex">Exercise 2.</span>
+<span class="it">
+Integrate the result from exercise 1 by parts twice to show
+\(\frac{\partial C}{\partial t} = \frac{1}{2}\sigma^2k^2
+\frac{\partial^2 C}{\partial k^2}\).
+
+</span>
+</p>
+<p>
+Let \(u = f - k\) and \(dv = \frac{1}{2}\frac{\partial^2}
+{\partial f^2}(\sigma^2 f^2\phi)\,df\) so \(du = df\) and
+\(dv = \frac{1}{2}\frac{\partial}
+{\partial f}(\sigma^2 f^2\phi)\). Integrating by parts gives 
+\(\frac{\partial C}{\partial t} = -\int_k^\infty \frac{1}{2}\frac{\partial}
+{\partial f}(\sigma^2 f^2\phi)\,df = -\frac{1}{2}\sigma^2 f^2\phi|_k^\infty
+= \frac{1}{2}\sigma^2 k^2\phi
+= \frac{1}{2}\sigma^2 k^2\frac{\partial^2 C}{\partial k^2}\).
+
+</p>
+
+<p>
+This gives the Dupire formula for local volatility given call prices
+at all strikes and maturities: \(\sigma^2(k,t) = \frac{\partial
+C/\partial t}{(1/2)k^2\partial^2C/\partial k^2}\).  </p>
+
+<p>
+<span class="ex">Exercise 3.</span>
+<span class="it">
+Formal application of the Ito formula gives
+\(d(F_t - k)^+ = 1(F_t \ge k)dF_t + (1/2)\sigma^2 F_t^2 \delta_k(F_t)\,dt\),
+where \(\delta_k\) is the delta function having mass 1 at \(k\).
+Take the expectation conditioned on \(F_u = k\) to show
+\(\partial c/\partial t
+= E_t[\sigma^2\mid F_u = k](1/2)k^2\partial^2 c/\partial k^2\).
+</span>
+
+<p>
+We have, \(C_t = C_f
+</p>
+
+<p>
+This gives the Derman and Kani result
+\(\sigma^2(k,t;f) = E[\sigma^2\mid F_t = k]\).
+</p>
+<p>
+<span class="ex">Exercise 4.</span>
+<span class="it">
+Use \(f(x) = f(a) + f'(a)(x - a)
++ \int_0^a f''(k)(k - x)^+\,dk
++ \int_a^\infty f''(k)(x - k)^+\,dk\) to show
+(1/2)\(E(F - a)^2 = \int_0^a p(k)\,dk + \int_a^\infty c(k)\,dk\), where
+\(p(k) = E(k - F)^+\)  is the price of a put at strike \(k\) and
+\(c(k) = E(F - k)^+\) is the price of a call at strike \(k\).
+</span>
+
+</p>
+<p>
+Take \(f(x) = x^2\), then \(F^2 = a^2 + 2a(F - a)
++ \int_0^a 2(k - F)^+\,dk
++ \int_a^\infty 2(F - k)^+\,dk\), so
+\(E F^2 = a^2 + 2a(EF - a) + \int_0^a p(k),dk
++ \int_a^\infty c(k)\,dk\). The result follows from
+\(E(F - a)^2 = EF^2 - 2aEF + a^2\).
+
+</p>
+
+</body>
+</html>

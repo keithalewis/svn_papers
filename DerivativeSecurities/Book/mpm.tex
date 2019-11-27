@@ -1,0 +1,122 @@
+\chapter{Multi-Period Model}
+
+\section{Introduction}
+\label{mpm-intro}
+
+Fix times $t_0 < \cdots < t_n$ and algebras of sets on $\Omega$,
+$\F_0\subset\dots\subset\F_n\subset\F$.  Let $X_j\colon\Omega\to\R^m$,
+$0\le j \le n$, be $\F_j$ measurable, bounded, vector valued functions
+representing a model of the prices of  $m$ market instruments at times
+$(t_j)$.  Assume one share of instrument $j$ pays a cash flow, $C_j$,
+at time $t_j$ if it was purchased at time $t_{j-1}$. E.g., a stock
+dividend, a swap or bond coupon, a spot FX interest rate roll.
+
+Let $\Xi_j\colon\Omega\to\R^m$, $0\le j < n$, be $\F_j$ measurable
+and bounded vector valued functions representing the trading position
+held in the market from time $t_j$ to time $t_{j+1}$.  The cash flows
+associated with this are $-\Xi_0\cdot X_0$ at $t_0$, $\Xi_{j - 1}\cdot
+(X_j + C_j) - \Xi_j\cdot X_j$ at $t_j$, $0 < j < n$, and $\Xi_{n-1}\cdot
+(X_n + C_n)$ at $t_n$.
+
+We will use the notation $B_j = B(\Omega, \F_j)$ for bounded
+$\F_j$ measurable functions on $\Omega$ and
+$B_j\otimes\R^m$ for bounded measurable functions taking values in $\R^m$.
+The dual of $B_j$ is $B_j^* = ba_j = ba(\Omega, \F_j)$, the space of
+finitely additive measures on $(\Omega, \F_j)$.
+
+\begin{definition}
+With prices $(X_j)$ and cash flows $(C_j)$ as above, 
+arbitrage exists if there are positions
+$\Xi_j\in B_j\otimes\R^m$ such that 
+$-\Xi_0\cdot X_0 > 0$,
+$\Xi_{j - 1}\cdot (X_j + C_j) - \Xi_j\cdot X_j\ge0$, $0 < j < n$,
+and $\Xi_{n-1}\cdot (X_n + C_n)\ge0$.
+\end{definition}
+
+\begin{theorem}
+There is no arbitrage if and only if there exist
+$\Pi_j\in ba_j$ with $\Pi_0 > 0$ and $\Pi_j\ge0$ for $0 < j \le n$ 
+such that $E[(X_{j+1} + C_{j+1})\Pi_{j+1}|\F_j] = X_j\Pi_j$, $0\le j < n$.
+\end{theorem}
+\begin{proof}
+One direction is easy. If such $(\Pi_j)$ exist, then 
+$-\Xi_0\cdot X_0\Pi_0 > 0$, 
+$(\Xi_{j - 1}\cdot (X_j + C_j) - \Xi_j\cdot X_j)\Pi_j \ge0$, $0 < j < n$,
+and $\Xi_{n-1}\cdot (X_n + C_n)\Pi_n\ge0$. 
+The sum of these cash flows is
+$\sum_{j=0}^{n-1} \Xi_j\cdot((X_{j+1} + C_{j+1})\Pi_{j+1} - X_j\Pi_j) > 0$.
+This is a contradiction if
+$E[(X_{j+1} + C_{j+1})\Pi_{j+1} - X_j\Pi_j|\F_j] = 0$ for all $j$.
+
+To prove the converse, define the linear operator 
+$A:\oplus_{j = 0}^{n-1} B_j\otimes\R^m\to\oplus_{j = 0}^{n} B_j$ by
+\begin{equation*}
+A(\oplus_{j=0}^{n-1}\Xi_j) =
+\oplus_{j=0}^n \Xi_{j - 1}\cdot (X_j + C_j) - \Xi_j\cdot X_j,
+\end{equation*}
+where $\Xi_{-1} = 0 = \Xi_n$.
+Let $\PP = \{\oplus_0^n P_j:P_0 > 0, P_j\ge0, j > 0\}$ be the
+positive cone in $\oplus_{j = 0}^{n} B_j$.
+Arbitrage is equivalent to the range of $A$ intersecting this cone.
+The adjoint of $A$ is
+$A^*\colon\oplus_{j = 0}^{n} ba_j\to
+\oplus_{j = 0}^{n-1} ba_j\otimes\R^m$ where
+\begin{equation*}
+A^*(\oplus_{j=0}^n \Pi_j) =
+\oplus_{j=0}^{n-1} E[(X_{j+1} + C_{j+1})\Pi_{j+1}|\F_j] - X_j\Pi_j.
+\end{equation*}
+By the Hanh-Banach theorem, no arbitrage is equivalent to the kernel of
+$A^*$ intersecting
+the dual cone $\PP^+$, i.e., there exist
+$\Pi_j\in ba_j$ with $\Pi_0 > 0$ and
+$\Pi_j\ge0$ for $0 < j \le n$ such that
+$A^*(\oplus_{j=0}^n \Pi_j) = 0$.
+This is equivalent to $X_j\Pi_j
+= E[(X_{j+1} + C_{j+1})\Pi_{j+1}|\F_j]$ for $0\le j < n$.
+\end{proof}
+
+Note, it is no loss in generality to assume $\Pi_0 = 1$ if $\F_0$ is
+the trivial $\sigma$-algebra.
+
+Given $\Xi_j\in B_j\otimes\R^m$, $0\le j < n$, define the martingale 
+$M_j = \sum_{i = 0}^{j-1}\Xi_i\cdot((X_{i+1} + C_{i+1})\Pi_{i+1} - X_i\Pi_i)
+= -\Xi_0 X_0 \Pi_0
++ \sum_{i = 1}^j (\Xi_{i-1}\cdot(X_i + C_i) - \Xi_i\cdot X_i)\Pi_i$,
+$j < n$, and $M_n = -\Xi_0 X_0 \Pi_0 
++ \sum_{i = 1}^{n-1} (\Xi_{i-1}\cdot(X_i + C_i) - \Xi_i\cdot X_i)\Pi_i + \Xi_{n-1}\cdot X_n\Pi_n$.
+If the trading is {\em self-financing}, i.e.,
+$\Xi_{i - 1}\cdot(X_i + C_i) - \Xi_i\cdot X_i = 0$ for $0 < i < n$,
+then $M_0 = E[M_n]$ shows $\Xi_0\cdot X_0\Pi_0 = E[\Xi_{n - 1}\cdot X_n\Pi_n]$.
+
+This formula is the basis of the statement that the cost of a
+derivative security is the expected value of its discounted payoff under
+a risk-neutral measure. If the payoff can be expressed as $\Xi_{n -
+1}\cdot X_n$ for some $\Xi_{n-1} \in B_{n-1}\otimes\R^m$ that
+is the last position in a self-financing strategy, then the cost of
+implementing this strategy at time $t_0$ is $\Xi_0\cdot X_0$.
+
+As long as at each trading time a zero coupon bond to the next trading
+time exists, it is always possible to make the trading strategy self
+financing. If the prices and cash flows are square integrable, the problem
+reduces to finding $\Xi\in L^2_{n-1}\otimes\R^m$ such that $\Xi_{n -
+1}\cdot X_n = F$, where $F\in L^2_n$ is the option payoff. This problem
+can be solved by finding $\Xi$ that minimizes $\|\Xi\cdot X - F\|$.
+
+\begin{lemma}
+Given $F\in L^2(\F)$, $X\in L^2(\F)\otimes\R^m$, the minimum
+value of $\|\Xi\cdot X - F\|$ for $\Xi\in L^2(\G)\otimes\R^m$,
+$\G\subset\F$, is $\|F\|^2 - E[\Xi\cdot X F]$, for $\Xi =
+E[XX^T|\G]^{-1}E[XF|\G]$. 
+\end{lemma}
+
+\begin{proof}
+The Fr\'echet derivative of $\Xi\mapsto\|\Xi\cdot X - F\|^2$ at $\Xi$
+is $2E[(\Xi\cdot X - F)X|\G] = 2E[XX^T|\G]\Xi - 2E[FX|\G]$. The minimum
+occurs when this vanishes.
+
+\end{proof}
+
+In general markets are not complete, but this method produces the
+best $L^2$ approximation.
+
+%\section*{Notes}

@@ -1,0 +1,238 @@
+% use E, F, ... for events!!!
+% move new commands/the
+\chapter{Probability Theory}
+
+\begin{section}{Introduction}
+
+Probability Theory had its origins in games of
+chance and was not considered to be a part of mainstream mathematics until
+fairly recently. It can be thought of as a generalization of the Propositional
+Calculus for logic that involves combining statements (`propositions') that 
+can be either `true' or `false' using the operations `and', `or', `not', etc.
+George Boole \cite{Boole:1853} proposed a set of laws that propositions satisfy that
+could be used to reduce (a very limited subset of) logical reasoning to algebraic 
+manipulation. The notion human reasoning could be reduced to a mechanical computation
+was quite stunning at the time. 
+
+Probability theory deals with `events' that have a `probability' between zero 
+and one. For events having probability zero or one, it reduces to the Propositional
+Calculus. There is not uniform agreement on what `probability' means.  Is it
+subjective or objective? Some schools interpret it as a frequency in order to give
+it an objective meaning, but modern thinking is that this is too restrictive.
+Bayesians consider it to be subjective and that it represents a
+degree of belief conditional on available information. To reconcile the 
+unsatisfactory notion of everyone having their own personal (`prior') probabilities, 
+they claim that repeated application of Bayes' Theorem involving increasing
+information would result in convergence of posterior probabilities.
+
+% (\cite{Kolmogorov:1933},\cite{Kolmogorov:1950}).
+
+%Is a probability a frequency? Is a probablity objective or subjective?
+
+%Emile Borel - probability is subjective
+
+%1923 Hausdorff - event is a measurable subset from a Borel field. (Stone's Theorem)
+
+% complexity and probability
+
+Schematically, given data $x_1$, $x_2$, \dots, and hypotheses $h_1$, $h_2$, \dots, one
+wishes to determine which hypothesis was was most likely. Bayes' Theorem provides a
+means of doing this if the hypotheses are assigned probabilities, but provides no
+guidance on assigning these a priori probabilities. In 1964 Solomonoff \cite{Solomonoff:1964} 
+obtained the remarkable result that there is a canonical prior distribution. 
+This distribution is related to Kolomogorov complexity, computability, and artificial
+intelligence \cite{AIT:2007}, but that is a fascinating story far beyond the scope of this simple note.
+
+
+\end{section}
+
+\begin{section}{Sample Spaces}
+In probability theory,
+all possible outcomes of trial are modeled by a set called the {\em sample space}.
+The possible results of flipping a coin can be described by the set $\{H, T\}$, where $H$ represents
+the outcome being heads and $T$ represents tails. Likewise, the outcome of the roll of
+a die is an element of the set $\{1,2,3,4,5,6\}$. Of course it is possible that the
+coin miraculously ends up balancing on its edge or the police raid your craps table 
+while the die is in mid roll. Mathematics is just an idealization of the real world.
+
+An element of the sample space is an {\em outcome} that represents complete knowledge of what occurred.
+A subset of the sample space is called an {\em event}. E.g., the `an even number was
+rolled' in the die example is the subset $\{2,4,6\}$.
+
+Recall the {\em cartesian product} of two sets is $A\times B = \{(a,b)\colon a\in A, b\in B\}$.
+Its elements correspond to all ways of choosing one element from the first set and one
+element from the second set.  We write $A^n$ for the cartesian product of the set $A$ with itself $n$ times.
+It can be thought of as repeated trials of sampling from $A$. If we let $n = \{0, 1, \dots, n-1\}$,
+then every function $a\colon n\to A$ corresponds to an element of $A^n$. In general
+$A^B = \{f\colon A\to B\}$ is the set of all functions from the set $B$ to the set $A$.
+
+
+\end{section}
+
+\begin{section}{Boolean Algebras}
+In what follows, we will limit ourselves to Boolean algebras with a finite number of
+elements that can be represented as sets, where `and' corresponds to set intersection,
+`or' to set union, and `not' to set complement. A collection of subsets of a
+sample space is a
+{\em Boolean algebra} if it is closed under intersection and complement. By De Morgan's
+Laws, it is also closed under intersection. 
+An event is an {\em atom} if it is not empty and no proper subset belongs to the algebra.
+Recall a {\em partition} of a set is a collection of pairwise disjoint subsets sets with union
+equal to the set.
+
+\begin{lemma}
+The atoms of a Boolean algebra form a partition.
+\end{lemma}
+\begin{proof}
+For each point in the set, the intersection of all events containing that point is an atom,
+so the union of all atoms is the entire set. If two atoms have a nonempty intersection,
+the atoms must be equal, so the atoms are pairwise disjoint.
+\end{proof}
+
+The importance of Boolean algebras is that they represent partial information. If the
+set represents all possible outcomes, knowing to which atom an outcome belongs provides
+some information about the outcome. For example, the partition $\{\{1,3,5\},\{2,4,6\}\}$
+represents the information 'we know whether the outcome was even or odd' for the
+roll of a die example.
+
+\end{section}
+
+\begin{section}{Probability Spaces}
+
+The modern axioms of Probability Theory were proposed by Kolomogorov \cite{Kolmogorov:1933,Kolmogorov:1950}.
+A {\em probability space} is a {\em sample space}, $\Omega$, representing possible
+{\em outcomes}, an algebra of {\em events}, $\F$, of subsets of the samples space, and a {\em probability
+measure}, $P$, from the algebra to the real numbers with the properties (i) $P(A)\ge0$ for
+all $A\in\F$, (ii) $P(\Omega) = 1$, and (iii) $P(A_1\cup A_2) = P(A_1) + P(A_2)$ for $A_1$, $A_2\in\F$ disjoint.
+For an event $A\in\F$, $P(A)$ represents the probability the
+outcome belongs to $A$.
+
+\begin{exercise}
+Show $P(\bar{A}) = 1 - P(A)$, for $A\in\F$, 
+where $\bar{A} = \{\omega\in\Omega\colon \omega\not\in A\}$.
+\end{exercise}
+
+\begin{exercise}
+Show $P(A\cup B) = P(A) + P(B) - P(A\cap B)$ for $A$, $B\in\F$.
+\end{exercise}
+
+Given probability spaces $(\Omega_i, \F_i, P_i)$ one can form the {\em product space}
+$\Omega = \Pi_i \Omega_i$, 
+
+\begin{subsection}{Biased Coin Toss}
+Let $\Omega = \{H,T\}$ represent the two possible outcomes of heads or tails, the
+algebra of events is $\F = \{\{\}, \{H\}, \{T\}, \{H, T\}\}$ is the set of all
+subsets of $\Omega$, and $P$ is defined by $P(\{H\}) = \theta$. From the properties
+of a probability measure $1 = P(\Omega) = P(\{H,T\}) = P(\{H\}) + P(\{T\})$, hence
+$P(\{T\}) = 1 - \theta$.
+\end{subsection}
+
+\begin{subsection}{Fair Die Roll}
+Let $\Omega = \{1,2,3,4,5,6\}$, $\F$ be the algebra of all subsets of $\Omega$
+and $P(\{\omega\}) = 1/6$ for all $\omega\in\Omega$. For example, the event
+``the outcome of the roll is even'' corresponds to the subset $\{2,4,6\}$.
+\end{subsection}
+
+\begin{subsection}{Rolling a Pair of Dice.}
+Let $\Omega' = \Omega\times\Omega$, where
+$\Omega$ is as in the previous example. The sigma algebra is the algebra
+of all subsets, and $P'(A\times B) = P'(A\times\Omega\cap\Omega\times B)
+= P(A) P(B)$, for $A$, $B\subset\Omega$. For example, the event ``rolling
+doubles'' corresponds to the six element subset $\{(1,1),\dots,(6,6)\}$
+and has probability $6/36 = 1/6$.
+\end{subsection}
+
+This is a example of forming the {\em product space} that also represents
+two independent rolls of one die. 
+
+\begin{subsection}{Uniformly Distributed Random Variable.}
+Let $\Omega = [0,1) = \{x:0\le x<1\}$, $\F$ be the algebra of all Borel measurable sets,
+and $P(A)$ be the Lebesgue measure of $A$. 
+\end{subsection}
+
+We can use this probability space to model our first example by letting
+$H$ correspond to the subset $[0,\theta)$ and $T$ correspond to
+$[\theta, 1)$.
+\end{section}
+
+\begin{section}{Conditional Expectation}
+Given two events, $A$ and $B$, define the {\em conditional probability}
+of $A$ given $B$ by $P(A|B) = P(A\cap B)/P(B)$. This is the natural
+way of localizing the probability measure to the set $B$. The
+function $A\mapsto P(A|B)$ for $A\subset B$ is a probability measure.
+($B$ is the new $\Omega$.) 
+\begin{exercise}
+Show $P(B|B) = 1$ and $P(A_1\cup A_2|B) = P(A_1|B) + P(A_2|B)$
+if $A_1$ and $A_2$ are disjoint.
+\end{exercise}
+
+The general formula for the intersection of two events is $P(AB)
+= P(A)P(B|A)$. (From here on we write $AB$ for $A\cap B$.)  Note 
+$P(A|\Omega) = P(A)$ for all events $A$ so in some sense all 
+probabilities are conditional.
+\begin{exercise}
+Show $P(AB|C) = P(A|C) P(B|AC)$ for all events $A$, $B$, $C$.
+\end{exercise}
+
+\end{section}
+
+\begin{section}{Random Variables}
+
+A {\em random variable}, $X$, is completely determined by its 
+{\em cumulative distribution function}, $F_X$, defined by 
+$F_X(x) = Prob(X\le x)$, the probability $X$ takes a value less than 
+or equal to $x$ when sampled.
+For any measurable set $A$, $Prop(X\in A) = \int_{\{x\in A\}} dF_X(x) 
+= \int_{-\infty}^\infty 1_A(x)\,dF_X(x) = E[1_A(X)]$, 
+where $1_A(x) = 1$ if $x\in A$ and $= 0$ if $x\not\in A$ is the
+{\em indicator function} of the set $A$.
+
+The c.d.f. is nondecreasing, right continuous, tends to 0 at
+$-\infty$ and tends to 1 at $\infty$. Any such function is the
+c.d.f. of a random variable. If $X$ is {\em discrete}, i.e.,
+there exist $x_i$ and $p_i > 0$ with $\sum p_i = 1$ such that
+$Prob(X = x_i) = p_i$, then its c.d.f. is piecewise constant with 
+jumps of size $p_i$ at $x_i$. If there is a function $f$ such that 
+$F(x) = \int_{-\infty}^x f(y)\,dy$ we say $X$is 
+{\em continuously distributed}.
+
+For any function $g$, $E[g(X)] = \int_{-\infty}^\infty g(x)\,dF(x)$.
+Note $E[a + bX] = a + bE[X]$.
+Define the {\em variance} of the random variable $X$ by
+$\Var(x) = E[(X - E[X])^2]$.
+
+\begin{exercise}
+Show $\Var(X) = E[X^2] - E[X]^2$. 
+\end{exercise}
+
+\begin{exercise}
+Show $\Var(a + bX) = b^2\Var(X)$.
+\end{exercise}
+
+\end{section}
+
+\begin{section}{Bayes' Theorem}
+
+From the definition of conditional probability, $P(A\cap B) = P(A)P(B|A)$. Since
+$P(A\cap B) = P(B\cap A)$, we have $P(A)P(B|A) = P(B)P(A|B)$, hence
+$P(A|B) = P(A)P(B|A)/P(B)$.
+Note that if $A$ and $B$ are independent, then $P(A|B) = P(A)$ and
+$P(B|A) = P(B)$. I.e., neither event provides additional information
+about the other.
+
+The usual statement of Bayes' Theorem \cite{DeGroot:1986}, page 66, is
+\begin{theorem}
+Let $A_1$, \dots, $A_n$ form a partition of $\Omega$, then for any event, $B$,
+\begin{equation*}
+	P(A_i|B) = \frac{P(A_j)P(B|A_j)}{\sum_j P(A_j)P(B|A_j))}.
+\end{equation*}
+\end{theorem}
+\begin{exercise}
+Show the denominator above is equal to $P(B)$.
+\end{exercise}
+
+
+
+$P(A|B_1\cdots B_n) = P(A)P(B_1|A)P(B_2|B_1 )\cdots P(B_n|B_1\cdots B_{n-1}A)/P(B_1\cdots B_n)$.
+\end{section}
+

@@ -1,0 +1,109 @@
+\documentclass[11pt,letterpaper,fleqn]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newcommand{\R}{{\bf{R}}}
+
+\author{Keith A. Lewis}
+\title{The Black-Scholes/Merton PDE}
+\begin{document}
+\maketitle
+
+In \cite{BlaSch1973}, equation (7), Fischer Black and Myron Scholes derived a partial
+differential equation for the price of options that can be replicated using
+dynamic hedging under certain assumptions. In \cite{Mer1973}, equation (33), Robert
+Merton derives a similar.
+
+Their model of prices is $X(t) = (R(t), S(t))$ where $dR/R = \rho\,dt$ 
+and $dS/S = \mu\,dt + \sigma\,dB$ describe the bond and stock prices, and
+$\rho$, $\mu$, and $\sigma$ are constant.
+Black and Scholes also assume what they call ``ideal conditions'', e.g.,
+European options having no dividends or transaction costs, whereas Merton considers
+more general notions and extensions to their theory.
+
+Ross picked up on Merton's notion of this being just the first step in a more
+general theory. \cite{Ross}
+
+Given any portfolio $\Xi(t) = (M(t), N(t))$
+consisting of $M$ shares in the bond and $N$ shares in the stock, where
+$M$ and $N$ are also It\=o diffusions, the value of the portfolio at time $t$ is 
+$V(t) = \Xi(t)\cdot X(t) = M(t)R(t) + N(t)S(t)$. A portfolio is {\em self financing} if $d(MR + NS) = M dR + N dS$. The It\=o calculus says 
+\[
+d(MR + NS) = 
+M\,dR + N\,dS + R\,dM + S\,dN + dM\,dR + dN\,dS
+\]
+so the self financing condition implies $0 = R\,dM + S\,dN + dM\,dR +
+dN\,dS$.  The financial interpretation is that changing the position $M$
+in the bond and $N$ in the stock that were put on at time $t$ to $M +
+dM$ and $N + dN$ at time $t + dt$ costs $dM\,(R + dR) + dN\,(S + dS) = 0$.
+
+Since sums and products of It\=o diffusions are It\=o diffustions, 
+there exists a function $v\colon [0,\infty)\times\R^2\to\R$ such that
+$V(t) = v(t, R(t), S(t))$. Similar functions, $m$ and $n$, exist for
+$M$ and $N$.  By the It\=o formula applied to $V$ and the self financing
+condition, 
+\[
+(v_t + \rho R v_r + \frac{1}{2} \sigma^2 S^2 v_{ss}) dt + v_s dS 
+= M dR + N dS.
+\]
+Equating the $dS$ terms gives $N = v_s$. Using $M =
+(V - v_s S)/R$, and equating the $dt$ terms yields 
+\[
+v_t + \rho R v_r + \frac{1}{2}\sigma^2 S^2 v_{ss} = \rho(V - v_s S),
+\]
+the Black-Scholes/Merton
+partial differential equation.
+
+From \cite{BlaSch1973} equation (7) is
+\[v_t = \rho V - \rho S v_s - \frac{1}{2}\sigma^2S^2v_{ss}\]
+and from \cite{Mer1973} equation (33) is
+\[\frac{1}{2}\sigma^2S^2v_{ss} + \rho S v_s - v_t - \rho V = 0\]
+
+This gives necessary conditions on $M$ and $N$. We show that
+they also satisfy the self financing condition.
+
+Since $n(t, r, s) = v_s(t, r, s)$,
+\[
+dN = (v_{st} + \rho R v_{sr} + \frac{1}{2} \sigma^2 S^2 v_{sss})\,dt
+	+ v_{ss}\,dS.
+\]
+Using $m(t, r, s) = (v - v_s s)/r$, gives
+\begin{align*}
+dM &= \bigl((v_t - v_{st}S)/R + \rho(v_r - v_{sr}S - (v - v_s S)/R)\\
+ &- \frac{1}{2}\sigma^2 S^2(v_{ss} + v_{sss}S)/R\bigr)\,dt - (v_{ss}S)/R\,dS.
+\end{align*}
+
+The $dS$ term of $R\,dM + dM\,dR + S\,dN + dN\,dS = R\,dM + S\,dN + dN\,dS$ is 
+$-v_{ss}S + v_{ss}S + 0= 0$
+and the $dt$ term is
+\begin{align*}
+&\bigl((v_t - v_{st}S) + \rho((v_r - v_{sr}S)R - (v - v_s S)) \\
+&\quad -\frac{1}{2}\sigma^2 S^2(v_{ss} + v_{sss}S)\bigr)\\ 
+&+ (v_{st} + \rho R v_{sr} + \frac{1}{2} \sigma^2 S^2 v_{sss})S\\
+&+ \sigma^2 S^2 v_{ss}
+\end{align*}
+
+Canceling and combining terms yields
+\[
+v_t + \rho(v_r R - (v - v_s S))
++\frac{1}{2}\sigma^2 S^2v_{ss}.
+\]
+Since $v$ satisfies the Black-Scholes/Merton PDE, this
+quantity is zero and hence $M$ and $N$ are
+self financing.
+
+%This gives necessary conditions on $M$ and $N$. We must show they
+%are sufficient. Given $t$, $r$, and $s$, there exists a
+%unique strong solution to $(dR, dS) = (\rho R, \mu S) dt
+%+ (0, \sigma S)dB$ that satisfies the initial condition 
+%$R(t) = r$ and $S(t) = s$ \cite{Oks}.
+%For a European option that pays $\phi(S_T)$ at time $T$,
+%define $V(t, r, s) = E^(t, r, s)[\phi(S_T)R_T/R_t | \F_t]$.
+%The Kolomogorov backward equation \cite{Oks} states
+%$V_t = \rho r V_r + \mu_s s V_s + \frac{1}{2} \sigma^2 s^2 V_ss$
+%and $V(T, r, s) = \phi(s)$. Since $V_r = -V_r/r$ it follows ...
+\bibliographystyle{plain}
+\bibliography{bsm}{}
+\end{document}

@@ -1,0 +1,115 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 8}
+\author{Due 7:10PM, 11 April 2011}
+
+\maketitle
+
+The Ho-Lee model with constant rate and volatility has short rate
+process $r_t = r + \sigma B_t$, stochastic discount
+$D_t = e^{-rt - \int_0^t\sigma B_u\,du}$, and zero coupon bond prices
+$D(s, t) = e^{-r(t - s) + \sigma^2(t - s)^3/6 - \sigma(t - s)B_s}$.
+
+\begin{xca}{(25 points)}
+The value of a caplet that pays
+$\max\{F_{\delta(t,u)}(t;t, u) - f, 0\}$ at time $u$ 
+is $E[(F_{\delta(t,u)}(t;t, u) - f)^+ D_u]$.
+Find a formula for this of the form
+$E[(1/\delta - (1/\delta + f)D(t, u)e^\gamma)^+]D(0, t)$
+for an appropriate $\gamma$.
+({\em Hint: use the fact $E[E[X\mid\F_t]] = E[X]$.})
+
+\end{xca}
+
+We have
+\begin{eqnarray*}
+E[(F_{\delta(t,u)}(t;t, u) - f)^+ D_u]
+&=& E[E[(F_{\delta(t,u)}(t;t, u) - f)^+ D_u\mid\F_t]]\\
+&=& E[E[(F_{\delta(t,u)}(t;t, u) - f)^+ D(t;t,u)D_t]]\\
+&=& E[(\frac{1}{\delta}(1/D - 1) - f)^+ D D_t]\\
+&=& E[(\frac{1}{\delta}(1 - D) - fD)^+ D_t]\\
+&=& E[(\frac{1}{\delta} - (\frac{1}{\delta} + f)D)^+ D_t]\\
+&=& E[(\frac{1}{\delta} - (\frac{1}{\delta} + f)De^\gamma)^+]E[D_t]\\
+\end{eqnarray*}
+where $\delta = \delta(t,u)$, $D = D(t;t,u)$, and 
+$\gamma = \Cov(\log D(t;t,u), \log D_t)
+= \Cov(\sigma (u - t)B_t, \int_0^t \sigma B_s \, ds)
+= \int_0^t (u - t)s\, ds = (u - t)t^2/2$.
+
+\begin{xca}{(25 points)}
+Find $s$, $k$, $\sigma$,  $r$, and $t$ (not necessarily the same $\sigma$ and
+$t$ above) such that the caplet value is given by the Black-Sholes/Merton
+put price $p(s, k, \sigma, r, t) = e^{-rt}E[(k - se^{(r - \sigma^2/2)t +
+\sigma B_t})^+]$.
+
+\end{xca}
+Since 
+\begin{eqnarray*}
+\Var(\int_0^t B_u\,du)
+&=& \int_0^t\int_0^t \Cov(B_u, B_v)\,du\,dv\\
+&=& \int_0^t\int_0^t \min\{u,v\}\,du\,dv\\
+&=& \int_0^t\int_0^v u\,du\,dv + \int_0^t\int_v^t v\,du\,dv\\
+&=& \int_0^t v^2/2\,dv + \int_0^t v(t - v)\,dv\\
+&=& \int_0^t vt - v^2/2\,dv\\
+&=& t^3/2 - t^3/6 = t^3/3,\\
+\end{eqnarray*}
+we have $E[D_t] = e^{-rt + \sigma^2t^3/6}$. Another way to 
+compute this is to note $E[D_t] = D(0, t)$ and use the
+formula above.
+We will use the subscript 1 to refer to variables from exercise 1.
+Clearly $k = 1/\delta$ and $\sigma = -(u - t)\sigma_1$. We take
+$t = t_1$ and so $r = r_1 - \sigma_1^2t_1^2/61$, and finally
+take $s = (1/\delta + f)De^\gamma/e^{r - \sigma^2/2)t}$ and
+replace $r$, $\sigma$, and $t$ in the denominator by
+what was determined above.
+
+\begin{xca}{(25 points)}
+Find a closed form formula for $\Cov(F(t;t,u), D_t)/D(0,t)$, where $F(t;t,
+u) = (1/D(t, u) - 1)/(u - t)$. Finally, choose $s
+= (1/\delta + f)De^\gamma$.
+
+\end{xca}
+
+We have $\Cov(F, D_t) = \Cov(\frac{1}{\delta}(1/D - 1), D_t)
+= \frac{1}{\delta}E[1/D]E[D_t](e^\gamma - 1)$, where $\gamma
+= -\Cov(\log D, \log D_t) = -(u - t)t^2/2$.
+Note $E[1/D] = e^{r(u - t) - \sigma^2(u - t)^3/6 + \sigma^2(u - t)^2/2}$
+so $\Cov(F(t;t,u), D_t)/D(0,t)= e^{r(u - t)
+- \sigma^2(u - t)^3/6 + \sigma^2(u - t)^2/2}(e^{-\sigma^2(u - t)t^2/2} - 1)/(u - t)$.
+
+Note this tends to $-t^2/2$ as $u$ approaches $t$.
+\begin{eqnarray*}
+\end{eqnarray*}
+
+\begin{xca}{(25 points)}
+Use Tukhi and the Ho-Lee functions from the yc project in {\tt
+http://xll.codeplex.com} to verify your formula in excecise 3 for $t =
+1$, $u = 1.25$, $r = 0.02$, $\sigma = 0.03$.
+
+\end{xca}
+
+\end{document}

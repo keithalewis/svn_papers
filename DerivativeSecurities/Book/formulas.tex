@@ -1,0 +1,37 @@
+\magnification=\magstep1
+\def\Var{\mathop{\rm Var}\nolimits}
+\def\Cov{\mathop{\rm Cov}\nolimits}
+
+$P(X = x_j) = p_j$, $p_j > 0$, $\sum_j p_j = 1$
+
+$E[X] = \sum_j x_j p_j$
+
+$E[f(X)] = \sum_j f(x_j) p_j$
+
+$E[aX + Y] = aE[X] + E[Y]$
+
+$\Var(X) = \Cov(X, X) = E[(X - E[X])^2] = E[X^2] - E[X]^2$
+
+$\Var(aX) = a^2\Var(X)$
+
+$\Cov(X, Y) = E[(X - E[X])(Y - E[Y]) = E[XY] - E[X]E[Y]$
+
+$\int_{-\infty}^\infty e^{-\pi x^2}\,dx = 1$,
+$\int_{-\infty}^\infty e^{-\alpha x^2}\,dx = \sqrt{\pi/\alpha}$
+
+$E[e^N] = e^{E[N] + \Var(N)/2}$, $N$ normal
+
+$E[e^N f(N_1,\dots)] = E[e^N] E[f(N_1 + \Cov(N, N_1),\dots)]$, jointly normal
+
+$E[S f(S)] = E[S] E[f(Se^{\Var\log S})]$, $S$ lognormal
+
+Brownian motion, $B_t$, increments are independent, stationary, normal
+
+$E[B_t] = 0$, $\Var(B_t) = t$
+
+$E[\max\{S - k, 0\}] = se^{\mu t}P(Se^{\sigma^2 t} > k) - kP(S > k)$,
+$S = se^{(\mu - \sigma^2/2) t + \sigma B_t}$
+
+$E[S] = R + \beta(E[M] - R)$, $\beta = \Cov(S, M)/\Var(M)$
+
+\bye

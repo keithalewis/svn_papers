@@ -1,0 +1,78 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 4}
+\author{Due 7:10PM, 7 Mar 2011}
+
+\maketitle
+
+\begin{xca}{(25 points)}
+Let $A(\Xi_0\oplus\cdots\oplus\Xi_{n-1}) = -\Xi_0\cdot X_0
+\oplus (\Xi_0 - \Xi_1)\cdot X_1\oplus\cdots\oplus \Xi_{n-1}\cdot X_n
+= A_0\oplus A_1\oplus\cdots\oplus A_n$.
+\begin{enumerate}
+\item Show $A_0 + \cdots + A_j = -\Xi_j\cdot X_j +
+\sum_{0\le i < j}\Xi_i\cdot\Delta X_i$, where
+$\Delta X_i = X_{i+1} - X_i$, $j < n$. 
+
+\item Show $(\Xi_j)_0^{n-1}$ is self-financing if and only if
+$\Delta (\Xi_j\cdot X_j) = \Xi_j\cdot \Delta X_j$.
+
+\end{enumerate}
+
+\end{xca}
+
+\begin{xca}{(25 points)}
+Let $N$ be normally distributed. Show $E[\max\{e^N - k, 0\}]
+= E[e^N]P(e^{N + \Var(N)} > k) - k P(e^N > k)$.
+
+Hint: You may use $E[e^N f(N)] = E[e^N] E[f(N + Var(N))]$.
+
+\end{xca}
+
+Consider the two period model with $t_0 = 0$, $t_1 = 1$, and $t_2 = 2$,
+where $X_j = (1, B_{t_j})$, $j = 0, 1, 2$, $C_j = 0$ with $(B_t)_{t\ge0}$
+being standard Brownian motion starting from zero. Consider an European
+call with strike 1 expiring at $t_2$ and the stop-loss/start-gain strategy
+$\Xi_0 = (0, 0)$, $\Xi_1 = (-B_1 1(B_1 > 1), 1(B_1 > 1))$.
+
+\begin{xca}{(25 points)}
+Show that $E[\Xi_1\cdot X_2] = 0$ and find
+$E[\max\{B_2 - 1, 0\}]$.
+
+\end{xca}
+
+\begin{xca}{(25 points)}
+Create (on your own, please) a spreadsheet using Tukhi
+that supports the results of the previous exercise.
+Compute the variance of $\max\{B_2 - 1, 0\}$ and
+$\max\{B_2 - 1, 0\} - (B_2 - B_1)1(B_1 > 1)$
+
+Hint: See BeatBlackScholes.xls in Tukhi/Samples...
+
+\end{xca}
+
+
+\end{document}

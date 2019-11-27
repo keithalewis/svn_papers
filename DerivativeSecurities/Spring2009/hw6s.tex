@@ -1,0 +1,87 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 6 Solutions}
+
+\maketitle
+
+\begin{xca}
+\begin{enumerate}
+\item
+\begin{eqnarray*}
+E[e^{\theta Z} f(Z)] &=& \int_{-\infty}^\infty e^{\theta z} f(z) e^{-z^2/2}\,dz/\sqrt{2\pi}\\
+	&=& e^{\theta^2/2}\int_{-\infty}^\infty f(z) e^{-(z - \theta)^2/2}\,dz/\sqrt{2\pi}\\
+	&=& e^{\theta^2/2}\int_{-\infty}^\infty f(z + \theta) e^{-z^2/2}\,dz/\sqrt{2\pi}\\
+	&=& E[e^{\theta Z}] E[f(Z + \theta)]\\
+\end{eqnarray*} 
+
+\item
+\begin{eqnarray*}
+E[Z f(e^{\theta Z})] &=& \int_{-\infty}^\infty z f(e^{\theta z}) e^{-z^2/2}\,dz/\sqrt{2\pi}\\
+	&=& \int_{-\infty}^\infty f'(e^{\theta z}) \theta e^{\theta z} e^{-z^2/2}\,dz/\sqrt{2\pi}\\
+	&=& \theta E[e^{\theta Z} f'(e^{\theta Z})]\\
+	&=& \theta E[e^{\theta Z}] E[f'(e^{\theta (Z + \theta)})]\\
+\end{eqnarray*} 
+
+\end{enumerate}
+\end{xca}
+
+\begin{xca}
+Let $g(x) = f'(se^{\sigma^2 t/2}x)$ so $g(e^{\sigma\sqrt{t} Z}) = f'(Se^{\sigma^2 t})$
+and $g'(x) = f''(se^{\sigma^2 t/2}x)se^{\sigma^2 t/2}$ so $g'(e^{\sigma\sqrt{t} (Z + \sigma\sqrt{t})})
+ = f''(Se^{3\sigma^2 t/2}) se^{\sigma^2 t/2}$.
+\begin{eqnarray*}
+(\partial/\partial\sigma)E[f(S)] 
+	&=& E[f'(S) S (-\sigma t + \sqrt{t} Z)]\\
+	&=& E[S] E[f'(Se^{\sigma^2 t}) (-\sigma t + \sqrt{t} (Z + \sigma\sqrt{t})]\\
+	&=& \sqrt{t} s E[Z f'(Se^{\sigma^2 t})]\\
+	&=& \sqrt{t} s^2 e^{\sigma^2 t/2} E[f''(Se^{3\sigma^2 t})]\\
+\end{eqnarray*}
+\end{xca}
+
+\begin{xca}
+Let $T\colon\H\to\K$ be a linear operator between two Hilbert spaces. If the dimension
+of the range of $T$ is 1,
+\begin{enumerate}
+\item Show there exist $x\in\K$ and $y\in\H$ with $T = x\otimes y$.
+\item Show that if $\H = \R^m$ and $\K = \R^n$ then $x\otimes y = xy^T$, where
+$y^T$ is the transpose of $y$.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}
+Let $x = (1, s)$, and $X = (R, S)$, where $s$ and $R$ are scalars and 
+$S$ is a random variable on $\Omega$.
+Let $F$ be another random variable on $\Omega$.
+\begin{enumerate}
+\item Find $\xi = E[X\otimes X]^{-1} E[FX]$.
+\item Show $\xi\cdot X = F$ if and only if $S$ and $F$ are perfectly correlated.
+\item Show that if the cardinality of $\Omega$ is 2, then $S$ and $F$ are perfectly correlated.
+\end{enumerate}
+[Note: perfectly correlated means correlation 1 or -1.]
+\end{xca}
+
+\end{document}

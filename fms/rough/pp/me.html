@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>Maximum Entropy Principle</title>
+</head>
+
+<body>
+<h1>Maximum Entropy Principle</h1>
+<p>
+The <em>maximum entropy prinicple</em> states that the a priori
+probabilities to be chosen for a probability distribution should be
+the ones having the largest entropy that satisfies initial
+information. For a discrete distribution the entropy is defined
+to be \(H = - p_j \sum_j \log p_j\) and for a continuous
+distribution \(H = -\int f(x)\log f(x)\,dx\) where \(f\) is
+the probability density.
+
+</p>
+<p>
+In general prior information is defined in terms of contraints
+on random variables on the probability space.
+
+</p>
+
+<h2>Examples</h2>
+<p>
+
+<span class="ex">Exercise.</span>
+<span class="it">
+The distribution \(\{p_j\}_{j=1}^n\) has maximum
+entropy precisely when \(p_j = 1/n\) for all \(j\).
+</span>
+</p>
+<p>
+The maximum entropy principle generalizes Laplaces
+principle of indifference.
+
+</p>
+<p>
+
+<span class="ex">Exercise.</span>
+<span class="it">
+Suppose \(f\) is supported on the positive real numbers and
+define the random variable \(X\colon [0,\infty)\to\bf{R}\) by
+\(X(\omega) = \omega\). Show the maximum entropy distribution
+given \(E X = \mu\) is the exponential distribution
+\(f(\omega) = \mu e^{-x/\mu}\), \(x\ge0\).
+</span>
+</p>
+
+<span class="ex">Exercise.</span>
+<span class="it">
+Suppose \(f\) is supported on the real numbers and
+define the random variable \(X\colon \bf{R}\to\bf{R}\) by
+\(X(\omega) = \omega\). Show the maximum entropy distribution
+given \(E X = \mu\) and \(\Var X = \sigma^2\) is the normal distribution
+\(f(\omega) =
+e^{-\frac{1}{2}(\frac{x - \mu}{\sigma})^2}/\sigma\sqrt{2\pi}\).
+</span>
+</p>
+
+<h3>References</h3>
+<p>
+E. T. Jaynes,
+<i>Probability Theory With Applications in Science and Engineering</i>,
+<a href="http://bayes.wustl.edu/etj/science.pdf.html" target="_blank">
+link
+</a>
+&nbsp;
+<a href="http://ksvanhorn.com/bayes/jaynes/" target="_blank">errata</a>
+</p>
+
+</body>
+</html>

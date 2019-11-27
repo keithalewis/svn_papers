@@ -1,0 +1,109 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 7}
+\author{Due 7:10PM, 4 April 2011}
+
+\maketitle
+
+\begin{xca}{(30 points)}
+Consider the model with prices $X_j = (R_j, S_j, 0)$, $0\le j\le n$,
+and cash flows $C_j = (0, 0, \Phi_j - \Phi_{j-1})$, $0 < j\le n$,
+at times $t_0$, \dots, $t_n$, where $\Phi_n = S_n$.
+Assume $\Pi_j$
+is the no arbitrage price deflator.
+Show $\Phi_j = E[\Phi_{j+1}\mid \F_j]$ if $\Pi_j$ is
+$\F_{j-1}$ measurable. (We say $(\Pi_j)$ is {\em predictable}.)
+Conclude $\Phi_0 = E[S_n]$.
+\end{xca}
+
+By the FTAP, $0 = E[(\Phi_j - \Phi_{j-1})\Pi_j\mid F_{j-1}]
+= E[\Phi_j - \Phi_{j-1}\mid F_{j-1}]\Pi_j$
+if $(\Pi_j)$ is predictable. We conclude
+$\Phi_0 = E[\Phi_1] = \cdots E[\Phi_n] = E[S_n]$.
+
+\begin{xca}{(30 points)}
+Let $f = F(0;t,u)$ be the forward rate now and $F = F(t;t,u)$
+be the forward rate expiration $t$ over the interval $[t,u]$.
+From exercise 1, we know the futures rate at time zero is
+$E[F]$. Find a formula for $E[F] - f$ involving $D_u$, the
+stochastic discount to time $u$, and determine
+under what conditions this difference is positive.
+\end{xca}
+
+Since the price of a forward contract is zero, we have
+$0 = E[(F - f)D_u] = E[FD_u] - fE[D_u] = E[F]E[D_u] + \Cov(F,D_u)
+- fE[D_u]$ so $E[F] - f = -\Cov(F,D_u)/D(0,u)$.  This is positive
+if and only if $\Cov(F,D_u)$ is negative, which is usually the case.
+
+\begin{xca}{(40 points)}
+Consider the Ho-Lee short rate model $r_t = r + \sigma B_t$, where $r$
+and $\sigma$ are constants and $B_t$ is standard Brownian motion.
+\begin{enumerate}
+\item Show $\int_s^t B_u\,du = tB_t - sB_s - \int_s^t u\,dB_u$.
+\item Using the fact $e^{-\int_0^t\theta(u)\,dB_u - \int_0^t\theta^2(u)/2\,du}$
+is a martingale, find a closed form formula for
+$D(s,t) = E[D_t/D_s|\F_s]$ where $D_t = e^{-\int_0^t r_u\,du}$ is
+the stochastic discount.
+\end{enumerate}
+\end{xca}
+
+Lets do the general case $r_t = r(t) + \sigma(t) B_t$.
+By Ito's formula, $d(\theta(t)B_t) = \theta(t)\,dB_t + \theta'(t)B_t\,dt$.
+Let $\Sigma(t) = \int_0^t \sigma(s)\,ds$. We have
+\begin{eqnarray*}
+D(s,t) &=&
+E[e^{-\int_s^t r_u\,du}\mid\F_s]\\
+&=& E[e^{-\int_s^t (r(u) + \sigma(u)B_u)\,du}\,du\mid\F_s]\\
+&=& e^{-\int_s^t r(u)\,du}E[e^{-\int_s^t \sigma(u)B_u}\,du\mid\F_s].\\
+\end{eqnarray*}
+Now
+\begin{eqnarray*}
+E[e^{-\int_s^t \sigma(u)B_u}\,du\mid\F_s] 
+&=& E[e^{-\Sigma(t)B_t + \Sigma(s)B_s
+	+\int_s^t \Sigma(u)\,dB_u}\mid\F_s]\\
+&=& e^{-(\Sigma(t) - \Sigma(s))B_s}
+	E[e^{-\Sigma(t)B_t + \Sigma(t)B_s
+	+\int_s^t \Sigma(u)\,dB_u}\mid\F_s]\\
+&=& e^{-(\Sigma(t) - \Sigma(s))B_s}
+	E[e^{-\int_s^t (\Sigma(u) - \Sigma(t))\,dB_u}\mid\F_s]\\
+&=& e^{-(\Sigma(t) - \Sigma(s))B_s}
+	e^{+\int_s^t (\Sigma(u) - \Sigma(t))^2/2\,du}\\
+\end{eqnarray*}
+Putting it back together gives the general formula
+\begin{eqnarray*}
+D(s,t)
+&=& e^{-\int_s^t r(u) - (\Sigma(u) - \Sigma(t))^2/2\,du
+-(\Sigma(t) - \Sigma(s))B_s}\\
+\end{eqnarray*}
+
+For constant $r$ and $\sigma$, $\Sigma(t) = \sigma t$ so
+\begin{eqnarray*}
+D(s,t)
+&=& e^{-r(t - s) + \sigma^2(t - s)^3/6 - \sigma(t - s)B_s}\\
+\end{eqnarray*}
+
+\end{document}

@@ -1,0 +1,35 @@
+% ds.tex - notes on computing delta
+\documentclass[12pt,fleqn]{amsart}
+\usepackage{amsmath}
+
+\newcommand{\Var}{\mathop{\rm Var}}
+\newcommand{\Cov}{\mathop{\rm Cov}}
+
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{lemma}{Lemma}
+
+\begin{document}
+
+\title{Volatility Variance Convexity}
+\author{Keith A. Lewis}
+\maketitle
+
+Let $X_j$ be independent normally distributed random variables, then
+$Y_n = X_1^2 + \cdots + X_n^2$ is $\chi^2$ with $n$ degrees of freedom
+with density $x^{(n/2)-1}\exp(-x/2)/2^n\Gamma(n/2)$, $x > 0$. We first
+find $\sqrt{E[Y_n]} - E[\sqrt{Y_n}]$.
+
+The $\chi^2$ distribution is a gamma distribution with $\alpha = n/2$
+and $\beta = 1/2$.
+Using
+$$
+	\Gamma(\alpha)/\beta^\alpha
+		= \int_0^\infty x^{\alpha - 1} e^{-\beta x}\,dx
+$$
+we see $E[Z^\gamma] = \Gamma(\alpha + \gamma)/\beta^\alpha
+\Gamma(\alpha)$ if $Z$ is Gamma($\alpha,\beta$).
+
+This shows $E[\sqrt{Y_n}] = \Gamma((n + 1)/2)\sqrt{2}/\Gamma(n/2)$.
+
+\end{document}
+

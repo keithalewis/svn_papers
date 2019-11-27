@@ -1,0 +1,67 @@
+\documentclass[11pt,fleqn]{amsproc}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 1}
+\author{Due 7:10PM, 1 Feb 2010}
+
+\maketitle
+
+\begin{xca}{(20 points)}
+Let $D(t; u, v)$ denote the price at time $t$ of a zero coupon bond
+effective at time $u$ and terminating at time $v$, i.e.,
+a contract for the sequence of cash flows $-D(t; u, v)$ at time 
+$u$ and $1$ at time $v$, having zero price at time $t$.
+Show $D(t; u, v) D(t; v, w) = D(t; u, w)$ for $t\le u\le v\le w$
+assuming no arbitrage and perfect liquidity.
+\end{xca}
+
+\begin{xca}{(20 points)}
+If today's EUR/USD exchange rate is $1.4$, the one year USD zero price is 99,
+and the one year EUR zero price is 98, what is today's one year forward 
+EUR/USD exchange rate assuming no arbitrage and perfect liquidity?
+\end{xca}
+
+\begin{xca}{(20 points)}
+Find puts with strikes at 1 and 2, and a calls with strikes
+at 3 and 4 having payoff piecewise linear and continuous
+taking on the values $f(x) = x^2 - 5x + 6$ at
+$x = 1$, 2, 3, 4 and having slope -3 for $0 < x < 1$
+and slope 3 for $x > 4$.
+\end{xca}
+
+\begin{xca}{(20 points)}
+Let $c(s, k, t)$ [C(s,k,t)] be the price of a European [American] call
+on a non dividend paying stock with current price $s$, strike $k$,
+and maturity $t$. Show that in the absence of arbitrage and assuming
+perfect liquidity
+\begin{enumerate}
+\item $c(s, k, t) \le C(s,k,t) \le s$,
+\item $C(s, k, t) \ge \max\{s - kD(t),0\}$,
+\item $c(s, k, t) = C(s, k, t)$,
+\item $c(s, k, t) \le c(s, k, t')$ when $t < t'$,
+\end{enumerate}
+where $D(t)$ is the discount to time $t$. Assume
+$D(t)$ is non-increasing to prove item (iii).
+\end{xca}
+
+\begin{xca}{(20 points)}
+Use the formula $E[e^N f(N_1,\dots)] = E[e^N] E[f(N_1 + \Cov(N,
+N_1),\dots)]$, where $N$, $N_1$,\dots are jointly normal to show
+\begin{equation*}
+\Cov(N,f(N_1,\dots)) = \sum_i \Cov(N,N_i) E[D_if(N_1,\dots)],
+\end{equation*}
+where $D_i f$ is the derivative of $f$ with respect to the $i$-th argument.
+\end{xca}
+
+\end{document}

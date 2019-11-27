@@ -1,0 +1,59 @@
+\documentclass[11pt,fleqn]{amsproc}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 2}
+\author{Due 7:10PM, 14 Feb 2011}
+
+\maketitle
+
+\begin{xca}{(20 points)}
+If $P_1$, $P_2$, \dots, $P_n$ are points in Euclidean space, show by
+induction that $P_1(P_1 + P_2)\cdots(P_1 + P_2 + \cdots + P_n) = P_1
+P_2 \cdots P_n$.
+
+\end{xca}
+
+\begin{xca}{(20 points)}
+If $P$, $P_1$, \dots, $P_n$ are points in Euclidean space, show by
+induction that $P(P + P_1)\cdots(P + P_n) = PP_1\cdots P_n$.
+
+\end{xca}
+
+\begin{xca}{(20 points)}
+If $Q = P + tv$ and $R = P + uv$, where $P$ is a point, $v$ is a vector,
+and $t$, $u$ are scalars, find conditions on the scalar $w$ such that $P +
+wv$ is between $Q$ and $R$.
+
+\end{xca}
+
+Consider the one period model with initial prices for a bond, stock
+and calls $x = (1, s, c_1,\dots,c_n)$ and final prices $X(\omega) =
+(R, \omega, (\omega - K_1)^+,\dots,(\omega - K_n)^+)$ where $\omega\in
+[L, H]$ and $L < K_1 < \cdots < K_n < H$.
+
+\begin{xca}{(20 points)}
+If $K_j < \omega < K_{j+1}$ show that $X(\omega)$ is between $X(K_j)$
+and $X(K_{j+1})$, $1\le j < n$.
+
+\end{xca}
+
+\begin{xca}{(20 points)}
+Calculate $X(L)X(K_1)\cdots X(K_n)X(H)$, where $X(L) = O + Re_b + Le_s$,
+$X(K_1) = O + Re_b + K_1e_s$, \dots, $X(K_n) = O + Re_b + K_ne_s + (K_n -
+K_1)e_1 + \cdots + (K_n - K_{n-1})e_{n-1}$, and $X(H) = O + Re_b + He_s +
+(H - K_1)e_1 + \cdots + (H - K_n)e_n$.
+
+\end{xca}
+
+\end{document}

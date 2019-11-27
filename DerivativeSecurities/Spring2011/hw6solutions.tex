@@ -1,0 +1,112 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 6}
+\author{Due 7:10PM, 28 March 2011}
+
+\maketitle
+
+
+\begin{xca}{(20 points)}
+Show $f(t) = r(t) + t r'(t)$, where $f$ is the instantaneous forward rate and
+$r$ is the spot rate. Draw a graph of $r(t)$ that implies a
+negative forward rate.
+\end{xca}
+
+Since $D(t) = \exp(-tr(t)) = \exp(-\int_0^t f(s)\,ds)$ we have
+$tr(t) = \int_0^t f(s)\,ds$ and so $tr'(t) + r(t) = f(t)$.
+If $tr'(t) < -r(t)$, then $f(t)$ will be negative.
+
+\begin{xca}{(20 points)}
+A cash deposit has price $1$ at time $0$ and cash flow $c_j$
+at time $t_j$.
+Given the discount to time $t_{j-1} < t_j$ is $D(t_{j-1})$, find the
+constant forward rate, $f$,
+over the interval $[t_{j-1}, t_j]$ that correctly prices the cash deposit.
+\end{xca}
+
+Since $0 = -1 + c_jD(t_j)$ and $D(t_j) = D(t_{j-1})\exp(-f(t_j - t_{j-1}))$
+we have $f = (\log c_jD(t_{j-1}))/(t_j - t_{j - 1})$.
+
+\begin{xca}{(20 points)}
+A forward has price 0 at time 0 and cash flows $-1$ at time $t$ and
+$c_j$ at time $t_j > t$. Given the discount to time $t_{j-1} < t_j$ is
+$D(t_{j-1})$, find the constant forward rate, $f$, over the interval
+$[\max\{t, t_{j-1}\}, t_j]$ when
+
+\begin{enumerate}
+\item $t > t_{j-1}$
+\item $t < t_{j-1}$, and given $D(t)$,
+\end{enumerate}
+that correctly prices the forward.
+
+\end{xca}
+
+In both cases $0 = -1D(t) + c_jD(t_j)$.
+If $t > t_{j-1}$ then since
+$D(t) = D(t_{j-1})\exp(-f(t - t_{j-1}))$, and
+$D(t_j) = D(t_{j-1}\exp(-f(t_j - t_{j-1}))$ we have
+$c = \exp(f(t_j - t))$
+so $f = (\log c)/(t_j - t)$.
+
+If $t < t_{j - 1}$ then $D(t)\exp(-f(t_{j-1} - t)) = D(t_{j-1})$
+and $D(t_j) = D(t_{j-1})\exp(f(t_j - t_{j-1}))$ so
+$cD(t_{j-1})/D(t) = \exp(f(t_j - t_{j-1}))$
+and $f = (\log cD(t_{j-1})/D(t)/(t_j - t_{j-1})$.
+
+\begin{xca}{(20 points)}
+A swap pays $(c - F_\delta(t_{j-1}; t_{j-1}, t_j))\delta(t_{j-1}, t_j)$
+at times $t_j$, $j = 1$, \dots, $n$.  Find a formula for the fixed coupon,
+$c$, in terms of the discount function, $D(t) = D(0,t) = D(t_0, t)$,
+that makes the swap value equal to zero using the fact that
+$F_\delta(t; u, v) = (D(t, u)/D(t, v) - 1)/\delta(u, v)$.
+
+\end{xca}
+
+The par coupon, $c$, is determined by 
+\begin{eqnarray*}
+0 &=& \sum_{0 < j <= n}
+(c - F_\delta(t_{j-1}; t_{j-1}, t_j))\delta(t_{j-1}, t_j)D(0,t_j)\\
+&=& c\sum_{0 < j <= n} \delta(t_{j-1}, t_j)D(0,t_j)
+ - \sum_{0 < j <= n} (1/D(t_{j-1},t_j) - 1)D(0,t_j)\\
+&=& c\sum_{0 < j <= n} \delta(t_{j-1}, t_j)D(0,t_j)
+ - \sum_{0 < j <= n} (D(0,t_{j-1})/D(0,t_j) - 1)D(0,t_j)\\
+&=& c\sum_{0 < j <= n} \delta(t_{j-1}, t_j)D(0,t_j)
+ - \sum_{0 < j <= n} (D(0,t_{j-1}) - D(0,t_j)\\
+&=& c\sum_{0 < j <= n} \delta(t_{j-1}, t_j)D(0,t_j)
+ - 1 + D(0,t_n)\\
+\end{eqnarray*}
+This imples $c = (1 - D(0,t_n))/\sum_{0 < j <= n} \delta(t_{j-1}, t_j)D(0,t_j)$.
+
+
+\begin{xca}{(20 points)}
+Complete the functions {\tt add(const cd\&)} and {\tt add(const fra\&)}
+functions in the {\tt yc::pwflat} class and e-mail your Excel add-in to
+{\tt kal12@nyu.edu} and {\tt bs1589@nyu.edu}.
+
+\end{xca}
+
+\end{document}

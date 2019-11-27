@@ -1,0 +1,81 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 9}
+\author{Due 7:10PM, 18 April 2011}
+
+\maketitle
+
+
+\begin{xca}{(25 points)}
+Let $D_t$ be the stochastic discount and $D(s,t)$ be the price at time
+$s$ of a zero coupon bond maturing at time $t$.  Show $E[D(T,t)D_T|\F_s]
+= \int_0^s D(u,t)D_u\,dG(u) + D(s,t) D_s P(s\le T\le t)$, where $T$ is a
+non-negative random variable with cumulative distribution function $G$.
+
+\end{xca}
+
+We have 
+\begin{eqnarray*}
+E[D(T,t)D_T|\F_s] &=& \int_0^\infty E[D(u,t)D_u|\F_s]\,dG(u)\\
+&=& \int_0^s E[D(u,t)D_u|\F_s]\,dG(u) + \int_s^t E[D(u,t)D_u|\F_s]\,dG(u)\\
+&=& \int_0^s D(u,t)D_u\,dG(u) + D(s,t)D_s\int_s^t \,dG(u)\\
+&=& \int_0^s D(u,t)D_u\,dG(u) + D(s,t)D_s P(s < T \le t)\\
+\end{eqnarray*}
+Note $D(u, t) = 0$ for $u > t$.
+
+\begin{xca}{(25 points)}
+Show the price of a risky zero coupon bond satisfies
+$$D_{T,R}(s, t) = D(s,t)(RP(T\le t\mid T > s)
++ P(T > t\mid T > s))1(T > s).$$
+\end{xca}
+
+Follows from $P(A\mid B) = P(A\cap B)/P(B)$
+so $P(T>t\mid T>s) = P(T > t)/P(T > s)$.
+
+\begin{xca}{(25 points)}
+Assuming a constant hazard rate of $\lambda$ and using the approximation
+$e^x \approx 1 + x$ for small $x$, show the credit spread of a risky
+zero coupon bond is approximately equal to $\lambda(1 - R)$ for small
+$\lambda$.
+
+\end{xca}
+
+Let $u$ be the credit spread so $e^{-(r + u)t} = e^{-rt}(R(1 - e^{-\lambda t})
++ e^{-\lambda t})$ so $1 - ut \approx R\lambda t + 1 - \lambda t$ and
+$u\approx \lambda(1 - R)$.
+
+\begin{xca}{(25 points)}
+Suppose a risky 1 year zero coupon bond has price 0.97. If the continuously
+compounded risk free rate is 2\% and recovery is 50\%, what is the
+constant hazard rate for the time of default under the risk-neutral 
+measure?
+
+\end{xca}
+We have $e{-(r + u)t} = 0.97$ so $u = -\log 0.97 - 0.02 \approx 0.01046$
+and $\lambda \approx u/(1 - R) = 0.02092$.
+
+\end{document}

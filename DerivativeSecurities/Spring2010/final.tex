@@ -1,0 +1,157 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Final Exam}
+%\author{10 May 2010}
+
+\maketitle
+
+For each question, circle the letter corresponding to the answer that
+is most correct. Each question is worth 12.5 points.
+
+\begin{xca}
+Let $D(t;u,v)$ be the price at time $t$ of a zero coupon bond
+over the interval $[u, v]$. Which of the following statements
+is always true in every arbitrage free model?
+\begin{enumerate}
+\item $D(0;1,2) = D(1;1,2)$.
+\item $D(0;1,2) < D(1;1,2)$.
+\item $D(0;1,2) > D(1;1,2)$.
+\item $D(0;1,2) D(1;1,2) = D(0;0,2)$.
+\item None of the above.
+\end{enumerate}
+
+\end{xca}
+
+\begin{xca}
+Let $c(s,k,t)$ be the price of a European call on a non dividend paying
+stock with current price $s$, strike $k$, and maturity $t$. Let $C(s,k,t)$
+be the price of the corresponding American call option. Assuming positive
+interest rates, no arbitrage and perfect liquidity, which of the following
+statements are true?
+
+\begin{enumerate}
+\item $c(s,k,t) < C(s,k,t)$.
+\item $c(s,k,t) \le c(s,k,t')$ when $t \le t'$.
+\item $C(s,k,t) \ge \max\{s - k, 0\}$.
+\item All of the above.
+\item None of the above.
+\item Exactly one of (a), (b), (c) is false.
+\end{enumerate}
+
+\end{xca}
+
+\begin{xca}
+Consider the piecewise linear and continuous function defined by line
+segments from $(0,3)$ to $(1,1)$ to $(2,0)$ to $(3,0)$ to $(4,1)$ and
+extrapolated linearly. Which of the following statements are true for
+portfolios consisting of at most one forward, a cash position, puts and
+calls where the puts have strikes less than the those of the calls?
+
+\begin{enumerate}
+\item There is a replicating portfolio consisting only of calls and puts that
+replicates this payoff.
+\item There is a replicating portfolio that has one put having strike 1.
+\item There is a replicating portfolio that has one call having strike 1.
+\item There is a replicating portfolio that has one put having strike 3.
+\item All of the above.
+\item Exactly one of (a), (b), (c), (d) is false.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}
+The It\=o integral $\int_0^t e^{\sigma B_s}\,dB_s$ is equal to
+\begin{enumerate}
+\item $e^{\sigma B_t} - 1 - \int_0^t e^{\sigma B_s}\,ds/2$.
+\item $(e^{\sigma B_t} - 1)/\sigma - \sigma\int_0^t e^{\sigma B_s}\,ds$.
+\item $(e^{\sigma B_t} - 1)/\sigma - \sigma\int_0^t e^{\sigma B_s}\,ds/2$.
+\item $e^{\sigma B_t} - 1 - \sigma\int_0^t e^{\sigma B_s}\,ds/2$.
+\item none of the above.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}
+Consider the one period model consisting of a bond, call,
+and put where $x = (1, 0.5, 0.5)$,
+$X(\omega) = (1, \max\{\omega - 1, 0\}, \max\{2 - \omega, 0\})$,
+$0 < \omega < \infty$.
+There is an arbitrage consisting of (circle the correct number
+in each row)
+\begin{enumerate}
+\item -1, 0, 1, 2 units of bond
+\item -1, 0, 1, 2 units of the call
+\item -1, 0, 1, 2 units of the put
+\item This model is arbitrage free.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}
+Let $F = fe^{-\sigma^2t/2 + \sigma B_t}$ where $B_t$ is standard
+Brownian motion. Let $v = E[\phi(F)]$ where $\phi$ is some
+twice differentiable functions. Which of the following are
+independent of $\phi$?
+\begin{enumerate}
+\item $v_{ff}/v_\sigma$.
+\item $v_{ff}/v_t$.
+\item $v_\sigma/v_t$.
+\item All of the above.
+\item One of (a), (b), (c) is true.
+\item Two of (a), (b), (c) is true.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}
+Let $f = F(0;t,u)$ be today's forward over $[t,u]$, $F = F(t;t,u)$ be
+the forward over $[t,u]$ at time $t$, and $D = D_u$ be the stochastic
+discount to time $u$. Which of the following statements is true?
+
+\begin{enumerate}
+\item $f = E[F] - \Cov(F,D)/E[D]$.
+\item $f = E[F] + \Cov(F,D)/E[D]$.
+\item $f < E[F]$ if $F$ and $D$ are independent.
+\item $f > E[F]$ if $F$ and $D$ are independent.
+\item None of the above are true in general.
+\end{enumerate}
+
+\end{xca}
+
+\begin{xca}
+Consider a European call with strike 50 on a risky zero coupon bond having
+100 units notional, one year maturity, and no recovery.  The call expires
+one day before bond maturity.  You may suppose the risk-free rate is 3\%
+and the hazard rate of default is 2\%. The delta hedge in the risky bond
+for this call two days before bond maturity 
+
+\begin{enumerate}
+\item is close to zero.
+\item is approximately 0.5 shares of the bond.
+\item will be close to either 1 or 0 shares of the bond.
+\item none of the above.
+\item cannot be accurately determined from the given data.
+\end{enumerate}
+\end{xca}
+
+\end{document}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>Stochastic Processes</title>
+</head>
+
+<body>
+<h1>Stochastic Processes</h1>
+<p>
+A <em>stochastic process</em> is a collection of random variables
+and algebras indexed by time, \((X_t)_{t\in T}\) and
+\(({\cal A}_t)_{t\in T}\), where \(T\subseteq [0,\infty)\).
+Just as a random variables are determined by their joint distribution, 
+a <em>stochastic process</em> is completely
+determined by its finite joint distributions. Given \(t_0\lt\cdots\lt t_n\) in \(T\) the
+corresponding finite joint distribution is \(F(x_0,\dots,x_n) = P(X_{t_0}\le x_0,\dots,X_{t_n}\le x_n)\).
+</p>
+<p>
+A random process is <em>adapted</em> if \(X_t\) is \({\cal A}_t\) measurable for every \(t\in T\). If
+we consider \({\cal A}_t\) to be the partial information available at time \(t\) then this means the
+process does not 'look into the future.'
+</p>
+<p>
+Typically the algebras have the property \({\cal A}_t\subseteq{\cal A}_u\) if \(t\lt u\) to reflect the
+notion that information increases over time. We do not make that assumption in general to
+reflect that under some conditions the only information required at time \(t\) is
+the currently information and that the historical information is not required. This
+is often the case with Markov processes or binomial tree models.
+</p>
+<h2>Martingales</h2>
+<p>
+A <em>martingale</em> is a stochastic process with the property
+\(E[X_u|{\cal A}_t] = X_t\) for \(t\lt u\). 
+Processes having independent increments are martingales.  A simple way
+to produce martingales is to fix a random variable \(X\) and define
+\(X_t = E[X|{\cal A}_t]\). This is a martingale by the tower property
+of conditional expectation, but not all martingales can be expressed
+this way.
+
+</p>
+
+<h3>Remarks</h3>
+<p>
+The Fundamental Theorem of Asset Pricing states arbitrage free models
+of prices have a positive scalar muliplier (<em>price deflator</em>)
+making them into martingales.
+
+</p>
+<p>
+Futures quotes are naturally occuring martingales because the price of
+a futures contract is always zero.
+
+</p>
+<p>
+There is a deep connection between martingales and harmonic functions
+as first shown by <a href="./papers/Kakutani1944.pdf">Kakutani</a>
+in 1944 for the case of 2-dimensional Brownian motion.
+
+</p>
+
+</body>
+</html>

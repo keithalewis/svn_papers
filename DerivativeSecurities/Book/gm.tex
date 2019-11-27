@@ -1,0 +1,43 @@
+\chapter{General Model} 
+\label{gm}
+
+A trade entails buying or selling an instrument. The price
+of a trade depends on its size
+and who is doing the transaction. Brokers
+connect buyers and sellers and make the {\em spread},
+the difference between the prices they charge
+the two counterparties. 
+The General Model does not have anything
+interesting to say about brokers. The money they make is 
+proportional to volume.
+
+There are cash flows involved with holding a position.
+Stocks pay dividends or require borrow costs, bonds pay coupons, 
+foreign exchange positions held for more than 24 hours
+involve carry payments proportional to the difference of the
+short term interest rates of the currency pair.
+
+\section{Assumptions}
+In what follows we assume that instrument prices
+are perfectly liquid, i.e., trades occur exactly at the
+given time and specified price, no matter the
+quantity. There is no bid/ask spread. The Notes section
+indicates how to incorporate more realistic assumptions.
+
+\section{Model}
+The price of a instrument, $(X_t)$, is modeled by a semimartingale.
+Every instrument has cash flows $(C_j)$ at $(U_j)$ associated with it,
+where the $(U_j)$ are stopping times and each $C_j$ is measurable with
+respect to $\F_{U_j}$. Trading in the market is modeled by positions,
+$(\Xi_j)$ held over the interval $(T_j, T_{j+1})$, where the $T_j$
+are increasing stopping times and each $\Xi_j$ is $\F_{T_j}$ measurable.
+
+The {\em profit and loss} at time $t$ due to trading is \begin{equation*}
+\sum_j \Xi_j\cdot(X_{T_{j + 1}\wedge t} - X_{T_{j}\wedge t} + \sum \{
+C_k : T_j\wedge t < U_k < T_{j+1}\wedge t\}) \end{equation*} where
+$t\wedge u = \min\{t, u\}$.
+
+If we define the left-continuous adapted process $\Xi_t = \Xi_j$ 
+for $t_j < t \le t_{j+1}$, then $A_t = A_0 + \int_0^t \Xi_s\,dX_s$
+using the standard definition of integration with respect to
+a ... [Protter]

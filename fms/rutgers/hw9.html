@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>
+Homework 9
+</title>
+
+</head>
+<body>
+
+<h1>
+Math 628 Sp12 Homework 9
+</h1>
+<h4>
+Due Apr. 12, 2012 at 6:40PM
+</h4>
+<p>
+Your job is to provide a convincing argument that what you claim
+is correct.
+</p>
+
+<p>
+<span class="ex">Exercise 1.</span>
+<span class="it">
+Find the credit spread of a one year zero coupon bond
+assuming a risk free rate of 1%, a default intensity of 5%, and 50% recovery.
+</span>
+</p>
+<p>
+<span class="ex">Exercise 2.</span>
+<span class="it">
+Consider an option on a risky 1 year zero coupon bond having $100 notional
+that pays $1 if the bond is trading between $10 and $90 one day prior
+to expiration. Assuming the risk free rate is 1%, the default intensity
+is 5%, and recovery is zero, what is the value of this option rounded
+to the nearest penny.
+
+</span>
+</p>
+<p>
+The Plackett family of copulas are given by
+\[
+C_\theta(u,v) =
+\frac{1 + (\theta - 1)(u + v)
+- \sqrt{[1 + (\theta - 1)(u + v)]^2 - 4uv\theta(\theta - 1)}}
+{2(\theta - 1)}
+\]
+for \(\theta\ge0\) and \(C_1(u,v) = uv\). Note that
+\(C_0(u, v) = \max\{u + v - 1, 0\}\) and
+\(C_\infty(u, v) = \min\{u, v\}\) give the bookends of
+the Frech\'et-Hoeffding inequality.
+</p>
+<p>
+Given two random variables \(X\) and \(Y\) the <em>odds ratio</em>
+is \(\theta(x,y) = P(X>x,Y>y)P(X\le x,Y\le y)/P(X>x,Y\le y)P(X\le x,Y>y)\).
+Note that if \(X\) and \(Y\) are independent, then \(\theta = 1\),
+if \(Y = X\) then \(\theta = \infty\), and if \(Y = -X\) then
+\(\theta = 0\) for all \(x\), \(y\).
+</p>
+<p>
+<span class="ex">Exercise 3.</span>
+<span class="it">
+If \(U\) and \(V\) are two random variables uniformly distributed
+on the unit interval having a Plackett joint distribution, show
+the odds ratio \(\theta(u,v)\) is constant.
+</span>
+</p>
+
+<p>
+<span class="ex">Exercise 4.</span>
+<span class="it">
+Consider a one year floating leg of a risky swap no recovery and payment
+frequency \(f\) times per year. Let \(V(f) = \sum_{j=1}^f (D(0,(j-1)/f) -
+D(0,j/f))P(T > j/f)\). Show \(V(2) \ge V(1)\).
+
+</span>
+</p>
+<p>
+<span class="ex">Extra Credit (25 points).</span>
+<span class="it">
+Show \(V(f)\) in exercise 4 is an increasing function of \(f\).
+</span>
+</p>
+
+</body>
+</html>

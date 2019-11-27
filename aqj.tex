@@ -1,0 +1,44 @@
+\documentclass[fleqn]{amsart}
+\usepackage{amssymb,amsmath,amsthm,hyperref}
+
+\def\F{\mathcal{F}}
+\def\Var{\mathop{\rm Var}}
+\def\Cov{\mathop{\rm Cov}}
+\newcommand{\RR}{\mathbb{R}}
+
+\title{A Quant's Job}
+\author{Keith A. Lewis}
+\email{kal@kalx.net}
+\address{KALX, LLC \tt{\url{http://kalx.net}}}
+
+\begin{document}
+\maketitle
+
+\begin{section}{What Quants Do}
+Specify a set of possible outcomes, $\Omega$,
+and algebras of sets on $\Omega$, $(\F_t)_{t\ge0}$, where $\F_t$ represents
+information available at time $t$.
+
+Then next step is to specify a short rate process, $(R_t)_{t\ge0}$.
+This process has to be better than adapted, it must be predictable, and
+represents the notion that 1 unit invested at time $t$ will pay $1 +
+R_t\,dt = \exp(R_t\,dt)$ at time $t + dt$.  Define the {\em stocastic
+discount} to be $D_t = \exp(-\int_0^t R_s\,ds)$.
+
+The final step is to specify a vector valued stochatic process,
+$(X_t)_{t\ge0}$ representing the prices of market instruments
+such that $(X_tD_t)_{t\ge0}$ is a martingale.
+
+To do a good job, $X_0$ must be todays prices and $(X_t)_{t\ge0}$ should
+permit dynamics that capture possible market moves.
+
+To do a great job, the parmeters of the stochastic process should
+correspond as closely as possible to market prices.
+\end{section}
+
+\begin{section}{Why Quants Do It}
+If $(\Xi_t)_{t\ge0}$ 
+Being able to find a strategy, $\Xi$, that permits 
+\end{section}
+
+\end{document}

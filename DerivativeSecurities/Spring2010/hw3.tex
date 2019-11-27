@@ -1,0 +1,63 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 3}
+\author{Due 7:10PM, 23 Feb 2009}
+
+\maketitle
+
+\begin{xca}{(30 points)}
+Define the wedge product of vectors, $v\wedge w$, by
+$v\mapsto v\wedge w$ and $w\mapsto v\wedge w$ are linear,
+and $v\wedge v = 0$.
+\begin{enumerate}
+\item Show $v\wedge w = -w\wedge v$ for any vectors $v$, $w$.
+\item Show $(a e_1 + b e_2)\wedge (c e_1 + d e_2) = (ad - bc)e_1\wedge e_2$
+for vectors $e_1$, $e_2$ and scalars $a$, $b$, $c$, $d$.
+(Note $ad - bc$ is the area of the parallelogram defined by the two vectors.)
+\item Let $e_1$, $e_2$, $e_3$ be a basis for a 3-dimensional vector space.
+Define a linear function by $(e_1\wedge e_2)^\perp = e_3$,
+$(e_2\wedge e_3)^\perp = e_1$, and $(e_3\wedge e_1)^\perp = e_2$. 
+Let $u = u_1 e_1 + u_2 e_2 + u_3 e_3$ and $v = v_1 e_1 + v_2 e_2 + v_3 e_3$.
+Find $w = w_1 e_1 + w_2 e_2 + w_3 e_3$ such that $(u\wedge v)^\perp = w$.
+Show $u\cdot w = 0$ and $v\cdot w = 0$.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}{(40 points)}
+Consider the one period model $x = (\sigma_1, \sigma_2, \sigma_3)$,
+$\Omega = [1/2,2] \times [1/2, 2]$, $X(\omega_1, \omega_2)
+= (|1 - \omega_1|, |1 - \omega_2|, |\omega_1 - \omega_2|)$.
+\begin{enumerate}
+\item Compute $X(\omega_1,\omega_2)$ for $\omega_1$, $\omega_2 \in \{1/2,1,2\}$.
+\item Describe the range of $X$, $X(\Omega)$.
+\item Find an arbitrage if $x = (0.2, 0.2, 0.5)$.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}{(30 points)}
+Given a set $\Omega$ and an increasing filtration of algebras
+$(\F_j)_{j=0}^n$ on $\Omega$ let $B(\Omega,\F_j,\R^m)$ denote
+the space of bounded $\F_j$ measurable functions taking values in $\R^m$.
+Suppose there exist non-negative finitely additive measures
+$\Pi_j\in ba(\Omega,\F_j)$ with $X_j\Pi_j = E_j[X_{j+1}\Pi_{j+1}]$
+for $0\le j < n$ where $E_j$ is the restriction of a finitely
+additive measure to $\F_j$.
+If $(\Xi_{j - 1} - \Xi_j)\cdot X_j = 0$
+for $0 < j < n$. Show $\Xi_0\cdot X_0\Pi_0 = E_0[\Xi_{n-1}\cdot X_n\Pi_n]$.
+\end{xca}
+
+\end{document}

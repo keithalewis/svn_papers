@@ -1,0 +1,226 @@
+\documentclass[11pt,letterpaper,fleqn]{report}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{lmodern}
+\usepackage{kpfonts}
+\usepackage{bm}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+
+\newcommand{\reason}[1]{{#1}\equiv\ }
+
+\author{Keith A. Lewis}
+\title{Notes on the \(\lambda\)-ccalculus}
+\begin{document}
+\maketitle
+\section{The \texorpdfstring{\(\lambda\)-} calculus}
+The \(\lambda\)-calculus involves {\em variables}, {\em expressions}, 
+{\em \(\lambda\)-abstraction}, and {\em application}.
+Variables are denoted by lowercase roman letters. Expressions
+are denoted by uppercase roman letters. The standard notation
+for \(\lambda\)-abstraction is \(\lambda v . E\), where \(v\) is
+a variable and \(E\) is an expression. We will use \((v\to E)\) instead.
+Application is denoted by \((E F)\) where \(E\) and \(F\) are expressions.
+
+Parentheses can be implicit. Removing outer parentheses in an expression
+does not cause ambiguity. We assume abstraction associates right to left
+so \(v\to w\to E\) is \(v\to (w\to E)\), or \(vw\to E\) for short.
+Application associates left to right so \(EFG\) is \((EF)G\) and not \(E(FG)\).
+
+If \(v\) is a variable, then \(v\) is an expression. If \(E\) is an expression
+then so is \(v\to E\). If \(F\) is an expression then \(EF\) is too.
+
+A single variable is {\em free}. The free variables in \(v\to E\) are the free
+variables in \(E\) except for \(v\). The free variables in \(EF\) are the union
+of the free variables in \(E\) or \(F\). Variables that are not free are {\em bound}.
+\begin{definition}{(\(\alpha\)-conversion)}
+Replacing all occurrences of a bound variable in an expression
+by a variable that is not free gives an equivalent expression.
+\end{definition}
+\begin{definition}{(\(\beta\)-reduction)}
+The expression \((v\to E)F\) is equivalent to
+\(E\) with all occurences of \(v\) in \(E\) replaced by \(F\).
+\end{definition}
+\begin{definition}{(\(\eta\)-equivalence)}
+The expression \((v\to E)v\) is equivalent to \(E\)
+if \(v\) is not free in \(E\).
+\end{definition}
+
+This completes the definition of the (untyped) \(\lambda\)-calculus.
+Simple as it is, it is powerful enough to express any function that can
+be can be computed.
+% and gives a negative answer to the 
+% \href{http://en.wikipedia.org/wiki/Entscheidungsproblem}{Entscheidungsproblem}.
+
+\section{Examples}
+The simplest example of \(\lambda\)-abstraction is \(x\to y\) where \(x\)
+and \(y\) are distinct variables.
+For any expression \(M\), \((x\to y)M\) can be \(\beta\)-reduced to \(y\).
+The expression \(x\to x\) is the identity function: for any
+expression \(M\), \((x\to x)M\) reduces to \(M\). We use the notation
+\(I = x\to x\) to give this expression the {\em name} \(I\).
+
+The next simplest example is \(x\to y\to z = xy\to z\). For any
+expressions \(M\) and \(N\), \(((x y\to z)M)N\) reduces to \(z\).
+Since \(x\) and \(y\) are bound, there are only two cases to consider
+when not all variables are distinct.
+Let \(T = x y\to x\) and \(F = x y\to y\).
+Observe \(TM\) reduces to \(y\to M\) so \((TM)N\) is \(M\),
+and \(FM\) reduces to \(I\) so \((FM)N\) is \(N\).
+
+Every expression is a {\em fixed point} of the identity but an amazing
+fact about the \(\lambda\)-calculus is that every expression has at
+least one fixed point.  Let \(Y = f \to(x\to fxx)(x\to fxx)\), so
+\[
+Y\underline{f}\equiv \bm{(x\to fxx)\underline{(x\to fxx)}}\equiv
+\bm{f\underline{(x\to fxx)(x\to fxx)}}\equiv f\bm{Yf},
+\]
+hence \(Yf\) is a fixed point of \(f\).
+
+\section{Logic}
+
+Writing \(x\to y\to \cdots v\to E\) as \(xy\dots v\to E\),
+The expression \(? = xyz\to (x y) z\) is the \(\lambda\)-calculus
+equivalent of an if-then-else construct since
+\begin{align*}
+&\underline{?}T\\
+\reason{name}&\bm{(\underline{x}yz\to (\underline{x} y) z)}\underline{T}\\
+\reason{reduction}&yz\to (\underline{\bm{T} y) z}\\
+\reason{T}&\underline{yz\to \bm{y}}\\
+\reason{name}&\bm{T}\\
+\end{align*}
+and
+\begin{align*}
+&\underline{?}F\\
+\reason{name}&\bm{(\underline{x}yz\to (\underline{x} y) z)}\underline{F}\\
+\reason{reduction}&yz\to (\underline{\bm{F} y) z}\\
+\reason{F}&\underline{yz\to \bm{z}}\\
+\reason{name}&\bm{F}\\
+\end{align*}
+so \(((?T)M)N\equiv M\) and \(((?F)M)N\equiv N\). 
+
+\(not = x\to (xF)T\) since \(not\ F\equiv (FF)T\equiv T\)
+and \(not\ T\equiv (TF)T\equiv F\).
+
+\(and = xy\to (xy)F\) since \(and\ F\equiv y\to (Fy)F\equiv y\to F\) is the
+constant function \(F\) and \(and\ T\equiv y\to (Ty)F\equiv y\to y\) is the identity function.
+
+\(or = xy\to (xT)y\) since \(or\ F\equiv y\to (FT)y\equiv y\to y\)
+is the identity functions and \(or\ T\equiv y\to (TT)y\equiv y\to T\)
+the constant function \(T\).
+
+%\(pair\colon xyp\to (p x)y\), \(head\colon z\to z T\), \(tail\colon z\to z F\)
+%so \(head\ pair\ x y \equiv head\ (p x)y\equiv ((T x)y)\).
+
+%Fixed points \(II = I\), \(?T = T\), \(?F = F\).
+
+\section{Church Numerals}
+The \(\lambda\)-calculus is powerful enough to describe basic arithmetic.
+To simplify exposition we will give names to expressions. Choose any two
+variables \(s\) and \(x\) and define \(\mathit{0} = sx \to x\),
+\(\mathit{1} = sx\to s x\), \(\mathit{2} = sx\to s s x\), \dots,
+where the {\it name}s {\it 0}, {\it 1}, {\it 2}, \dots are not (are to) to be
+confused with the numbers 0, 1, 2,\dots.
+In general
+{\it n} is \(sx\to s^\mathrm{n}x\) where \(s^\mathrm{n}\) means
+\(s\) repeated \(n\) times.
+Note {\it 0E} is \(x\to x\) for any expression \(E\).
+%% n -> (x -> (s ((n s) x)))
+%% n ->  x -> (s ((n s) x))  , x -> (E) = x -> E
+%% n ->  x ->  s ((n s) x)   , x -> (E) = x -> E
+%% n ->  x ->  s  (n s) x    , M(NO) = MNO
+%
+
+Let \(inc = nsx\to s (n s) x\).
+\begin{align*}
+&\underline{inc}\ \mathit{0}&\\
+\reason{name}
+&\bm{(\underline{n}sx\to s (\underline{n} s) x)}\underline{\mathit{0}}\\
+\reason{reduction}
+&sx\to s (\underline{\mathbf{0} s}) x\\
+\reason{\mathit{0}}
+&sx\to s (\underline{\bm{x\to x})x}\\
+\reason{reduction}
+&\underline{sx\to s \bm{x}}\\
+\reason{\mathit{1}}
+&\bm{1}\\
+\end{align*}
+
+Similarly, {\it 2} is \(inc\ \mathit{1}\) or \(inc\ inc\ \mathit{0}\).
+All numbers come from {\it inc}rementing {\it 0}. 
+%
+%Let \(add := m\to n\to s\to x\to m s (n s) x\). Note {\it 1E} 
+%is \(x\to Ex\) for any expression \(E\).
+%\begin{align*}
+%\underline{add}\ \mathit{1}\\
+%\bm{(\underline{m}\to n\to s\to x\to \underline{m} s (n s) x)}\ \underline{\mathit{1}}
+%&\reason{name}\\
+%n\to s\to x\to \underline{\bm{1} s} (n s) x
+%&\reason{reduction}\\
+%n\to s\to x\to \underline{\bm{(y\to sy)} (n s) x}
+%&\reason{\mathit{1},\ conversion}\\
+%\underline{n\to s\to x\to \bm{s(n s) x}}&\reason{reduction}\\
+%\bm{inc}&\reason{name}
+%\end{align*}
+%We have tediously demonstrated \((add\ 1)\ 0\) is \(1\).
+%You should try to reduce \(m\to n\to m\ inc\ n\) to \(add\).
+%Note {\it 2E} reduces to \(x\to EEx\). In general {\it nE}
+%reduces to \(x\to E^nx\) where \(E^n\) is \(E\) repeated (the number) n times.
+%
+%Let \(mul := m\to n\to s\to m n s\). Show this reduces to \(m\to n\to m (add\ n) 0\).
+%Let \(exp := m\to n\to m n\). Note \((exp\ 2)\ 3\) reduces to
+%\(2 3\) which reduces to \((x\to 33x)3\), \((33)3\), \((3333)3\)
+%\begin{align*}
+%\end{align*}
+%
+%\section{Combinators}
+%Note {\it 0}, {\it 1}, \dots, \(inc\), \(add\) and \(mul\) have no free variables.
+%Such expressions are called {\em combinators}.
+%The identity function \(I := x\to x\) is the simplest example. The next simplest
+%example is \(K := x\to y\to x\). 
+%Since \((KM)N\) reduces to \(M\) for any expression \(N\) we can
+%think of \(KM\) as a function that takes on the constant value \(M\).
+%
+%The combinator {\it 0} can be written \(KI\).
+%\begin{align*}
+%KI&\\
+%(x\to y\to x)I&\reason{name}\\
+%y\to I&\reason{reduction}\\
+%y\to (x\to x)&\reason{name}\\
+%s\to (x\to x)&\reason{conversion}\\
+%\mathit{0}&\reason{name}
+%\end{align*}
+%The easy way to figure this out is to note \(KM\) is 
+%\((x\to y\to x)M\) which
+%reduces to \(y\to M\) and work backward. Since
+%{\it 0} is \(s\to x\to x\), convert \(s\) to \(y\), and can use this fact to write 
+%\(K(x\to x)\), hence \(KI\).
+%
+%% K(y -> z -> (x z) y z)
+%% KK(z -> (x z) y z)
+%% KK(S(z -> (x z))(z -> (y z))
+%Let \(S := x\to y\to z\to (x z) y z\). Since
+%\begin{align*}
+%(S(x\to M))(x\to N)&\\
+%((x\to y\to z\to (x z) y z)(x\to M))(x\to N)&\reason{name}\\
+%((y\to z\to ((x\to M) z) y z))(x\to N)&\reason{reduction}\\
+%((z\to ((x\to M) z) (x\to M) z))&\reason{reduction}\\
+%\end{align*}
+%we can replace expressions of the form \(x\to MN\)
+%by \(S(x\to M)(x\to N)\).
+%
+%For example
+%\begin{align*}
+%inc&\\
+%n\to s\to x\to s (n s) x&\reason{name}\\
+%K(s\to x\to s (n s) x)&reason{x\to M}\\
+%KK(x\to s (n s) x)&\reason{x\to M}\\
+%KKS(x\to s)(x\to (n s) x&\reason{x\to MN}\\
+%KKS(Ks)(S(x\to ns)(x\to s)&\reason{s\to MN}\\
+%\end{align*}
+%
+\end{document}

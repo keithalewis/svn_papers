@@ -1,0 +1,19 @@
+By training, Keith is a mathematician who began his career as a
+J. D. Tamarkin assistant professor at Brown University happily hunting
+for invariant subspaces using Operator Theory and Functional Analysis.
+
+In the 90's he worked at Bankers Trust, Morgan Stanley, and Banc of
+America Securities.  At Bankers Trust he worked in the technology group
+responsible for interest rate derivatives and later in the quant group
+responsible for all derivative products traded by Bankers worldwide.
+At Morgan Stanley Keith worked in the technology group supporting
+the fixed income derivative desk, ran the technical side of their
+AAA subsidiary, and was a member of Global Treasury responsible for
+determining capital charges for all trades done by the Derivative Products
+Group. At Banc of America Securities Keith was very actively engaged in
+many levels of their equity derivative business.
+
+Since 2002, Keith has been doing consulting for hedge funds and investment
+banks and creating non-proprietary open source spinoffs available at
+http://xll.codeplex.com.
+

@@ -1,0 +1,70 @@
+\chapter{Grassman's Geometric w} 
+\label{ga}
+
+It took nearly two millenia from the time of the geometric machinery
+developed by Euclid until Descartes invented analytic geometry by
+introducing coordinates to reduce geometric problems to algebra. Some
+two hundred years later Hermann Grassmann introduced the next major
+breakthrough by using coordinate-free algebra to conquer geometric
+questions. For some reason, his theory is less well known, although far
+more powerful.
+
+During his time, non-Euclidean geometries were being considered, but
+his theory was about Euclidean space. This is different from what we now
+call a vector space in that there is no origin, simply points in space.
+His notion was that if $P$ and $Q$ are points in space, $PQ$ represents
+the line from $P$ to $Q$. If $R$ is a third point, $PQR$ represents the
+plane determined by the three points, and so on. His theory worked in any
+number of dimensions, which was quite revolutionary at the time. One
+triumph of his theory was that he (and Clifford) were able to fit
+Hamilton's 4-dimensional quaternions into a more general framework.
+
+In Grassman's algebra, $P + Q$ is the midpoint between $P$ and $Q$ and
+has a weight of 2. More generally, $aP + bQ$ has weight $a + b$ and is
+the point at which a weight of $a$ at $P$ and a weight of $b$ at $Q$ would
+balance on the line determined by $P$ and $Q$. The fundamental assumption
+Grassmann made was that $PQ = 0$ if and only if $P = Q$. In his
+algebra of points, the first consequence is that $PQ
+= -QP$ since $0 = (P + Q)(P + Q) = PP + PQ + QP + QQ = PQ + QP$. This
+incidence rule generalizes to higher dimensions.  $PQR = 0$ if and only
+if $P$, $Q$, and $R$ lie on the same line, and so on.
+
+One easy geometric consequence is that the medians of the triangle $PQR$
+meet at a point.  $P + Q$ is the midpoint between $P$ and $Q$. $(P +
+Q)R$ is the line from the midpoint to $R$. $P + Q + R$ is where all
+the lines from the midpoints intersect because $P(Q + R)(P + Q + R) =
+(PQ + PR)(P + Q + R) = PQP + PQQ + PQR + PRP + PRQ + RPR = PQR + PRQ =
+P(QR + RQ) = 0$. Same story for $Q(R + P)$ and $R(P + Q)$.
+
+Let $R(t) = (1 - t)P + tQ = P + t(Q - P)$, where $t$ is a scalar.
+Clearly $R(0) = P$ and $R(1) = Q$. Also, $R(1/2)$ is the midpoint
+between $P$ and $Q$ with weight 1.  If we interpret $Q - P$ as the vector
+from $P$ to $Q$, we can recognize $R(t)$ as the instruction ``starting
+from the point $P$, move $t$ multiples in the direction $P$ to $Q$.''
+The points $R(t)$ for $t$ scalar are the points on the line determined
+by $P$ and $Q$.
+
+Note $R(t) \not= Q - P$ for any value of $t$ since $Q - P$ has weight
+zero. Such `points' are called {\em vectors} and can be thought of
+as $\lim_{t\to\infty}R(t)$.
+
+\section{Dimension One}
+Points are zero dimensional. Products of points are one dimensional.
+$PQ = RS$ if and only if there exists a scalar $t$ such that $R = P +
+t(Q - P)$ and $S = Q + t(Q - P)$, that is, the line segment from $R$
+to $S$ is a translation of the segment from $P$ to $Q$ along the line
+determined by $P$ and $Q$. Note $R$ and $S$ are on the line
+determined by $P$ and $Q$ since $PQR = RSR = 0$ and $PQS = RSS = 0$.
+Hence, there exist scalars $t$ and $u$ such that $R = R(t)$ and $S =
+R(u)$.  Since $PQ = R(t)R(u) = (1-t)uPQ + t(1-u)QP = (u - t)PQ$ we have
+$u - t = 1$ so $S = R(u) = R(t + 1) = -tP + (t + 1)Q = Q + t(Q - P)$.
+
+\section{Dimension Two}
+The product of of three points is two dimensional. $PQR = STU$ if
+and only if there are scalars $t$ and $u$ such that
+$S = R(t)$, $T = R(u)$ and ...
+
+\section{Clifford Algebras}
+His rule for vector products was that $vv$ was a real number
+for any vector $v$ and defined $v\cdot w = (vw + wv)/2$ and
+$v\wedge w = (vw - wv)/2$ so $vw = v\cdot w + v\wedge w$.

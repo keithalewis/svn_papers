@@ -1,0 +1,59 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 10}
+\author{Due 7:10PM, 19 April 2010}
+
+\maketitle
+
+
+\begin{xca}{(30 points)}
+Let $R_t = r + \sigma B_t$ be the short rate process and
+assume $s\le t \le u$.
+\begin{enumerate}
+\item Show $F(s; t, u) = (D(s,t)/D(s,u) - 1)/(u - t) \approx r + \sigma B_s
+- \sigma^2(u^2 + ut + t^2 - 3(u + t)s + 3s^2)/6$ when $u \approx t$.
+\item Find a simple formula for the convexity $E[F(t;t,u)] - F(0;t,u)$.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}{(30 points)}
+Let $D_t$ be the stochastic discount and $D(s,t)$ be the price at time
+$s$ of a zero coupon bond maturing at time $t$.  Show $E[D(T,t)D_T|\F_s]
+= \int_0^s D(u,t)D_u\,dG(u) + D(s,t) D_s P(s\le T\le t)$, where $T$ is a
+non-negative random variable with cumulative distribution function $G$.
+
+\end{xca}
+
+\begin{xca}{(40 points)}
+Suppose a risky 1 year zero coupon bond has price 0.97. If the continuously
+compounded risk free rate is 2\% and recovery is 50\%, what is the
+constant hazard rate for the time of default under the risk-neutral 
+measure?
+
+\end{xca}
+
+\end{document}

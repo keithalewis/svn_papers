@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>
+Homework 5
+</title>
+
+</head>
+<body>
+
+<h1>
+Math 628 Sp12 Homework 5
+</h1>
+<h4>
+Due Mar. 2, 2012 at 6:40PM
+</h4>
+<p>
+Your job is to provide a convincing argument that what you claim
+is correct.
+</p>
+<p>
+The Heath-Jarrow-Morton model assumes that for each maturity, \(u\),
+the instantaneous forward rate satisfies the SDE
+\(df(t, u, \omega) = \alpha(t, u, \omega)\,dt + \sigma(t, u, \omega)\,dB_t\)
+for \(t\le u\), where \((B_t)\) is standard Brownian motion and
+\(\alpha\) and \(\sigma\) satisfy appropriate conditions.
+The price of a zero coupon bond at time \(t\) maturing at time \(u\)
+is \(D(t, u) = \exp(-\int_t^u f(t, s)\,ds\)). 
+Recall the stochastic discount is \(D_t = \exp(-\int_0^t r_s\,ds)\)
+where \(r_t = f(t,t)\).
+</span>
+</p>
+<p>
+<span class="ex">Exercise 1.</span>
+<span class="it">
+Prove \(dD_t = -r_t D_t\,dt\).
+</span>
+</p>
+
+<p>
+<span class="ex">Exercise 2.</span>
+<span class="it">
+Prove \(d(\int_t^u f(t,s)\,ds) = -f(t,t)\,dt + \int_t^u df(t,s)\, ds\).
+</span>
+</p>
+
+<p>
+<span class="ex">Exercise 3.</span>
+<span class="it">
+Prove \(dD(t,u) = D(t,u)\{r_t\,dt - \int_t^u df(t,s)\,ds
++ \frac{1}{2}(\int_t^u \sigma(t,s)\,ds)^2\,dt\}\).
+</span>
+</p>
+
+<p>
+<span class="ex">Exercise 4.</span>
+<span class="it">
+Prove that \(t\mapsto D(t,u)D_t\) being a martingale implies
+\(\alpha(t,u) = \sigma(t,u)\int_t^u \sigma(t,s)\,ds\).
+</span>
+</p>
+
+</body>
+</html>
+

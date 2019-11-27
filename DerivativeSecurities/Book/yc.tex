@@ -1,0 +1,136 @@
+% yc.tex - notes on yield curves
+\documentclass[12pt]{amsart}
+\usepackage{amsmath}
+
+\begin{document}
+
+\title{Yield Curves}
+\date{\today}
+\author{Keith A. Lewis}
+\address{KALX, LLC}
+\email{kal@kalx.net}
+\maketitle
+
+%\begin{abstract}
+%\end{abstract}
+
+\section{Introduction}
+
+A yield curve is used to compute the cost of moving a fixed payment from
+one date to another. A zero coupon bond is the simplest example.
+The price of a contract that pays 1 unit at time $t$, the maturity
+of the bond, is denoted $D(t)$. Assuming no arbitrage opportunities
+exist, $D(0) = 1$ and $D(t)$ is a decreasing function of time, $t$.
+
+Short term zero coupon bonds are called {\em cash deposits}.  They are
+quoted in terms of a rate, $r$, using a specific {\em day count basis}
+and a maturity $t$. A 1.2\% 1 month cash deposit having actual/360 day
+count costs 1 unit and pays $1 + 0.012\delta$ at maturity, where the {\em
+day count fraction} $\delta$ is, in this case, the number of days in the
+one month period, divided by 360. The day count fraction is approximately
+the time in years of the life, or {\em tenor}, of the contract.
+
+The cash deposit rate is related to the discount by
+$D(t) = 1/(1 + r\delta)$ so $r = (1/D(t) - 1)/\delta$.
+
+A forward contract is just a forward starting zero coupon bond.
+They are quoted in terms of a rate, $f$, using a specific day
+count basis and an {\em effective} and {\em termination} date.
+The contract is quoted in such a way as to have zero initial
+cost. Being long the contract means you will pay $1$ unit
+on the effective date, and receive $1 + f\delta$ units on the
+termination date, where $\delta$ is the day count fraction
+corresponding to the interval of time between the effective
+and termination dates.
+
+The forward rate is related to the discount by
+$D(u)/D(t) = 1/(1 + f\delta)$ so $f = (D(t)/D(u) - 1)/\delta$.
+
+To avoid large exchanges of notional, forward contracts can be specified
+to pay $(f - F)\delta$ at termination, where $F$ is the (uncertain)
+rate at time time $t$ over the interval from $t$ to $u$. If the unit
+paid at time $t$ on in the original contract is invested at this rate,
+it will pay $1 + F\delta$ at time termination. Netting this with the
+fixed payment gives the payoff described above.
+
+To describe this using formulas, we need to talk about discount
+curves that occur in the future. Let $D_s(t, u)$ denote the
+price at time $s$ of a 
+
+There are many kinds of swaps, but a generic swap is just a 
+portfolio of back-to-back forward contracts.
+
+Floating leg modelled as two zero coupon bonds.
+$F_\delta(t; t_0,\dots,t_n)$ notation.
+
+Constructing a yield curve means finding a discount curve that
+reprices a reference set of instruments. A typical reference set would
+include cash deposits at ..., forward or futures contracts from 3 months
+to 4 years, and swaps at 5, 7, 10, 15, 20, and 30 year maturities.
+This problem is underdetermined and there are various techniques to come
+up with satisfactory solutions.
+
+Bootstrap...
+
+Interpolating $\log D(t)$ using cubic spline...
+
+Parametric Fit...
+
+Least squares...
+
+\section{Discount, Spot, Forward}
+
+The {\em spot rate}, $r(t)$, is defined by $D(t) = \exp(-tr(t))$ and
+the {\em forward rate}, $f(t)$ is defined by $D(t) = \exp(-\int_0^t
+f(s)\,ds)$. Since $r(t) = (1/t)\int_0^t f(s)\,ds$, we see that the
+spot rate is the average value of the forward rate. One consequence
+is that the spot rate curve is smoother than the forward rate curve.
+Taking derivatives gives $f(t) = r(t) + tr'(t)$. Note the forward is
+equal to the spot when the derivative of the spot vanishes, and
+is above/below the spot if the slope of the spot is positive/negative.
+
+There is a geometric technique for finding the forward curve from the
+spot curve...
+
+The condition that the discount curve is a decreasing function of
+time is equivalent to the condition that the forward curve is
+always positive. The constraint on the spot curve is less clear.
+
+It is usually best to work with the forward curve since the noarbitrage
+constraint is simple to detect.
+
+\section{Interface}
+
+Typical usage of a yield curve model involves specifying the instruments
+and their prices, configuring special characteristics of the yield
+curve, then calculating the curve that reprices all instruments.
+After this has been done, the discount, spot, and forward rates 
+can be obtained. For computing hedges, it is convenient to be able
+to ``bump'' the yield curve in various ways and it is desirable
+to have this operation not be computationally expensive.
+
+\subsection{Instruments}
+
+Yield curve as a container of instruments. Use string tags to identify
+instruments. Valuation vs. settlement date. Settlement conventions.
+
+effective, settlement (T + n), tenor, freq, dcb, roll.
+
+\subsection{Configuration}
+
+Type of construction (bootstrap, parametric fit, etc.)
+Convexity adjustment, turn of year effect.
+
+\subsection{Calculation}
+
+Describe bootstrap process. Ridicule least squares method.
+
+\subsection{Bumping}
+
+Bumping instrument coupons. Bumping underlying forward curve directly.
+
+\subsection{State Transitions}
+
+States: init, adding, configable, calcable?
+
+\end{document}

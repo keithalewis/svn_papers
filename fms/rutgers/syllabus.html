@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+
+<title>
+Interest Rate Derivative Modeling
+</title>
+
+</head>
+<body>
+
+<h1>
+Interest Rate Derivative Modeling
+</h1>
+<p>
+Interest rate derivative modeling is a triumph of mathematical
+finance. All major institutions use the theory for pricing, hedging, and
+managing the risk in by far the largest and most liquid instrument class
+as reported by the <a href="http:www.bis.org/statistics/derstats.htm">Bank
+for International Settlements</a>.
+
+</p>
+<h1>Textbook</h1>
+<p>
+Damiano Brigo, Fabio Mercurio, <i>Interest Rate Models - Theory and
+Practice with Smile, Inflation and Credit</i> (2nd ed. 2006 ed.). Springer
+Verlag. ISBN 978-3-540-22149-4.
+</p>
+<h1>
+Grading
+</h1>
+<p>
+Your grade will be determined by weekly homework and one final exam. Each
+will count for 50% of your total grade. The final exam will be an in-class
+exam consisting of 8 questions, 7 of which will be based on the homework.
+<em>Homework is due at the beginning of each class.</em> Late homework
+will not be accepted. The lowest homework score will be thrown out.
+
+</p>
+<h1>
+Overview
+</h1>
+<p>
+A derivative security is a contract between a buyer and a seller to
+exchange one or more future cash flows. The buyer decides whether or not
+to initiate the transaction at the prices determined by the seller. In a
+two sided market, the buyer pays the <em>ask/offer</em> or receives the
+<em>bid</em>. These prices also depend on the size of the transaction
+and the credit worthiness of the buyer and seller, among other things.
+
+</p>
+<p>
+The Fundamental Theorem of Asset Pricing determines the value of uncertain
+future cash flows (pricing) by describing how to move them back to today
+(hedging) with information about how accurately that can be done (risk
+management).
+
+</p>
+<p>
+In this course you will learn how to use the FTAP to price, hedge,
+and manage the risk of fixed income derivative securities. 
+</p>
+
+<h2>
+Fundamental Theorem of Asset Pricing
+</h2>
+
+<h3>Lesson 1</h3>
+<ul>
+<li>The Fundamental Theorem of Asset Pricing.</li>
+<li>Pricing and hedging.</li>
+<li>A first look at risk management.</li>
+<li>Model parameterization.</li> <!-- only one model - a stochastic process -->
+<li>Model implementation.</li> <!-- tree, finite diff (explicit, implicit, CN-->
+<li>An introduction to the xll library.</li>
+</ul>
+<h4>Reading</h4>
+<p>
+Chapters 1 and 2,
+<a href="http://kalx.net/ftapd.pdf">
+The Fundamental Theorem of Asset Pricing: Discrete Time</a>,
+<a href="http://kalx.net/fms/rough/pp.html">
+Probability Preliminaries</a>,
+<a href="http://xll.codeplex.com">
+The xll add-in library</a> (follow the INSTALLATION instructions)
+
+</p>
+
+<h2>Yield Curve</h2>
+<h3>Lesson 2</h3>
+<ul>
+<li>Zero coupon bonds.</li>
+<li>Discount, forward, spot.</li>
+<li>Cash deposits, forwards/futures, swaps.</li>
+<li>Constructing yield curves.</li>
+<li>Implementing the bootstrap algorithm.</li>
+</ul>
+<h4>Reading</h4>
+<p>
+<a href="http://kalx.net/papers/HagWes2006.pdf">Hagan and Westwood 2006</a>,
+<a href="http://fmsdatetime.codeplex.com">fmsdatetime</a>,
+<a href="http://xlldatetime.codeplex.com">xlldatetime</a>,
+<a href="http://fmspwflat.codeplex.com">fmspwflat</a>,
+<a href="http://xllpwflat.codeplex.com">xllpwflat</a>
+<br/>(Check out using subversion with the URL
+<code>https://fmsdatetime.svn.codeplex.com/svn/trunk</code> to
+<code><i>Root</i>/fmsdatetime</code>, etc.)
+
+
+</p>
+
+<h2>Fixed Income Instruments</h2>
+<h3>Lesson 3</h3>
+<ul>
+<li>Caplets, Floorlets, and Swaptions.</li>
+<li>Caps and Floors.</li>
+<li>Black Formula.</li>
+<li>Foreign Exchange.</li>
+</ul>
+<h4>Reading</h4>
+<p>
+<a href="http://kalx.net/papers/fin.pdf">Fixed Income Notation</a>,
+<a href="http://fmsoption.codeplex.com">fmsoption</a>
+
+
+</p>
+
+<h2>Short Rate Process</h2>
+<h3>Lesson 4</h3>
+<ul>
+<li>Determines <em>all</em> prices.</li>
+<li>Historical review of short rate models.</li>
+<li>Equilibrium vs. market models.</li>
+<li>Characteristics of a good model.</li>
+<!-- fits the market, tractible, -->
+</ul>
+<h4>Reading</h4>
+<p>
+Chapter 3
+</p>
+
+<h3>Lesson 5</h3>
+<ul>
+<li>Implementing the Ho-Lee market model.</li>
+<li>Closed form solutions.</li>
+<li>Tuning to zero curve and caplets.</li>
+<li>Swaption pricing.</li>
+</ul>
+
+<h3>Lesson 6</h3>
+<ul>
+<li>Two factor Ho-Lee.</li>
+<li>Heath-Jarrow-Morton model.</li>
+<li>LIBOR Market Model. (A.k.a. LFM)</li>
+</ul>
+<h4>Reading</h4>
+<p>
+Chapters 4 and 5.
+</p>
+
+<h3>Lesson 7</h3>
+<ul>
+<li>Implementing the LMM model.</li>
+<li>Tuning to zero curve, caplets, and swaptions.</li>
+<li>Monte Carlo pricing basics.</li>
+<li>Variance reduction.</li>
+</ul>
+<h4>Reading</h4>
+<p>
+Chapter 6,
+<a href="http://kalx.net/papers/lmm.pdf">LIBOR Market Model</a>
+</p>
+
+<h3>Lesson 8</h3>
+<ul>
+<li>Testing the LMM.</li>
+<li>Convexity adjustments</li>
+<li>Monte Carlo pricing revisited.</li>
+</ul>
+<h4>Reading</h4>
+<p>
+Chapters 7 and 8.
+</p>
+
+
+<h2>Volatility Smiles</h2>
+
+<h3>Lesson 9</h3>
+<ul>
+<li>Local volatility.</li>
+<li>Stochastic volatility.</li>
+<li>Uncertain Parameter models.</li>
+</ul>
+<h4>Reading</h4>
+<p>
+Chapters 9, 10, 11, 12.
+</p>
+
+<h3>Lesson 10</h3>
+<ul>
+<li>Constant maturity swaps.</li>
+<li>In-Arrears Swaps.</li>
+<li>Ratchet Caps/Floors.</li>
+<li>Structured notes.</li>
+</ul>
+<h4>Reading</h4>
+<p>
+Chapter 13.
+</p>
+
+<h2>Credit</h2>
+
+<h3>Lesson 11</h3>
+<ul>
+<li>Collateral considerations.</li>
+<li>Default, Recovery, and credit spread.</li>
+<li>Swap basis spread since 2008.</li>
+<li>Credit default swaps.</li>
+</ul>
+<h4>Reading</h4>
+<p>
+Chapter 13,
+<a href="http://kalx.net/papers/credit.pdf">Credit Risk</a>,
+<a href="http://kalx.net/fmcc.pdf">Factor Models for Credit Correlation</a>.
+</p>
+
+<h2>Mortgages</h2>
+
+<h3>Lesson 12</h3>
+<ul>
+<li>Securitization/collateralization.</li>
+<li>Prepayment models.</li>
+<li>Non-optimal exercise.</li>
+</ul>
+<h4>Reading</h4>
+<p>
+TBA
+</p>
+
+<h2>Municipal Bonds</h2>
+
+<h3>Lesson 13</h3>
+<ul>
+<li>"Yield burning" and the Tax Reform Act of 1986.</li>
+<li>Legal considerations.</li>
+<li>Option adjusted spread.</li>
+<li>The nature of muni markets.</li>
+</ul>
+<h4>Reading</h4>
+<p>
+TBA
+</p>
+<h3>Lesson 14</h3>
+<ul>
+<li>Review</li>
+</ul>
+
+</body>
+</html>

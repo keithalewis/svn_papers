@@ -1,0 +1,70 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 5}
+\author{Due 7:10PM, 9 Mar 2009}
+
+\maketitle
+
+\begin{xca}{(25 points)}
+Let $(X_t)_{t\ge0}$ be a martingale.
+\begin{enumerate}
+\item Show $\Var(X_u) \le \Var(X_v)$ whenever $u < v$.
+\item If $\Var(X_T) = 0$ for some $T$, show $X_t = X_0$ a.e. for $0\le t\le T$.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}{(20 points)}
+Fix $F\in L^2(P)$ and $X\in L^2(P)\otimes\R^m$, where $P$ is some probability measure.
+Define $\Phi\colon\R^m\to\R$ by $\Phi(\xi) = \|\xi\cdot X - F\|^2$. Prove the Fr\'echet
+derivative is $D\Phi(\xi) = 2(E[X\otimes X]\xi - E[XF])$.
+\end{xca}
+
+\begin{xca}{(20 points)}
+Fix $F\in L^2(P, \F)$ and $X\in L^2(P, \F)\otimes\R^m$, where $P$ is some probability measure
+defined on the $\sigma$-algebra $\F$. Let $\G$ be a $\sigma$-subalgebra of $\F$ and
+define $\Phi\colon L^2(P, \G)\otimes R^m\to\R$ by $\Phi(\Xi) = \|\Xi\cdot X - F\|^2$. Prove the Fr\'echet
+derivative is $D\Phi(\Xi) = 2(E[X\otimes X|\G]\Xi - E[XF|\G])$.
+\end{xca}
+
+\begin{xca}{(20 points)}
+Let $(V_j)$ be independent random variables with $P(V_j = 1) = p$ and $P(V_j = 0) = 1 - p$. Define
+$W_n = V_1 + \cdots + V_n$ and let $\F_n$ be the smallest algebra such that $V_1$,...,$V_n$ are
+measurable. Put $M_n = u^{W_n}d^{n - W_n} R^{-n}$.
+\begin{enumerate}
+\item Compute $E[\log M_n]$ and $\Var(\log M_n)$.
+\item Compute $E[M_{n + 1}|\F_n]$.
+\item Find $p$ such that $(M_n)$ is a martingale.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}{(20 points)}
+Let $S_t = S_0e^{(r - \sigma^2/2)t + \sigma B_t}$ where $B_t$ is normally distributed with mean zero and variance $\sigma^2 t$.
+A {\rm power option} pays $S_T^p$ at time $T$ where $p$ is specified in the option contract. Find
+a formula for $e^{-rt}E[S_T^p]$.
+\end{xca}
+
+\end{document}

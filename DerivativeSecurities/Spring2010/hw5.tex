@@ -1,0 +1,56 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+\title{Derivative Securities Homework 5}
+\author{Due 7:10PM, 8 Mar 2010}
+
+\maketitle
+
+\begin{xca}{(50 points)}
+Let $F = f\exp(\sigma B_t - \sigma^2t/2)$ where $B_t$ is
+standard Brownian motion and let
+$\phi$ be a differentiable functions. Let $v =
+v(f,\sigma,t) = E[\phi(F)]$. Show
+\begin{enumerate}
+\item $v_f = E[\phi'(Fe^{\sigma^2t})]$.
+\item $v_{ff} = e^{\sigma^2t}E[\phi''(Fe^{2\sigma^2t})]$.
+\item $E[B_t\psi(B_t)] = tE[\psi'(B_t)]$.
+\item $v_\sigma = f^2\sigma te^{\sigma^2t}E[\phi''(Fe^{2\sigma^2t})]$.
+\item $v_t = \frac{1}{2}\sigma^2 f^2e^{\sigma^2t}E[\phi''(Fe^{2\sigma^2t})]$.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}{(50 points)}
+Let $\phi(x) = \max\{x - 100, 0\}$ and $v$ be as in problem 1. Plot
+\begin{enumerate}
+\item $v$ for $50\le f\le 150$, $\sigma = 0.2$, $0\le t\le 0.25$.
+\item $v$ for $50\le f\le 150$, $0\le\sigma\le 0.5$, $t = 0.25$.
+\item $v_f$ for $50\le f\le 150$, $\sigma = 0.2$, $0\le t\le 0.25$.
+\item $v_{ff}$ for $50\le f\le 150$, $\sigma = 0.2$, $0 < t\le 0.25$.
+\item $v_\sigma$ for $50\le f\le 150$, $\sigma = 0.2$, $0 < t\le 0.25$.
+\end{enumerate}
+\end{xca}
+
+\end{document}

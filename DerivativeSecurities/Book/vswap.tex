@@ -1,0 +1,169 @@
+\documentclass[11pt,fleqn]{amsart}
+\usepackage{amsmath}
+
+\begin{document}
+
+\title{Variance Swaps: Discrete Model}
+\author{Keith A. Lewis}
+
+\begin{abstract}
+This note describes a method for computing par variance rates using
+only option data at discrete strikes. Upper and lower bounds for the
+error introduced by discretization are derived assuming
+flat extrapolation of implied volatility.
+\end{abstract}
+
+\maketitle
+
+The value of the floating leg of a variance swap is
+\begin{equation*}
+	\sigma^2 = \frac{1}{t}e^{-rt} E[-2\log X/f + 2(X - f)/z],
+\end{equation*}
+where $t$ is the time in years to expiration, $r$ is the continuously
+compounded risk-free rate, $X$ is the price of the
+underlying at expiration under the risk-neutral measure and $f = E[X]$
+is the forward. This implies the value of $z$, the expansion point,
+may be chosen arbitraily. If we let $\phi(x) = \phi(x, f, z)
+= -2\log x/f + 2(x - f)/z$, then $\phi'(x) = -2/x + 2/z$ and
+$\phi''(x) = 2/x^2$. It is clear that $\phi(x)$ is concave up,
+and has a single minimum at $x = z$ at which it is negative unless
+$z = f$.
+
+The discrete model uses the prices of options at $k_0$,\dots,$k_n$, a
+low secant point $l < k_0$ and a high secant point $h > k_n$ to determine
+the value of the variance rate par volatility, $\sigma$.
+
+The Bloomberg implementation extimates the forward and at-the-money
+option value from option data and adds that point to the data used to
+fit the curve. It also assumes $z = f$, i.e., the expansion point equals
+the forward. From this data, the weights $w_0$, \dots, $w_n$ are chosen
+such that
+
+\begin{equation*}
+	\psi(x) = \sum_{k_j < f} w_j \max\{k_j - x, 0\}
+		+ \sum_{k_j \ge f} w_j \max\{x - k_j, 0\}
+\end{equation*}
+matchs $\phi$ at all strikes and at both secant points. The weight at
+strike $k_j$ is the slope of the segment to its immediate right minus
+the slope of the segment to its immediate left. Note that there are
+no options corresponding to the secant points. Adjusting these values
+result in the weight of the low strike put and high strike call changing.
+
+Note $\psi(x) > \phi(x)$ for $l < x < h$ and $\psi(x) > \phi(x)$ if
+$x < l$ or $x > h$. For coarse stikes, this method can overvalue the
+variance rate. If the range of strikes is not sufficiently wide, this
+ implementation can undervalue the variance rate. Typically the high
+strike put data is not problematic since the payoff function, $\phi(x)$
+ is nearly linear for large $x$. Because of the singularity at zero, the
+variance value will go to infinity as the low secant point tends to zero.
+
+If we parameterize the low secant point by $l = \lambda k_0$ for
+$0 < \lambda < 1$, then 
+
+The weight added to the low strike put
+beyond it's weight for $l = k_0$ is
+\begin{eqnarray*}
+	\frac{\phi(k_0) - \phi(l))}{k_0 - l} - \phi'(k_0) 
+		&=& -2\frac{\log k_0/l}{k_0 - l} + \frac{2}{k_0} \\
+		&=& \frac{2}{k_0} (1 + \frac{\log\lambda}{1 - \lambda})  \\
+\end{eqnarray*}
+where $\lambda = l/k_0$ is called the {\em low ratio}.
+
+We use the fact that
+\begin{equation*}
+	e^{-rt} E[-2\log X/f] = \int_0^f (2/k^2) p(k)\,dk
+		+ \int_f^\infty (2/k^2) c(k)\,dk,
+\end{equation*}
+where $p(k)$ is the value of a put having strike $k$ and
+$c(k)$ is the value of a call having strike $k$.
+
+In practice, the values of $p(k)$ and $c(k)$ are only known at a finite
+number of strikes. Consider the first term on the right hand side of
+the previous equation.  Assume $p(k)$ is given for $k$ having values
+$k_0 < k_1 < \cdots < k_n = f$.  We assume that the implied volatility,
+$\sigma_0$, is constant for $0 < k < k_0$. There is no need to assume it
+is equal to the implied volatility of the put having the lowest strike.
+Using $X = f\exp(- \sigma_0^2 t/2 + \sigma_0\sqrt{t} Z)$, where $Z$ is
+a standard normal random variable, we can find a closed form solution
+for the integral from zero to $k_0$.  Using integration by parts twice
+
+\begin{eqnarray*}
+	\int_0^{k_0} (2/k^2) p(k)\,dk
+		&=& -2p(k_0)/k_0 + \int_0^{k_0} (2/k) p'(k)\,dk \\
+		&=& -2p(k_0)/k_0 + (2\log k_0) p'(k_0) \\
+		&\quad&\quad - \int_0^{k_0} (2\log k) p''(k)\,dk \\
+		&=& -2p(k_0)/k_0 + e^{-rt}(2\log k_0) P(X \le k_0) \\
+		&\quad&\quad -e^{-rt}E[2\log X 1(X \le k_0)].\\
+\end{eqnarray*}
+The last equation uses the fact that $p'(k) = e^{-rt}P(X \le k)$ and
+so $e^{rt}p''(k)$ is the density function of the random variable $X$.
+
+The closed form for the last expression can be found
+from the fact that $E[Z 1(Z \le z)] = -\exp(-z^2/2)/\sqrt{2\pi}$
+if $Z$ is a standard normal.
+\begin{eqnarray*}
+	E[\log X 1(X \le k_0)] &=& (\log f - \sigma_0^2 t/2) P(Z \le z_0)
+		- \sigma_0\sqrt{t/2\pi} e^{-z_0^2/2},
+\end{eqnarray*}
+where $z_0 = (\log k_0/f + \sigma_0^2 t/2)/\sigma_0\sqrt{t}$.
+Combining these results we have
+\begin{eqnarray*}
+	\int_0^{k_0} (2/k^2) p(k)\,dk
+	&=& -2p(k_0)/k_0 + e^{-rt}(2\log k_0/f + \sigma_0^2 t) P(X \le k_0) \\
+	&\quad&\quad + 2e^{-rt}\sigma_0\sqrt{t/2\pi} e^{-z_0^2/2} \\
+\end{eqnarray*}
+
+We turn to the integral from $k_0$ to $f$.  Using integration
+by parts with constant of integration $2/f$,
+\begin{eqnarray*}
+\int_{k_0}^f (2/k^2) p(k)\,dk
+	&=& (2/k_0 - 2/f) p(k_0)
+		+ \int_{k_0}^f (2/k - 2/f) p'(k)\,dk\\
+	&=& (2/k_0 - 2/f) p(k_0)
+		+ \sum_{j < n} (2/k_j^* - 2/f) (p(k_{j+1}) - p(k_j)),\\
+\end{eqnarray*}
+for some $k_j^*$'s with $k_j \le k_j^* \le k_{j + 1}$ by the
+mean value theorem for Riemann-Steiltjes integrals.
+Since the integrand is monotone we can get error bounds
+by evaluating at the end points of each interval.
+
+Similar analysis can be performed on the integral from $f$ to infinity.
+Assume $c(k)$ is given at $k$ having values $k_0 = f < \cdots < k_n$.
+
+\begin{eqnarray*}
+\int_f^{k_n} (2/k^2) c(k)\,dk
+	&=& \int_f^{k_n} (2/k - 2/f) c'(k)\,dk \\
+	&=& \sum_{j < n} (2/k_j^* - 2/f) (c(k_{j+1}) - c(k_j))\\
+\end{eqnarray*}
+for some $k_j^*$'s with $k_j \le k_j^* \le k_{j + 1}$. As before
+we can get upper and lower bounds by evaluating the integrand
+at the endpoints of each interval.
+
+\begin{eqnarray*}
+\int_{k_n}^\infty (2/k^2) c(k)\,dk
+	&=& 2c(k_n)/k_n + \int_{k_n}^\infty (2/k) c'(k)\,dk \\
+	&=& 2c(k_n)/k_n - (2\log k_n) c'(k_n) \\
+	&\quad&\quad - \int_{k_n}^\infty (2\log k) c''(k)\,dk \\
+	&=& 2c(k_n)/k_n + e^{-rt}(2\log k_n) P(X \ge k_n) \\
+	&\quad&\quad -e^{-rt}E[2\log X 1(X \le k_n)].\\
+\end{eqnarray*}
+
+We assume the implied volatility, $\sigma_n$, is constant for strikes
+greater than $k_n$ and equal to the implied volatility of the call
+at strike $k_n$. We get a closed form solution for the
+last term above. Since $E[Z 1(Z > z)] = \exp(-z^2/2)/\sqrt{2\pi}$,
+
+\begin{eqnarray*}
+	E[\log X 1(X \ge k_n)] &=& (\log f - \sigma_n^2 t/2) P(Z \ge z_n)
+		+ \sigma_n\sqrt{t/2\pi} e^{-z_n^2/2}, \\
+\end{eqnarray*}
+where $z_n = (\log k_n/f + \sigma_n^2 t/2)/\sigma_n\sqrt{t}$.
+
+Combining these results we have
+\begin{eqnarray*}
+	\int_{k_n}^\infty (2/k^2) c(k)\,dk
+	&=& 2c(k_n)/k_n + e^{-rt}(2\log k_n/f + \sigma_n^2 t) P(X \ge k_n) \\
+	&\quad&\quad - 2e^{-rt}\sigma_n\sqrt{t/2\pi} e^{-z_n^2/2} \\
+\end{eqnarray*}
+
+\end{document}

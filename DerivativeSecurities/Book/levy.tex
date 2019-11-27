@@ -1,0 +1,186 @@
+\documentclass{amsart}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\Var}{\mathop{\rm Var}}
+
+
+\title{The L\'evy-Khintchine Theorem}
+\author{Keith A. Lewis}
+\email{kal@kalx.net}
+
+\begin{document}
+\maketitle
+
+\begin{section}{Everybody uses it...}
+
+...but nobody proves it (except old-timers).
+
+\medskip
+
+{\bf Theorem.} {\it
+If $X$ is infinitely divisible, then there exist scalars
+$\mu$, $\sigma$, and a measure $\nu$ on $\RR$ with
+$\nu(\{0\}) = 0$ and $\int_\RR (|x|^2\wedge 1)\,d\nu(x) < \infty$
+such that the log of the characteristic function of $X$ is}
+
+\begin{quote}
+$
+	i\mu t - \sigma^2 t^2/2
+		+ \int_\RR (e^{itx} - 1 - itx 1_{\{|x|\le1\}})\,d\nu(x).
+$
+\end{quote}
+
+\end{section}
+
+\begin{section}{Finite Variance Case}
+
+{\bf Theorem.} (Kolomogorov) {\it
+If $X$ is infinitely divisible and has finite variance,
+then there exists a scalar
+$\gamma$, and a nondecreasing function $G$ such that}
+
+\begin{quote}
+$
+	\log E\exp(itX) = i\gamma t + \int_{-\infty}^\infty (e^{itx} - 1 - itx)/x^2\,dG(x).
+$
+\end{quote}
+{\it Also, $E[X] = \gamma$ and $\Var(X) = G(\infty) - G(-\infty)$.}
+
+\medskip
+
+This is a better parameterization because it is continuous
+in $\gamma$ and $G$.
+
+\end{section}
+
+\begin{section}{Definitions}
+
+The {\it cumulative distribution function} of the random variable
+$X$ is $F(x) = P(X\le x)$.
+Two random variables {\it have the same law} if they have the
+same cumulative distribution functions.
+
+\medskip
+
+The {\it characteristic function} of the random variable $X$ is
+$\phi(t) = E[\exp(itX)] = \int_{-\infty}^\infty e^{itx}\,dF(x)$.
+
+\medskip
+
+The random variable $X$ is {\it infinitely divisible} if for every
+positive integer $n$ there exist i.i.d., $X_j$, with
+$X_1 + \cdots + X_n$ having the same law as $X$.
+
+\end{section}
+
+
+\begin{section}{Cumulative Distributions}
+
+If $F$ is a cumulative distribution function, then
+\begin{itemize}
+\item $F(-\infty) = 0$ and $F(\infty) = 1$,
+\item $F(x) \le F(y)$ if $x < y$,
+\item $F$ is right continuous and has left limits.
+\end{itemize}
+
+\medskip
+
+The converse is also true.
+
+\end{section}
+
+\begin{section}{Characteristic Functions}
+
+If $\phi$ is a characteristic function, then
+\begin{itemize}
+\item $\phi(0) = 1$,
+\item $|\phi(t)| \le 1$ for all $t$,
+\item $\phi(t)$ is uniformly continuous,
+\item $\phi(-t) = \overline{\phi(t)}$.
+\end{itemize}
+
+\medskip
+
+Two random variables have the same characteristic function if
+and only if they have the same law. (Fourier inversion theorem.)
+
+\end{section}
+
+\begin{section}{Infinite Divisibility}
+If $X$ is infinitely divisible, then
+\begin{itemize}
+\item for all $n$ there exists a characteristic function $\phi_n$
+with $\phi(t) = \phi_n(t)^n$ for all $t$,
+\item $1 - \phi(2t) \le 4(1 - \phi(t))$ if $\phi(t) \ge 0$.
+\item the characteristic function does not vanish,
+\item $\phi_n(t) \to 1$ as $n\to\infty$.
+\end{itemize}
+
+\end{section}
+
+\begin{section}{Helly's Theorem}
+
+{\bf Theorem.} {\it If $F_n$ are nondecreasing and bounded,
+then there exists a
+nondecreasing $F$ and a subsequence $F_{n_k}$ such that
+for any continuous $f$ that vanishes at infinity}
+$$\lim_{k\to\infty}\int_{-\infty}^\infty f(x)\,dF_{n_k}(x)
+		= \int_{-\infty}^\infty f(x)\,dF(x).$$
+\smallskip
+This is a simple consequence of the Riesz Representation Theorem,
+Aloaglu's Theorem and a one semester course in Functional Analysis.
+
+\end{section}
+
+\begin{section}{Proof of L-K}
+
+\begin{eqnarray*}
+\log\phi(t) &=& n\log\phi_n(t)\\
+	&=& n\log (1 + \phi_n(t) - 1)\\
+	&=& \lim_{n\to\infty} n(\phi_n(t) - 1)\\
+	&=&  \lim_{n\to\infty}\int_{-\infty}^\infty (e^{itx} - 1)\,n\,dF_n(x),\\
+\end{eqnarray*}
+where $F_n$ is the c.d.f. of $\phi_n$.
+
+\smallskip
+
+We want $n\,dF_n$ to converge to something...
+
+\end{section}
+
+\begin{section}{Proof...}
+
+...but they don't since $dF_n$ converges to a point mass at 0.
+Note $\gamma = E[X] = nE[X_n]$, and $\Var(X) = n\Var(X_n)$ so
+\begin{eqnarray*}
+\Var(X) &=& nE[X_n^2] - nE[X_n]^2\\
+	&=& \int_{-\infty}^\infty x^2\,ndF_n(x) - \gamma^2/n.\\
+\end{eqnarray*}
+
+Define $dG_n(x) = x^2\,ndF_n(x)$, then $G_n$ satisfy the hypotheses
+of Helly's Theorem.
+
+\smallskip
+
+{\bf Exercise.} {\it Show $\Var(X) = \int_{-\infty}^\infty dG(x)$.}
+
+\end{section}
+
+\begin{section}{Proof!}
+
+Too bad $(e^{itx} - 1)/x^2$ is not continuous.
+However, since $i\gamma t = \int_{-\infty}^\infty itx\,ndF_n(x)$
+we have
+\begin{eqnarray*}
+	\log\phi(t) &=& i\gamma t + \lim_{k\to\infty} \int_{-\infty}^\infty
+		\frac{e^{itx} - 1 - itx}{x^2}\,dG_{n_k}(x)\\
+	&=& i\gamma t + \int_{-\infty}^\infty
+		(e^{itx} - 1 - itx)/x^2\,dG(x)\\
+\end{eqnarray*}
+Q.E.D.
+
+\end{section}
+
+\end{document}

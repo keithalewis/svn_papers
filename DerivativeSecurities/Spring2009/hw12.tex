@@ -1,0 +1,53 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 12}
+\author{Due 7:10PM, 4 May 2009}
+
+\maketitle
+
+\begin{xca}
+Suppose $T$ is a random variable with the property $P(t < T < t + h|T>t) = \lambda h + o(h)$ for $t > 0$.
+\begin{enumerate}
+\item Prove $P(T > t) = \exp(-\lambda t)$, $t > 0$.
+\item Define $U$ to be the smallest integer greater than $T$. Find the distribution of $U$.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}
+Let $T$ be a default time and $(\G_t)_{t\ge0}$ be the smallest filtration making $(1_{\{T\le t\}})_{t\ge0}$ adapted.
+Show that if $f$ is a measurable function then 
+\begin{equation*}
+E[f(T)|\G_t] = f(T)1_{T\le t} + \frac{E[f(T)1_{\{T > t\}}]}{P(T > t)} 1_{\{T > t\}}.
+\end{equation*}
+\end{xca}
+
+\begin{xca}
+Suppose a risky 1 year zero coupon bond has price .97. If the continuously compounded risk free rate is 2\% 
+and recovery is 50\%, what is the hazard rate for the time of default?
+\end{xca}
+
+\end{document}

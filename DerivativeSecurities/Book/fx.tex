@@ -1,0 +1,75 @@
+\chapter{Foreign Exchange}
+
+\section{Introduction}
+Foreign exchange markets permit the exchange of one currency for
+another. It is a large and very liquid markets run primarily by large
+banks and central banks.  Around \$1 trillion turns over in the spot
+market every day while \$2 trillion in notional is outstanding for forward
+and FX swaps at any given time.  Outside of commercial business, most
+trading is done through electronic exchanges that match retail clients
+with major banks that provide liquidity.  Until recently, there was very
+little regulation in this market.  The exchanges and broker/dealers are
+regulated by the CFTC and NFA, but there is no overall regulator for
+major banks.
+
+\section{Quoting}
+When the {\tt USD|JPY} exchange rate is 95 that means USD 1 can
+be exchanged for JPY 95. The first currency is called
+the {\em base} and the second is called the {\em counter}.
+More precisely, if the quote
+is 95.123/97 it means the bid is 95.123 and the ask is 95.197.
+This means you can sell USD 1,000 and receive JPY 95,123
+or sell JPY 95,197 and receive USD 1,000. The first three
+digits of the quote are called the {\em big figure}. The last
+two digits are almost always all you need to determine the
+bid/ask spread for the {\em pair}.
+
+It is theoretically equivalent to say the {\tt JPY|USD} exchange
+rate is .0105127/045 but FX traders will make fun of you.  There is a
+market convention about which currency should be the base and which the
+counter. In general, the order that makes the quote greater than 1 is
+preferred. The major exception being {\tt EUR|GBP}. The currency chosen
+for the base is prioritized by EUR, GBP, AUD, NZD, USD, CAD, CHF, and JPY.
+These currencies are called the {\em majors} while all others are called
+the {\em minors}.
+
+\section{Exchanges}
+Nowadays, almost all exchange trading is electronic. You open an account
+by wiring an initial {\em margin} specified by the exchange. One exchange
+allows an initial margin of \$25, but a more typical amount is \$1000.
+Suppose you sold USD 10,000 for JPY 951,230. Even though you only
+have \$1,000 in margin, you can trade up to a fixed multiple of that
+in the base currency. This multiple is called your {\em leverage} and
+is typically in the range 20--200 depending on what view the
+exchange takes on your credit worthiness.
+
+Let $X^a(t)$ represent the yen ask price. If you unwound your trade your
+USD account would become zero and your JPY account would become $951,230
+- 10,000 X^a(t)$.  That could be converted to $(951,230 - 10,000
+X^a(t))/X^b(t)$ dollars, where $X^b(t)$ is the yen bid at time $t$.
+The exchange does exactly this calculation periodically and adjusts
+your margin by this amount. If your margin goes to zero, either
+you top off your account or you get taken out of the trade and your
+account is closed.
+
+At the end of each trading day there is another adjustment to your margin
+that is calculated called the {\em roll}. Each quantity of currency in
+your positions gets interest since the last trading day based on market
+quotes. For a fun time, you should ask your exchange how they come up
+with this number and exactly how they take into account intraday
+trading.
+
+If exchange rates are fairly stable between a currency pair, but one
+currency has a significantly higher interest rate, then it is possible
+to make money on the roll by shorting the low interest rate currency.
+This is called a {\em carry} trade.
+
+Exchanges have agreements with large banks or broker/dealers to provide
+liquidity. I.e., to supply bid and ask prices at which they are willing
+to exchange a minimum specified quantity of each currency pair. The
+exchange supplies their clients the best quotes, widened by a couple of
+basis points that the exchange intends to keep for themselves. A large
+exchange can do a volume of \$1B/day. If they make 2bps that works out
+to \$200,000/day.
+
+%\section{Model}

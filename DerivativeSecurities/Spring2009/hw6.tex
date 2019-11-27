@@ -1,0 +1,69 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 6}
+\author{Due 7:10PM, 23 Mar 2009}
+
+\maketitle
+
+\begin{xca}{(25 points)}
+Let $Z$ be a standard normal random variable. 
+\begin{enumerate}
+\item Show $E[e^{\theta Z} f(Z)] = E[e^{\theta Z}] E[f(Z + \theta)]$. 
+\item Show $E[Z f(e^{\theta Z})] = \theta E[e^{\theta Z}] E[f'(e^{\theta (Z + \theta)})]$.
+\end{enumerate}
+\end{xca}
+
+
+\begin{xca}{(25 points)}
+Let $S = se^{-\sigma^2t/2 + \sigma B_t}$, where $B_t$ is Brownian motion.
+Show $(\partial^2/\partial s^2) E[f(S)] = e^{\sigma^2 t} E[f''(Se^{2\sigma^2 t})]$. 
+\end{xca}
+
+\begin{xca}{(25 points)}
+Let $T\colon\H\to\K$ be a linear operator between two Hilbert spaces with the dimension
+of the range of $T$ equal to 1.
+\begin{enumerate}
+\item Show there exist $x\in\K$ and $y\in\H$ with $T = x\otimes y$.
+\item Show that if $\H = \R^m$ and $\K = \R^n$ then $x\otimes y = xy^T$, where
+$y^T$ is the transpose of $y$.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}{(25 points)}
+Let $x = (1, s)$, and $X = (R, S)$, where $s$ and $R$ are scalars and 
+$S$ is a random variable on $\Omega$.
+Let $F$ be another random variable on $\Omega$.
+\begin{enumerate}
+\item Find $\xi = E[X\otimes X]^{-1} E[FX]$.
+\item Show $\xi\cdot X = F$ if and only if $S$ and $F$ are perfectly correlated.
+\item Show that if the cardinality of $\Omega$ is 2, then $S$ and $F$ are perfectly correlated
+if neither is constant.
+\end{enumerate}
+[Note: perfectly correlated means correlation 1 or -1.]
+\end{xca}
+
+\end{document}

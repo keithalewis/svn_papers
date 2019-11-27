@@ -1,0 +1,79 @@
+\documentclass[10pt,letterpaper,fleqn]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{lmodern}
+\usepackage{kpfonts}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+\author{Keith Lewis}
+\title{Ho-Lee Model}
+\begin{document}
+\maketitle
+Let the {\em short rate} be \(R_t = \phi(t) + \sigma(t)B_t\) where
+\(B_t\) is Brownian motion. Define the {\em stochastic discount}
+\(D_t = \exp(-\int_0^t R_s\,ds)\). The price at time \(t\) of a {zero
+coupon bond} maturing at \(u\) is
+\begin{align*}
+D(t,u) &= E_t e^{-\int_t^u R_s\,ds}\\
+	&= E_t e^{-\int_t^u \phi(s)\,ds}e^{-\int_t^u \sigma(s)B_s\,ds}.\\
+\end{align*}
+Using \(d(\Sigma B) = \Sigma dB + \Sigma' B\,ds\)  and
+\(\exp(-\frac{1}{2}\int_0^t \theta^2\,ds + \int_0^t \theta\,dB_s)\) is
+a martingale
+\begin{align*}
+D(t,u) e^{\int_t^u \phi(s)\,ds}
+&= E_t e^{-(\Sigma(u)B_u - \Sigma(t)B_t) + \int_t^u \Sigma(s)\,dB_s}\\
+&= E_t e^{-(\Sigma(u)B_u -\Sigma(u)B_t + \Sigma(u)B_t - \Sigma(t)B_t) + \int_t^u \Sigma(s)\,dB_s}\\
+&= E_t e^{-(\Sigma(u) - \Sigma(t))B_t + \int_t^u \Sigma(s) - \Sigma(u)\,dB_s}\\
+&= e^{-(\Sigma(u) - \Sigma(t))B_t + \frac{1}{2}\int_t^u (\Sigma(s) - \Sigma(u))^2\,ds}\\
+\end{align*}
+hence
+\[
+D(t,u) = e^{-\int_t^u \phi(s) 
+- \frac{1}{2}(\Sigma(u) - \Sigma(s))^2\,ds
+- (\Sigma(u) - \Sigma(t))B_t}.
+\]
+Let \(\Phi(u,v)\) denote the integral and
+\(\Delta(u,v)\) the coefficient of \(B_t\).
+
+Recall the forward rate at time \(t\) over the interval \([u,v]\) having
+daycount fraction \(\delta_{u,v}\) is
+\[
+F(t;u,v) = \frac{1}{\delta_{u,v}}\bigl(\frac{D(t,u)}{D(t,v)} - 1\bigr).
+\]
+In the Ho-Lee model \(F(t,u) = F(t;t,u) = (e^{\Phi(t,u) + \Delta(t,u)B_t} - 1)/\delta\)
+the the payoff of a caplet is \(\max\{F(t,u)-k,0\}\delta = 
+\max\{e^{\Phi + \Delta B_t} - 1 - \delta k, 0\}\) so it can be priced using
+the Black-Scholes/Merton formula.
+
+\section{Hull-White}
+The short rate for the Hull-White model satisfies
+\(dR = (\psi(t) - \alpha(t)R_t)\,dt + \sigma(t)\,dB_t\)
+so \(dR - \alpha(t) R_t\,dt = \psi(t)\,dt + \sigma(t)\,dB_t\).
+Using the integrating factor \(e^{-A(t)}\) where \(A'(t) = \alpha(t)\) gives
+\[
+e^{-A(t)}R_t - R_0 = \int_0^t e^{-A(s)}\psi(s)\,ds 
++ \int_0^t e^{-A(s)}\sigma(s)\,dB_s
+\]
+and so
+\[
+R_t = R_0 + \int_0^t e^{A(t)-A(s)}\psi(s)\,ds 
++ \int_0^t e^{A(t)-A(s)}\sigma(s)\,dB_s
+\]
+Note if \(\alpha = 0\) and \(\sigma\) is constant
+this parameterization gives the Ho-Lee model with \(\psi = \phi'\).
+We have
+\begin{align*}
+E_t e^{-\int_t^u R_s\,ds}&= e^{\Psi(t,u)}E_t e^{-\int_t^u\int_0^s\Sigma(v)\,dB_v\,ds}\\ 
+&= e^{\Psi(t,u)}E_t e^{-\int_t^u(\int_0^t + \int_t^s)\Sigma(v)\,dB_v\,ds}\\ 
+&= e^{\Psi(t,u)}E_t e^{-\int_0^t\int_t^u \Sigma(v)\,ds\,dB_v 
+- \int_t^u\int_v^u\Sigma(v)\,ds\,dB_v}\\ 
+&= e^{\Psi(t,u)}E_t e^{-(u - t)\int_0^t\Sigma(v)\,dB_v 
+- \int_t^u(u - v)\Sigma(v)\,dB_v}\\ 
+&= e^{\Psi(t,u)}e^{\frac{1}{2}(u - t)^2\int_0^t\Sigma(v)^2\,dv 
++ \frac{1}{2}\int_t^u(u - v)^2\Sigma(v)^2\,dv}\\ 
+\end{align*}
+\end{document}

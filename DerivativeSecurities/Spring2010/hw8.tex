@@ -1,0 +1,61 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 8}
+\author{Due 7:10PM, 6 April 2009}
+
+\maketitle
+
+\begin{xca}{(25 points)}
+Define $S(\{t_j\}) = \sum_{j<n}(B_{t_{j+1}} - B_{t_j})(t_{j+1} - t_j)$, where $0 = t_0 < \cdots < t_n = t$
+and $B_t$ is standard Brownian motion.
+Show $E[S(\{t_j\})] \to 0$ and $\Var(S(\{t_j\})) \to 0$ as $\max_j \Delta t_j \to 0$.
+\end{xca}
+
+\begin{xca}{(25 points)}
+Show that for any differentiable function, $f$, $\int_0^t f(s)\,dB_s = f(t)B_t - \int_0^t f'(s)B_s\,ds$,
+where $B_t$ is standard Brownian motion.
+\end{xca}
+
+\begin{xca}{(25 points)}
+Consider the model $X_t = (R_t, S_t)$, where $dR/R = \rho\,dt$ and $dS/S = \mu\,dt + \sigma\,dB$, where
+$\rho$, $\mu$, and $\sigma$ are constants and $B$ is standard Brownian motion.
+\begin{enumerate}
+\item Find a price deflator, $\Pi_t$, such that $R_t\Pi_t$ is a martingale.
+\item For the price deflator in the previous item, find the value of $\mu$
+that makes $S_t\Pi_t$ a martingale.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}{(25 points)}
+Define $A_k = -\Xi_0\cdot X_0 + \sum_{j=1}^k (\Xi_{j-1} - \Xi_j)\cdot X_j$, $k < n$, and
+$A_n = -\Xi_0\cdot X_0 + \sum_{j=1}^k (\Xi_{j-1} - \Xi_j)\cdot X_j + \Xi_{n-1}\cdot X_n$.
+Describe the financial meaning of this process and show
+$A_k = -\Xi_k\cdot X_k + \sum_{j = 0}^{k - 1} \Xi_j (X_{j + 1} - X_j)$ for $j < n$
+and $A_n = \sum_{j = 0}^{n - 1} \Xi_j (X_{j + 1} - X_j)$.
+\end{xca}
+
+\end{document}

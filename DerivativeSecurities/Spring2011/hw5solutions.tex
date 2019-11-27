@@ -1,0 +1,143 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+\title{Derivative Securities Homework 5}
+\author{Due 7:10PM, 21 Mar 2011}
+
+\maketitle
+
+\begin{xca}{(25 points)}
+Let $F = f\exp(\sigma B_t - \sigma^2t/2)$ where $B_t$ is
+standard Brownian motion and let
+$\phi$ be a differentiable functions. Let $v =
+v(f,\sigma,t) = E[\phi(F)]$. Show
+\begin{enumerate}
+\item $E[B_t\psi(B_t)] = tE[\psi'(B_t)]$.
+\item $v_\sigma = f^2\sigma te^{\sigma^2t}E[\phi''(Fe^{2\sigma^2t})]$.
+\end{enumerate}
+\end{xca}
+
+Since $E[e^{\alpha N}f(N)] = E[e^{\alpha N}] E[f(N + \alpha\Var(N))]$
+for $N$ normal, taking the derivative with respect to $\alpha$ gives
+$E[e^{\alpha N}N f(N)] = E[e^{\alpha N}] E[f'(N + \alpha\Var(N))\Var(N)]
++ E[e^{\alpha N}N] E[f(N + \alpha\Var(N))]$. Evaluating at $\alpha = 0$
+yields $E[N f(N)] = \Var(N) E[f'(N)] + E[N]E[f(N)]$. Item (a) follows
+from $E[B_t] = 0$ and $\Var(B_t) = t$.
+
+$\partial E[\phi(F)]/\partial\sigma
+= E[\phi'(F)f\exp(\sigma B_t - \sigma^2t/2)(B_t - \sigma t)]
+= f E[\phi'(Fe^{\sigma^2 t})B_t] = f E[B_t\psi(B_t)]$, where
+$\psi(x) = \phi'(fe^{\sigma x - \sigma^2 t/2}e^{\sigma^2 t})$.
+
+Since $\psi'(x) = \phi''(fe^{\sigma x - \sigma^2 t/2}e^{\sigma^2 t})
+fe^{\sigma x - \sigma^2 t/2}e^{\sigma^2 t}\sigma$ we have
+$v_\sigma = fte^{\sigma^2 t}\sigma E[\phi''(Fe^{\sigma^2 t})F]
+= f^2te^{\sigma^2 t}\sigma E[\phi''(Fe^{2\sigma^2 t})]$.
+
+\begin{xca}{(25 points)}
+Using a model consisting of a bond with price dynamics
+$dR/R = \rho\,dt$ and stock $dS/S = \mu\,dt + \sigma\,dB$,
+Black-Scholes 1973 assumed the option price $v = v(t, s)$
+is a function of time and stock price.
+They derive the PDE (equation 7 in their paper)
+$v_t = \rho v - \rho sv_s - \sigma^2 s^2 v_{ss}/2$. In Merton 1973
+it is assumed the option price $w = w(t, r, s)$ is a function
+of time, bond, and stock price. He derives the PDE (equation 33
+in the paper)
+$\sigma^2 s^2 w_{ss}/2 + \rho sw_s + \rho r w_r + w_t - \rho w = 0$.
+
+If $v(t, s) = w(t, e^{\rho t}, s)$ and $w$ is a solution of
+Merton's equation, show $v$ solves the Black-Scholes PDE.
+\end{xca}
+
+Note $v_s = w_s$, $v_{ss} = w_{ss}$, and
+$v_t = w_t + w_r e^{\rho t}\rho$.
+Rearranging Merton's equation gives
+$w_t + \rho r w_r = \rho w - \rho s w_s - \sigma^2 s^2 w_{ss}/2$.
+Replacing the above gives the Black-Scholes equation.
+
+\begin{xca}{(50 points)}
+Let $(B_t)_{t\ge0}$ be standard Brownian motion. Using the
+facts (reflection principle)
+\begin{equation*}
+E[f(B_t)1(\max_{0\le s\le t}B_s > a)]
+= E[(f(B_t) + f(2a - B_t))1(B_t > a)]
+\end{equation*}
+and (Girsanov's theorem)
+\begin{equation*}
+E[g(B_t, \max_{0\le s\le t}B_s)]
+= E[e^{-\theta^2 t/2 + \theta B_t}
+g(B_t - \theta t, \max_{0\le s\le t}B_s - \theta s)]
+\end{equation*}
+find a closed-form formula for the value of a up-in call option
+with strike $k$ and barrier $h$.
+Assume interest is zero and
+$F_t = fe^{-\sigma^2 t/2 + \sigma B_t}$ describes the
+dynamics of the underlying.
+\end{xca}
+
+Using $\theta = \sigma/2$ (so $\sigma\theta = \sigma^2/2$)
+and $a = (1/\sigma)\log h/f$ we have
+\begin{eqnarray*}
+E[(F_t - k)^+1(F_t^* > h)]
+&=& E[(F_t - k)^+1(\max_{0\le s\le t} F_s > h)]\\
+&=& E[(F_t - k)^+1(\max_{0\le s\le t} B_s - \theta s > a)]\\
+&=& E[e^{-\theta^2t/2 + \theta B_t}e^{+\theta^2t/2 - \theta B_t}
+	(F_t - k)^+ 1(\max_{0\le s\le t} B_s - \theta s> a)]\\
+&=& E[e^{-\theta^2/2 + \theta B_t}
+g(B_t - \theta t, \max_{0\le s\le t}B_s - \theta s)]\\
+\end{eqnarray*}
+where $g(x, y) = e^{\theta^2t/2 - \theta (x + \theta t)}
+(fe^{-\sigma^2t/2 + \sigma(x + \theta t)} - k)^+
+1(y > a)= e^{-\theta^2t/2 - \theta x}(fe^{\sigma x} - k)^+
+1(y > a)$. Applying Girsanov's theorem followed by the
+reflection principal gives
+
+\begin{eqnarray*}
+E[(F_t - k)^+1(F_t^* > h)]
+&=& E[e^{-\theta^2t/2 - \theta B_t}
+(fe^{\sigma B_t} - k)^+
+1(\max_{0\le s\le t} B_s > a)]\\
+&=& E[e^{-\theta^2t/2 - \theta B_t}
+(fe^{\sigma B_t} - k)^+
+1(B_t > a)]\\
+&+& E[e^{-\theta^2t/2 - \theta (2a - B_t)}
+(fe^{\sigma (2a - B_t)} - k)^+
+1(B_t > a)]\\
+&=& E[(fe^{\sigma (B_t - \theta t)} - k)^+
+1(B_t - \theta t > a)]\\
+&+& e^{-2a\theta}E[(fe^{\sigma (2a - (B_t + \theta t))} - k)^+
+1(B_t + \theta t > a)]\\
+&=& E[(F_t - k)^+
+1(F_t > h)]\\
+&+& (f/h)E[(h/f)fe^{\sigma (B_t - \theta t)} - k)^+
+1(-B_t + \theta t > a)]\\
+&=& E[(F_t - k)^+
+1(F_t > h)]\\
+&+& (f/h)E[(h/f)F_t - k)^+
+1((h/f)F_t < f)]\\
+\end{eqnarray*}
+
+\end{document}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>Poisson Process</title>
+</head>
+
+<body>
+<h1>Poisson Process</h1>
+<blockquote>
+<em>We should be careful to get out of an experience only the wisdom that
+is in it and stop there, lest we be like the cat that sits down on a hot
+stove-lid. She will never sit down on a hot stove-lid again, and that
+is well; but also she will never sit down on a cold one anymore.</em>
+- Mark Twain
+
+</blockquote>
+<p>
+A <em>Poisson process</em> counts things that have a probability of
+occuring that is proportional to the time you have to wait for them. They
+are characterized by one parameter, \(\lambda\). If \((N_t)\) is a Poisson
+process with parameter \(\lambda\), then \(P(N_{t + \Delta t} - N_t = 0)
+= 1 - \lambda\Delta t + o(\Delta t)\) and \(P(N_{t + \Delta t} - N_t =
+1) = \lambda\Delta t + o(\Delta t)\). This implies Poisson processes
+don't jump twice at the same time; they do not have a memory, unlike
+Mark Twain's cat.
+
+</p>
+
+</body>
+</html>

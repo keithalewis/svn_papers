@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>Decision Theory</title>
+</head>
+
+<body>
+<h1>Decision Theory</h1>
+<p>
+How to make an optimal decision based on information.
+<ol>
+<li>Enumerate the sample space \(\{\omega_j\}\).</li>
+<li>Assign prior probabilities \(p(\omega_j|x)\) which maximize
+the entropy given prior information \(x\).</li>
+<li>Incorporate new evidence \(E\) using Bayes' theorem
+to get posterior probabilities \(p(\omega_j|x,E)\).</li>
+<li>Enumerate possible decisions \(\{D_i\}\).</li>
+<li>Specify a loss function \(L(D_i,\omega_j)\).</li>
+<li>Make decision \(D_i\) that minimizes the expected loss
+\begin{align*}
+	&lt;L&gt;_i = \sum_j L(D_i,\omega_j)p(\omega_j|x,E)
+\end{align*}
+</li>
+</ol>
+</p>
+
+<h2>Examples</h2>
+<p>
+
+</p>
+<h3>References</h3>
+<p>
+E. T. Jaynes,
+<i>Probability Theory With Applications in Science and Engineering</i>,
+<a href="http://bayes.wustl.edu/etj/science.pdf.html" target="_blank">
+link
+</a>
+&nbsp;
+<a href="http://ksvanhorn.com/bayes/jaynes/" target="_blank">errata</a>
+</p>
+
+</body>
+</html>

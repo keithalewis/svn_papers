@@ -1,0 +1,358 @@
+\documentclass[pdf,colorBG,slideColor,blends]{prosper}
+\usepackage{fleqn}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\def\Var{\mathop{\rm Var}}
+\def\Cov{\mathop{\rm Cov}}
+\newcommand{\RR}{\mathbb{R}}
+
+\title{The Risks of Risk-Neutral Pricing\\
+{\small (Things your mother never told you about Risk-Neutral Pricing.)}}
+\author{Keith A. Lewis}
+\email{kal@kalx.net}
+\institution{KALX, LLC}
+\slideCaption{The Risks of Risk-Neutral Pricing}
+
+\begin{document}
+\maketitle
+
+\begin{slide}{Risk-Neutral Pricing}
+
+\begin{itemize}
+
+\item Assumes no arbitrage and perfect liquidity.
+
+\item No arbitrage? Time to go home. That's where you make real money.
+
+\item Perfect liquidity? Often the most important consideration.
+
+\item ``Price'' is a slippery concept.
+\begin{itemize}
+	\item Size matters.
+	\item Bid/Ask spread.
+	\item Market/limit order mechanics.
+\end{itemize}
+
+\end{itemize}
+
+\end{slide}
+
+\begin{slide}{Foundations of RNP}
+
+\begin{itemize}
+
+\item If an option has a perfect hedge, its value is the
+cost of the hedge.
+
+\item This cost can be computed as the expected value of
+the discounted option payoff.
+
+\item Hedging is delta hedging:  ratio of option value change to
+underlying change.
+
+\end{itemize}
+
+\end{slide}
+
+\begin{slide}{Problems with RNP}
+
+\begin{itemize}
+
+\item If an option does not have a perfect hedge, the theory
+is silent.
+
+\item The FTAP implies risk-neutral measures exists, but often
+they are not unique.
+
+\item All hedging in the real world is discrete time hedging, hence
+imperfect.
+
+\item Geared towards single trades.
+\begin{itemize}
+\item Ignores portfolio effect.
+\item Credit risk is non-linear.
+\end{itemize}
+
+\end{itemize}
+
+\end{slide}
+
+\begin{slide}{Observations}
+
+\begin{itemize}
+
+\item There is only one model -- a stochastic process -- the whole
+game is how to parameterize it.
+
+\item Arbitrage {\em must} be defined relative to a particular model.
+
+\item Hedge Funds don't hedge.
+
+\end{itemize}
+
+\end{slide}
+
+\begin{slide}{1-2-3 Example{...}}
+
+Single period binomial model.
+
+\begin{itemize}
+
+\item Stock price is $1$, goes to $3$ with probability $0.9$, stays at
+$1$ with probability $0.1$.
+
+\item Bond price is $1$, goes to $2$ over period.
+
+\item What is value of call option with strike $2$?
+
+\end{itemize}
+
+\end{slide}
+
+\begin{slide}{{...}Answer}
+
+\begin{itemize}
+
+\item Wrong answer: $0.45 = (1/2)(0\times 0.1 + 1\times 0.9)$. (Note $1 \not=
+(1/2)(1\times 0.1 + 3\times 0.9)$.
+
+\item ``Right'' answer: $0.25 = (1/2)(0\times 0.5 + 1\times 0.5$. (Note $1 =
+(1/2)(1\times 0.5 + 3\times 0.5)$.
+
+\item Paying $0.25$ to make $(1/2)0.9 = 0.45$ $90\%$ of the time sounds like
+a good trade!
+
+\item The theory of risk-neutral pricing is risk blind.
+
+\end{itemize}
+
+\end{slide}
+
+\begin{slide}{One Period Binomial}
+
+\begin{itemize}
+
+\item Stock price is $s$, goes to $S_+$ or $S_-$.
+
+\item Bond price is $1$, goes to $R$ over period.
+
+\item Option has payoff $f(S_\pm) = F_\pm$.
+
+\end{itemize}
+
+Replicate option by finding $m$ and $n$ so that
+
+\begin{eqnarray*}
+	mR + nS_- &=& F_-\\
+	mR + nS_+ &=& F_+\\
+\end{eqnarray*}
+
+\end{slide}
+
+\begin{slide}{{...}OPB}
+
+Delta hedge, $n$, and option value, $v$, are
+
+\begin{eqnarray*}
+	n &=& \frac{F_+ - F_-}{S_+ - S_-} \\
+	v &=& m + ns \\
+	  &=& \frac{1}{R}\left[\frac{S_+ - Rs}{S_+ - S_-} F_-
+		+ \frac{Rs - S_-}{S_+ - S_-} F_+\right] \\
+\end{eqnarray*}
+
+Note $n = \partial v/\partial s$.
+
+\end{slide}
+
+\begin{slide}{Wrong Parameterization}
+
+\begin{itemize}
+
+\item This parameterization is not standard. Given an up move, $u$,
+and a down move, $d$, define $S_+ = su$ and $S_- = sd$, so
+$$
+	v = \frac{1}{R}\left[\frac{u - R}{u - d} f(sd)
+		+ \frac{R - d}{u - d} f(su)\right].
+$$
+
+\item Oops, $n \not= \partial v/\partial s$ in general.
+
+\item However, $ns = (\partial/\partial R)(Rv)$ for {\em both}
+parameterizations.
+
+\end{itemize}
+
+\end{slide}
+
+\begin{slide}{Normal Facts}
+
+For any functions, $g$, $h$, and $k$,
+
+\begin{itemize}
+
+\item if $N$ is normal, then $E[e^N g(N)] = E[e^N] E[g(N + \Var N)]$.
+
+\item if $S$ is lognormal, then $E[S h(S)] = E[S] E[h(Se^{\Var\log S})]$.
+
+\item if $S$, $S_1$,... are jointly lognormal, then
+$E[S k(S_1,...)] = E[S] E[k(Se^{\gamma_1},...)]$, where
+$\gamma_j = \Cov(\log S, \log S_j)$.
+
+\end{itemize}
+
+\end{slide}
+
+
+\begin{slide}{Black-Scholes Pricing}
+
+Let's try to use this with Black-Scholes pricing, $v = (1/R) E[f(S)]$,
+where $S = Rse^{\sigma B_t - \sigma^2 t/2}$.
+
+\begin{eqnarray*}
+\partial v/\partial s &=& (1/R) E[f'(S) S/s]\\
+	&=& E[f'(Se^{\sigma^2 t})]\\
+\partial(Rv)/\partial R &=& E[f'(S) S/R]\\
+	&=& s E[f'(Se^{\sigma^2 t})]\\
+\end{eqnarray*}
+
+If $f(x) = (x - k)^+$, this shows delta is $N(d_1)$.
+
+\end{slide}
+
+\begin{slide}{Delta Skelter}
+
+\begin{itemize}
+
+\item
+For a contract with payoff $\log(S)$,
+$\partial (1/R) E[\log(S)]/\partial s = 1/Rs$.
+
+\item
+For a contract with payoff $\log(S/s)$,
+$\partial (1/R) E[\log(S/s)]/\partial s
+= (1/R) E[\log R + \sigma B_t - \sigma^2t/2]/\partial s = 0$.
+
+\item However, $\partial E[\log(S/s)]/\partial R = 1/R$ gets it right.
+
+\end{itemize}
+
+\end{slide}
+
+\begin{slide}{HiP Delta}
+
+Let $S = RsM$, where $E[M] = 1$ and $M$ does not depend on
+$R$, or $s$ and $C(k) = E[(S  - k)^+]/R$. From before,
+
+\begin{eqnarray*}
+ns &=& E[1(S > k) S/R]\\
+	&=& E[(S - k)1(S > k)]/R + k P(S > k)/R\\
+	&=& C(k) + k C'(k)\\
+\end{eqnarray*}
+
+You can compute dollar delta with your hands in your pocket. 
+
+\end{slide}
+
+\begin{slide}{CAPM}
+
+Bond is $1$, stock is $s$ at beginning of period. Bond return
+is $R$ and stock goes to $S$. Option pays $F$ at end of period.
+Minimize $E[(mR + nS - F)^2]$ over $m$, $n$.
+
+\begin{eqnarray*}
+n &=& \Cov(F,S)/\Var(S)\\
+m + ns &=& E[F]/R - n (E[S]/R - s)\\
+\end{eqnarray*}
+
+Assuming $S$ and $F$ do not depend on $s$, we have
+$\partial(Rv)/\partial R = ns$, where $v = m + ns$.
+
+\end{slide}
+
+\begin{slide}{Cones and Arbitrage}
+
+\begin{itemize}
+
+\item A {\em cone} is a subset of a vector space that is closed under
+vector addition and multiplication by a positive scalar.
+
+\item Cones are convex, but not vice versa.
+
+\item The set of arbitrage portfolios is a cone.
+
+\end{itemize}
+
+\end{slide}
+
+\begin{slide}{One Period General}
+
+\begin{itemize}
+
+\item Model: market with $m$ assets.
+\begin{itemize}
+
+\item $x\in\RR^m$ - prices at beginning of period.
+
+\item $\Omega$ - set of outcomes over the period.
+
+\item $X\colon\Omega\to\RR^m$ - prices at end of period.
+
+\end{itemize}
+
+\item Arbitrage means there exists $\xi\in\RR^m$ with $\xi\cdot x < 0$
+and $\xi\cdot X(\omega)\ge0$ for all $\omega\in\Omega$.
+
+\end{itemize}
+
+\end{slide}
+
+\begin{slide}{FTAP}
+
+\medskip
+
+{\bf Theorem:} {\rm (Fundamental Theorem of Asset Pricing)} {\it No arbitrage
+if and only if $x$ belongs to the smallest closed cone containing
+$X(\Omega)$.}
+
+\medskip
+
+\begin{itemize}
+
+\item This implies there is a positive measure, $\pi$, on $\Omega$
+with $x = \int_\Omega X\,d\pi$.
+
+\item If a bond with return $R$ exists, this is equivalent to $x$
+belonging to the smallest closed convex set containing $X(\Omega)/R$.
+
+\end{itemize}
+
+\end{slide}
+
+\begin{slide}{Application}
+
+\begin{itemize}
+
+\item Rates are zero, stock is 100. Can go to 90, 100, or 110.  What are
+the no arbitrage constraints on a call option with strike 100?
+
+\item Model: $x = (1, 100, v)$, $\Omega = \{90, 100, 110\}$,
+$X(\omega) = (1, \omega, (\omega - 100)^+)$. 
+
+\item No arbitrage if and only if $0\le v\le 5$.
+
+\end{itemize}
+
+\end{slide}
+
+\begin{slide}{FX Puzzle}
+
+Suppose USD/EUR volatility is 9\%, EUR/GBP volatility is
+9\%, and GBP/USD volatility is 20\%. These volatilities
+do not form the sides of a triangle, so arbitrage exists
+in the Black-Scholes constant volatility model.
+What is the arbitrage?
+
+\end{slide}
+
+\end{document}

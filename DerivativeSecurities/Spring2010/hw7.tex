@@ -1,0 +1,63 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 7}
+\author{Due 7:10PM, 29 March 2010}
+
+\maketitle
+
+
+\begin{xca}{(20 points)}
+Show $f(t) = r(t) + t r'(t)$, where $f$ is the instantaneous forward rate and
+$r$ is the spot rate. Draw a graph of $r(t)$ that implies a
+negative forward rate.
+\end{xca}
+
+\begin{xca}{(25 points)}
+A cash deposit has price $1$ at time $0$ and cash flow $c_j$ at time $t_j$.
+Given the discount to time $t_{j-1} < t_j$ is $D(t_{j-1})$, find the
+constant forward rate, $f_j$,
+over the interval $[t_{j-1}, t_j]$ that correctly prices the cash deposit.
+\end{xca}
+
+\begin{xca}{(25 points)}
+A forward has price 0 at time 0 and cash flows $-1$ at time $t$ and $c_j$ at time $t_j > t$. Given
+the discount to time $t_{j-1} < t_j$ is $D(t_{j-1})$, find the constant forward rate, $f_j$,
+over the interval $[t_{j-1}, t_j]$ when
+\begin{enumerate}
+\item $t > t_{j-1}$
+\item $t < t_{j-1}$, and given $D(t)$,
+\end{enumerate}
+that correctly prices the forward.
+\end{xca}
+
+\begin{xca}{(30 points)}
+A swap pays $(c - F_\delta(t_{j-1}; t_{j-1}, t_j))\delta(t_{j-1}, t_j)$ at times $t_j$, $j = 1$, \dots, $n$.
+Find a formula for the fixed coupon, $c$, in terms of the discount function, $D(t) = D(0,t) = D(t_0, t)$, that makes the
+swap value equal to zero using the fact that $F_\delta(t; u, v) = (D(t, u)/D(t, v) - 1)/\delta(u, v)$.
+\end{xca}
+
+\end{document}

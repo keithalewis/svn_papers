@@ -1,0 +1,237 @@
+\section{The One Period Model}
+The one period model is described by a vector, $x\in\R^m$, representing
+the prices of $m$ instruments at the beginning of the period, a set
+$\Omega$ of all possible outcomes over the period, and a bounded function
+$X\colon\Omega\to\R^m$, representing the prices of the $m$ instruments
+at the end of the period depending on the outcome, $\omega\in\Omega$.
+
+\begin{definition}
+Arbitrage exists if there is a vector $\xi\in\R^m$ such that
+$\xi\cdot x < 0$ and $\xi\cdot X(\omega)\ge0$ for all $\omega\in\Omega$.
+\end{definition}
+
+The cost of setting up the position $\xi$ is $\xi\cdot x = \xi_1 x_1 +
+\cdots + \xi_m x_m$. This being negative means money is made by putting on
+the position. When the position is liquidated at the end of the period,
+the proceeds are $\xi\cdot X$. This being non-negative means no money
+is lost.
+
+It is standard in the literature to introduce an arbitrary probability
+measure on $\Omega$ and use the conditions $\xi\cdot x = 0$ and $\xi\cdot
+X\ge0$ with $E[\xi\cdot X]>0$ to define an arbitrage opportunity, e.g.,
+\cite{ShiKabKraMel1994} section 7.3, definition 1.  Making nothing
+when setting up a position and having a nonzero probability of making a
+positive amount of money with no estimate of either the probability or
+amount of money to be made is not a realistic definition of an arbitrage
+opportunity.  Traders want to know how much money they make up-front
+with no risk of loss after the trade is put on.  %(See remarks...)
+This is what Garman calls {\em strong arbitrage} \cite{Gar1985}.
+
+Define the \emph{realized return} for a position, $\xi$, by
+$R_\xi = \xi\cdot X/\xi\cdot x$,
+whenever $\xi\cdot x\not=0$. If there exists $\zeta\in\R^m$
+with $\zeta\cdot X(\omega) = 1$ for $\omega\in\Omega$ (a 
+zero coupon bond) then the price is $\zeta\cdot x = 1/R_\zeta$.
+Zero interest rates correspond to a realized return of 1.
+
+Note that arbitrage is equivalent to
+the condition $R_\xi < 0$ on $\Omega$ for some $\xi\in\R^m$.
+In particular, negative interest rates do not necessarily imply arbitrage. 
+
+The set of all arbitrages form a cone since this set is closed
+under multiplication by a positive scalar and addition. The following 
+version of the FTAP shows how to compute an arbitrage when it exists.
+
+\begin{theorem}{(One Period Fundamental Theorem of Asset Pricing)}
+Arbitrage exists if and only if $x$ does not belong to the smallest
+closed cone containing the range of $X$. If $x^*$ is the nearest point in
+the cone to $x$, then $\xi = x^* - x$ is an arbitrage.
+\end{theorem}
+
+\begin{proof}
+If $x$ belongs to the cone, it is arbitrarily close to a finite sum
+$\sum_j X(\omega_j) \pi_j$, where $\omega_j\in\Omega$ and $\pi_j > 0$ for
+all $j$. If $\xi\cdot X(\omega) \ge0$ for all $\omega\in\Omega$ then $\xi\cdot
+\sum X(\omega_j) \pi_j \ge0$, hence $\xi\cdot x$ cannot be negative. The
+other direction is a consequence of the following with $\CC$ being the
+smallest closed cone containing $X(\Omega)$.
+\end{proof}
+
+\begin{lemma}
+If $\CC\subset\R^m$ is a closed cone and $x\not\in \CC$, then there
+exists $\xi\in\R^m$ such that $\xi\cdot x < 0$ and $\xi\cdot y \ge0$
+for all $y\in \CC$.
+\end{lemma}
+
+\begin{proof}
+This result is well known, but we provide an elementary self-contained
+proof.  Since $\CC$ is closed and convex, there exists $x^*\in \CC$
+such that $\norm{x^* - x} \le \norm{y - x}$ for all $y\in \CC$.
+We have $\norm{x^* - x} \le \norm{tx^* - x}$ for $t \ge 0$, so $0 \le
+(t^2 - 1)\norm{x^*}^2 - 2(t - 1)x^{*}\cdot x = f(t)$. Because $f(t)$
+is quadratic in $t$ and vanishes at $t = 1$, we have $0 = f'(1) =
+2\norm{x^*}^2 - 2x^{*}\cdot x$, hence $\xi\cdot x^* = 0$.  Now $0 <
+\norm{\xi}^2 = \xi\cdot x^* - \xi\cdot x$, so $\xi\cdot x < 0$.
+
+Since $\norm{x^* - x} \le \norm{ty + x^* - x}$ for $t \ge 0$ and $y\in
+\CC$, we have $0 \le t^2\norm{y}^2 + 2ty\cdot(x^* - x)$. Dividing by $t$
+and setting $t = 0$ shows $\xi\cdot y \ge0$.  \end{proof}
+
+Let $B(\Omega)$ be the Banach algebra of bounded real-valued functions on
+$\Omega$. Its dual, $B(\Omega)^* = ba(\Omega)$, is the space of finitely
+additive measures on $\Omega$ \cite{DunSch1954}.  If $\PP$ is the set of
+non-negative measures in $ba(\Omega)$, then $\{\pair{X,\Pi}:\Pi\in\PP\}$
+is the smallest closed cone containing the range of $X$,
+where the angle brackets indicate the dual pairing.
+There is no
+arbitrage if and only if there exists a non-negative finitely additive
+measure, $\Pi$, on $\Omega$ such that $x = \langle X,\Pi\rangle$,
+
+If $V\in B(\Omega)$ is the payoff function of an instrument and $V =
+\xi\cdot X$ for some $\xi\in\R^m$, then the cost of replicating the payoff
+is $\xi\cdot x = \langle \xi\cdot X,\Pi\rangle = \langle V,\Pi\rangle$.
+Of course the dimension of such perfectly replicating payoff functions
+can be at most $m$.
+
+If a zero coupon bond, $\zeta\in\R^m$, exists then the riskless realized
+return is $R = R_\zeta = 1/\Pi(\Omega)$. If we let $P = \Pi R$, then $P$
+is a probability measure and $x = \langle X/R,P\rangle = E[X]/R$.
+
+% R^m/{R_\zeta = 1} convex set and separating hyperplane
+
+\subsection{Examples}
+This section illustrates the one period model with some examples.
+
+\begin{example}{(Forward)}
+Let $x = (1, s, 0)$, $\Omega = [0,\infty)$,
+and $X(\omega) = (R, \omega, \omega - f)$.
+\end{example}
+This models a bond with riskless realized
+return $R$, a stock, and a forward contract on the stock with forward $f$.
+The smallest cone containing the range of $X$ is spanned
+by $X(0) = (R, 0, -f)$ and $\lim_{\omega\to\infty}X(\omega)/\omega = (0, 1, 1)$.
+Solving $(1, s) = a(R, 0) + b(0, 1)$ gives $a = 1/R$ and $b = s$.
+This implies $0 = -f/R + s$ so $f = Rs$, the standard
+relationship between forward and spot prices in the one period case. 
+\cite{Hul2005}
+
+\begin{example}{(Standard Binomial Model)}
+Let $x = (1, s, v)$, $\Omega = \{d, u\}$, $0<d<u$.
+and $X(\omega) = (R, s\omega, V(s\omega))$, where $V$ is any given function.
+\end{example}
+This is the usual parameterization for the one period binomial model with
+a riskless bond having realized return $R$, and a stock having price $s$
+that can go to either $sd$ or $su$.  The smallest cone containing the
+range of $X$ is spanned by $X(d)$ and $X(u)$.  Solving $(1, s) = aX(d)
++ bX(u)$ for $a$ and $b$ yields $a = (R - d)/R(u - d)$ and $b = (u -
+R)/R(u - d)$. The condition that $a$ and $b$ are nonnegative implies $d
+\le R \le u$. The no arbitrage condition on the third component implies
+\begin{equation*}
+  v = \frac{1}{R}\left(\frac{u - R}{u - d} V(sd)
+    + \frac{R - d}{u - d} V(su)\right).
+\end{equation*}
+In a binomial model, the option is a linear combination of the bond
+and stock.
+Solving $V(sd) = mR + nsd$ and $V(su) = mR + nsu$ for $n$ we see
+the number of shares of stock to purchase in order to replicate the option
+is
+$n = (V(su) - V(sd))/(su - sd)$. 
+Note that if $V$ is a call spread consisting of long one call with strike
+slightly greater than $sd$ and short one call with strike slightly less
+than $su$, then $\partial v/\partial s = 0$ since $V'(sd) = 0 = V'(su)$.
+
+\begin{example}{(Binomial Model)}
+Let $x = (1, s, v)$, $\Omega = \{S^+, S^-\}$, and $X(\omega) = (R,
+\omega, V(\omega))$, where $V$ is any given function.
+\end{example}
+As above we find
+\begin{equation*}
+	v = \frac{1}{R}\left(\frac{S^+ - Rs}{S^+ - S^-} V(S^-) 
+		+ \frac{Rs - S^-}{S^+ - S^-} V(S^+)\right)
+\end{equation*}
+and the number of shares of stock required to replicate the option is
+$n = (V(S^+) - V(S^-)/(S^+ - S^-)$. Note $\partial v/\partial s = n$
+indicates the number of stock shares to buy in order to replicate
+the option.
+
+\begin{example}
+Let $x = (1, 100, 6)$, $\Omega = [90,110]$,
+and $X(\omega) = (1, \omega, \max\{\omega - 100, 0\})$.
+\end{example}
+This corresponds to
+zero interest rate, a stock having price 100 that will certainly end with
+a price in the range 90 to 110, and a call with strike 100. One might
+think the call could have any price between 0 are 10 without entailing
+arbitrage, but that is not the case.
+
+This model is not arbitrage free.  The smallest cone containing the
+range of $X$ is spanned by $X(90)$, $X(100)$, and $X(110)$. It is easy
+to see that $x$ does not belong to this cone since it lies above the
+plane determined by the origin, $X(90)$ and $X(110)$.
+
+Using $e_b$, $e_s$, and $e_c$ as unit vectors in the bond, stock, and call
+directions, $X(90) = e_b + 90e_s$ and $X(110) = e_b + 110e_s + 10e_c$.
+Grassman calculus \cite{Pea1999} yields $X(110)\wedge X(90)
+= 90 e_b\wedge e_s + 110e_s\wedge e_b + 10e_c\wedge e_b + 900e_c\wedge e_s
+= -900e_s\wedge e_c + 10e_c\wedge e_b - 20e_b\wedge e_s$. The vector
+perpendicular to this is $-900e_b + 10e_s - 20e_c$.
+
+After dividing by 10, we can read off an arbitrage from this: borrow 90
+using the bond, buy one share of stock, and sell two calls. The amount
+made by putting on this position is $-\xi\cdot x = 90 - 100 + 12 = 2$. At
+expiration the position will be liquidated to pay $\xi\cdot X(\omega)
+= -90 + \omega - 2\max\{\omega - 100, 0\} = 10 - |100 - \omega| \ge 0$
+for $90\le\omega\le 110$.
+
+\begin{example}
+Let $x = (100, 9.1)$, $\Omega = [90,110]$,
+and $X(\omega) = (\omega, \max\{\omega - 100, 0\})$.
+\end{example}
+
+Eliminating the bond does not imply the call can have any price
+between 0 and 10 without arbitrage. The position
+$\xi = (1, -11)$ is an arbitrage.
+% multi period - gains must be increasing V(0) <= 0 , V(T) > 0 does not
+% tell you what the drawdown is.
+
+\subsection{An Alternate Proof}
+The preceding proof of the fundamental theorem of asset pricing
+does not generalized to multi-period models so we
+give a proof here that does. 
+
+Define $A\colon\R^m\to \R\oplus B(\Omega)$ by $A\xi = -\xi\cdot x \oplus
+\xi\cdot X$.  This linear operator represents the account statements
+that would result from putting on the position $\xi$ at the beginning
+of the period and taking it off at the end of the period.  Define $\PP$
+to be the set of $p \oplus P$ where $p > 0$ is in $\R$ and $P \ge 0$
+is in $B(\Omega)$.  Arbitrage exists if and only if $\ran A = \{A\xi
+: \xi\in \R^m\}$ meets $\PP$.  If the intersection is empty, then by
+the Hahn-Banach theorem \cite{BanMaz1933} there exists a hyperplane $\HH$
+containing $\ran A$ that does not intersect $\PP$. Since we are working
+with the norm topology, clearly $1\oplus 1$ is the center of an open
+ball contained in $\PP$, so the theorem applies.
+The hyperplane consist of all $y\oplus Y\in \R\oplus
+B(\Omega)$ such that $0 = y\pi + \langle Y,\Pi\rangle$ for some
+$\pi\oplus\Pi\in\R\oplus ba(\Omega)$.
+
+First note that $\langle \PP, \pi\oplus\Pi\rangle$ cannot contain
+both positive and negative values. If it did, the convexity of $\PP$
+would imply there is a point at which the dual pair is zero and thereby meet
+$\HH$. We may assume that the dual pair is always positive and that $\pi
+= 1$.  Since $0 = \langle A\xi, \pi\oplus\Pi \rangle = \langle -\xi\cdot
+x, \pi\rangle + \langle \xi\cdot X, \Pi \rangle$ for all $\xi\in\R^m$
+it follows $x = \langle X,\Pi\rangle$ for the nonnegative measure
+$\Pi$. This completes the alternate proof.
+
+This proof does not yield the arbitrage vector when it exists, however
+it can be modified to do so. Define $\PP^+ = \{\pi\oplus\Pi : \langle
+p\oplus P,\pi\oplus\Pi\rangle > 0, p\oplus P\in\PP\}$. The Hahn-Banach
+theorem implies $\ran A\cap\PP \not=\emptyset$ if and only if $\ker
+A^*\cap\PP^+ = \emptyset$, where $A^*$ is the adjoint of $A$ and
+$\ker A^* = \{\pi\oplus\Pi : A^*(\pi\oplus\Pi) = 0\}$. If the later
+holds we know $0 < \inf_{\Pi\ge0} \norm{-x + \langle X,\Pi\rangle}$
+since $A^*(\pi\oplus\Pi) = -x\pi + \langle X,\Pi\rangle$. The same
+technique as in the first proof can now be applied.
+
+\bibliographystyle{plain}
+\bibliography{ftapd}{}

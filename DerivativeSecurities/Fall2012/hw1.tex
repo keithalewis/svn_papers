@@ -1,0 +1,49 @@
+\documentclass[11pt,fleqn]{amsproc}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{ORIE 5914 Equity Derivatives}
+\author{Due 4:00PM, 26 September 2012}
+
+\maketitle
+
+\begin{xca}{(20 points)}
+In the one period model, show that if there is no arbitrage
+and \(\xi\cdot X(\omega) = 0\), \(\omega\in\Omega\), then
+\(\xi\cdot x = 0\).
+\end{xca}
+
+\begin{xca}{(20 points - cost of carry)}
+Consider the one period model \(x = (D, s, 0 )\), \(\Omega = [0,\infty)\),
+and \(X(\omega) = (1, \omega, \omega - f)\). Use
+exercise one to prove \(-fD + s = 0\).
+\end{xca}
+
+\begin{xca}{(20 points - put/call parity)}
+Consider the one period model \(x = (D, s, c, p)\), \(\Omega = [0,\infty)\),
+and \(X(\omega) = (1, \omega, (\omega - k)^+, (k - \omega)^+)\). Use
+exercise one to prove \(-kD + s - c + p = 0\).
+\end{xca}
+
+\begin{xca}{(20 points)}
+Consider the one period model \(x = (D, s, c_1, c_2)\),  \(\Omega = [0,\infty)\),
+and \(X(\omega) = (1, \omega, (\omega - k_1)^+, (\omega - k_2)^+)\) where \(k_1 < k_2\). Use
+the fundamental theorem of asset pricing to prove \(-D(k_2 - k1) \le c_2 - c_1 \le 0\).
+\end{xca}
+
+\begin{xca}{(20 points - 90/100/110 example with no bond)}
+Consider the one period model \(x = (100, 9.9)\),  \(\Omega = [90, 110]\),
+and \(X(\omega) = (\omega, (\omega - 100)^+)\). Find the arbitrage.
+\end{xca}
+
+\end{document}

@@ -1,0 +1,158 @@
+\documentclass[12pt,letterpaper,fleqn]{report}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{lmodern}
+%\usepackage{kpfonts}
+%\usepackage{listings}
+%%\lstset{language=C++, basicstyle=\ttfamily}
+\author{Keith A. Lewis}
+\title{Monotonic Streams}
+\begin{document}
+\maketitle
+Time series are data indexed by a monotonic stream of times.
+We define fundamental operations
+directly on the stream of times and show how to attach data to
+those. The algorithms can be implemented efficiently and are well
+suited to columnar data.
+
+An example of a {\em stream} is a sequence \(t_0, t_1, \dots\) where the
+\(t_j\) are of some type \(T\).  The primitive operations on a stream
+\(s\) are \(*s\) returning the current {\em item} in the stream, \(+s\)
+which moves to the {\em next} item in the stream, and \(?s\) which returns
+a boolean indicating if the stream is {\em done}. This interface is more
+general than an array of items, \(s[i] = t_i\), since it permits lazy
+evaluation and infinite streams. A {\em monotonic stream} is a stream of
+non-decreasing items under some order, e.g., time. It satisfies \(*s \le
+*+s\) where we assume operations are evaluated right to left and \(?s\)
+and \(?+s\) are true. The stream is {\em strict} if \(*s < *+s\) holds.
+
+A stream can be tuple valued and we indicate the $i$-th element
+by $s<i>$ with the convention $*s = s<0>$. 
+
+More generally, given two streams, $s$ and $t$ we can
+
+Streams are similar to C++ iterators or C\# {\tt IEnumerator}s.
+A typical use scenario in a program is {\tt while (?s) \{ }{\em use\
+}{\tt *s; +s; \}}.  Note advancing to the next item in the stream and
+testing for remaining elements are separate operations.  In C++ the
+STL library uses {\tt end()} and C\# requires calling {\tt MoveNext}
+and testing the return value before calling {\tt Current}.
+
+The basic operations to combine two streams into new streams 
+are denoted {\tt [} and {\tt ]}. If $s$ and $t$ are streams
+then
+
+The union, intersection, and difference of streams is well-defined
+mathematically but they have canonical implementations
+that preserve monotonicity.
+
+Let \(s\vee s'\) be the {\em join} of monotonic streams that preserves
+their order.  An implementation satisfies \(*(s\vee s') = *s\) if \(*s <
+*s'\) and \(*s'\) otherwise.  Moving to the next item increments \(s\)
+in the first case and \(s'\) in the second if neither are done. The
+join is done when both streams are done. Defining {\em meet}, \(s\wedge
+s'\), for the intersection and {\em less}, \(s\backslash s'\), for the
+difference is equally straightforward.
+
+
+Given a {\em predicate}, i.e., a function \(p\colon T\to \mathrm{Bool}\),
+and a stream \(s\) define \(s|p\) to be the stream of items that satisfy
+the predicate. Incrementing this stream has the effect {\tt while (?s \&\&
+!p(*s)) \{ +s; \}}.
+
+Given a monotonic stream \(s\) and any function \(f\colon T\to U\)
+define \(f(s)\) to be the stream of type \(U\) with \(*f(s) = f(*s)\),
+\(+f(s)\) calls \(+s\), and \(?f(s) = ?s\).
+
+It is also useful to define
+two piece-wise constant functions by \(f[s(t) = f(t_j)\) if \(t\in [t_j,
+t_{j+1})\) and \(f]s(t) = f(t_j)\) if \(t\in (t_j, t_{j+1}]\). The former
+is right continuous and is used for market prices (prices can jump),
+the latter is used for positions (execution is not instantaneous).
+Note \(f[s(t)\) depends only on \(t_j \le t\) and \(f]s(t)\) only on
+\(t_j < t\), i.e., they cannot look at future stream values.
+
+Given a time \(t\) let \(s > t\) denote advancing the stream until
+we find an item greater than \(t\). Similarly for \(s \ge t\). Let
+\(s < t\) and \(s \le t\) denote the streams that stop at \(t\)
+either excluding or including \(t\). These two operations do
+not have an immediate effect, unlike the previous two.
+
+A type of concatenation for monotonic streams that is useful for describing
+trading strategies is denoted by \(s = s_0,s_1,\dots,s_{n-1}\).
+The initial index \(i\) is 0. Define \(*s = *s_i\) and
+\(+s\) by \(s_{i+1}>*s_i\), \(i = i + 1\) modulo \(n\).
+If after \(s_{i+1}>*s_i\) we have \(?s_{i+1}\) is false, apply the same 
+procedure to the the next stream.
+Define \(?s\) by all \(?s_j\) being false. 
+Let \(@ s\) denote the current index of the concatenated
+monotonic streams. It is also useful to use the condition
+\(s_{i+1}\ge *s_i\) instead of strict inequality. In this case
+we use a period instead of a comma.
+
+It is also useful to attach buffers to monotonic streams,
+e.g., a queue of fixed size or a range based on the contents of
+the buffer such as the last 5 minutes of ticks. The
+buffer can also be an accumulator (and contain only one item) such
+as a weighted moving average. Buffers take streams to
+streams of streams like {\tt SelectMany} in LINQ.
+
+\section{Trading Strategies}
+A simple trading strategy is to fix two values \(k_1 < k_2\) and buy
+an instrument when the price is below \(k_1\) then sell when the
+price goes above \(k_2\). If \(s\) is the stream of tick times and
+\(x\) is the instrument price then \(u = s|(x]s < k_1)\) gives
+the stream of enter signals. The predicate is evaluated at
+each tick to give \((x]s)(*s) < k_1\). Note we use \(x]s\) and
+not \(x[s\) because strategies cannot be executed instantaneously.
+Similarly, the exit signal
+stream is \(s|x]s > k_2\). 
+Monotonic stream concatenation gives the
+is the stream of trading times, \(u = (s|s]x < k_1),(s|s]x > k_1)\).
+Buy one share when \(@u = 0\)
+and sell one share when \(@u = 1\) is the trading strategy.
+
+This strategy stops generating trades when the price moves away
+from the \([k_1,k_2]\) range. Suppose we want to reset the
+range based on the market close each week. Let \(eow\) be
+the stream of end of week closing times. The stream
+\(u = (s|s < (x[eow) - h),(s|s > (x[eow) + h)\) has the effect of
+setting \(k_1 = x[eow - h\) and \(k_2 = x[eow + h\) at the
+end of each week.
+
+Consider the following strategy:
+if market open is less than last week's market close, buy one share.
+If market close is greater than last week's market close and you are long, close out.
+Always close out at the end of week even if it means taking a loss.
+
+Define the stream \(eow\) to be the weekly market closing time,
+\(mo\) to be daily market open, and \(mc\) to be daily market close. Let
+\(x(t)\) be the price of the underlying stock at time \(t\).
+The start gain component can be expressed by \(sg = mo|(x < x[eow)\). 
+This produces the
+stream of market open times where \(x(*mo) < x[eow(*mo)\), i.e.,
+the market open price is less than the previous week's close.
+The stop loss component is \(sl = mc|(x > x[eow)\). This produces the
+stream of market close times where \(x(*mc) > x[eow(*mc)\), i.e.,
+the market close is greater than the previous week's close.
+
+Stream concatenation expresses the timing of when these conditions
+are in effect. The expression \(slsg = sg,(sl\vee eow)\) gives the
+appropriate monotonic stream for determining the position. First
+we look for a market open that satisfies the entry criterion. We
+then switch to looking for either the stop loss or end of week
+criteria that occur after that.
+
+In the original specification it is not clear if we should do multiple
+trades during a week. The above implementation allows that. Suppose
+we wish to limit the strategy to doing at most one trade per week.
+That is specified by \(s = sg,(sl\vee ewo).eow\).
+After the exit signal immediately start looking for the end of week.
+If the exit and end of week coincide, the period operator ensures
+we move on to looking at the next market open.
+The trades are buy 1 share if \(@s = 0\), sell one share if \(@s = 1\), and do
+nothing if \(@s = 2\).
+
+\end{document}

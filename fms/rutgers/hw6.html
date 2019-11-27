@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>
+Homework 6
+</title>
+
+</head>
+<body>
+
+<h1>
+Math 628 Sp12 Homework 6
+</h1>
+<h4>
+Due Mar. 22, 2012 at 6:40PM
+</h4>
+<p>
+Your job is to provide a convincing argument that what you claim
+is correct.
+</p>
+<p>The Ho-Lee model with short rate process
+\(r_t = \phi(t) + \sigma(t)B_t\) has the closed form solution
+\[
+D(t, u) = e^{-\int_t^u \{\phi(s) - \frac{1}{2}(\Sigma(s) - \Sigma(u))^2\}\,ds
+- (\Sigma(u) - \Sigma(t))B_t}
+\]
+for the price at time \(t\) of a zero coupon bond maturing at time \(u\),
+where \(\Sigma(t) = \int_0^t \sigma(s)\,ds\).
+
+</p>
+
+<p>
+<span class="ex">Exercise 1.</span>
+<span class="it">
+Show \(E[D(u,v)D_t] = E[D(u,v)e^\gamma]D(0,t)\)
+where \(\gamma = (\Sigma(v) - \Sigma(u))\int_0^t \min\{s,u\}\sigma(s)\,ds\).
+</span>
+</p>
+
+<p>
+<span class="ex">Exercise 2.</span>
+<span class="it">
+The value of a swap paying fixed coupon \(c\) having calculation
+dates \(t_0 < \cdots < t_n\) is
+\(c\sum_{0\le j\lt n} D(t, t_{j+1})\delta_j - D(t, t_0) + D(t, t_n)\),
+where \(\delta_j\) is the day count fraction for the interval
+\([t_j, t_{j+1}]\) and \(t\le t_0\).
+Show the value of a swaption with strike \(c\) is
+\(E[(c\sum_{0\le j\lt n} D(t_0, t_{j+1})\delta_je^{\gamma_{j+1}}
+- 1 + D(t_0, t_n)e^{\gamma_n})^+]D(0, t_0)\), where
+\(\gamma_j = \Cov(\log D(t_0, t_j), \log D_{t_0})\).
+</span>
+</p>
+
+<p>
+Update the <code>rutgers</code> branch of <code>xllpwflat</code>.
+Be sure you have the latest <code>fmspwflat</code> and <code>xllbms</code>.
+</p>
+
+<p>
+<span class="ex">Exercise 3.</span>
+<span class="it">
+There is a bug in
+</span>
+<code>rutgers/hw6/ho_lee.h</code>.
+<span class="it">
+Find it and fix it.
+</span>
+
+</p>
+
+<p>
+<span class="ex">Exercise 4.</span>
+<span class="it">
+</span>
+Complete the code in
+</span>
+<code>rutgers/hw6/ho_lee.cpp</code>.
+</p>
+
+</body>
+</html>

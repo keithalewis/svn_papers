@@ -1,0 +1,122 @@
+\documentclass[11pt,fleqn]{amsproc}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 1}
+\author{Due 7:10PM, 7 Feb 2011}
+
+\maketitle
+
+\begin{xca}{(20 points)}
+If today's USD/JPY exchange rate is $82$, the one year USD zero price is 99,
+and the one year JPY zero price is 100, what is today's one year forward 
+USD/JPY exchange rate assuming no arbitrage and perfect liquidity?
+\end{xca}
+
+Consider the zero cost portfolio: $-1$ USD for $82$ JPY now, borrowing
+$1$ USD now and paying $1/.99$ USD in one year, investing $82$ JPY now
+are receiving $82$ JPY in one year, and a forward exchange contract
+for converting $1/.99$ USD into $X(1/.99)$ JPY in one year, where $X$
+is the forward exchange rate. No arbitrage implies
+$82$ JPY must equal $X/.99$ JPY so the forward exchange rate
+is $X = 82(.99) = 81.18$.
+
+\begin{xca}{(30 points)}
+Consider the one period model $x = (1, s, v)$,
+$\Omega = \{u, d\}$ and $X = (R, s\omega, f(s\omega))$.
+\begin{enumerate}
+\item Show no arbitrage implies $v = (qF^+ + (1 - q)F^-)/R$, where
+$q = (R - d)/(u - d)$, $F^+ = f(su)$, and $F^- = f(sd)$.
+\item Find a payoff, $f$, such that $\partial v/\partial s \not= n$, where
+$n = (f (su) - f (sd))/(su - sd)$.
+\item Show $ns = (\partial/\partial R)(Rv)$ for any payoff $f$.
+\end{enumerate}
+\end{xca}
+
+The solution can be found in the paper on the Fundamental Theorem
+of Asset Pricing: Discrete Time.
+
+\begin{xca}{(20 points)}
+Show a regular tetrahedron and a regular octohedron joined at a face
+has $8 - 1 + 4 - 1 - 2 = 8$ sides. Hint: consider the points
+$A = O + e_1 - e_2$, $B = O + e_1 + e_2$, $C = O + h e_3$ for some $h$, and
+$D = O + e_2 + h e_3$.
+\end{xca}
+
+If $E = (A + B)/2$, then the length of $CE$ is $\sqrt{3}$ and
+that of $OC$ is $h = \sqrt{2}$. We show the product
+$ABCD = 0$ so the four points are coplanar.
+We have $(O + e_1 - e_2)(O + e_1 + e_2)(O + \sqrt{2}e_3)
+(O + 2e_2 + \sqrt{2}e_3) = 
+[O\cdot e_1\cdot \sqrt{2} e_3\cdot 2e_2
++e_1\cdot O\cdot \sqrt{2} e_3\cdot 2e_2]
++[e_1\cdot e_2\cdot O\cdot \sqrt{2}e_3
++e_1\cdot O\cdot e_2\cdot \sqrt{2}e_3]
++[-e_2\cdot e_1\cdot O\cdot \sqrt{2}e_3
+-e_2\cdot e_1\cdot \sqrt{2}e_3\cdot O]$.
+The terms in the brackets cancel so the product is zero.
+
+By symmetry, $A'B'CD = 0$ where $A' = O - e_1 - e_2$
+and $B' = O - e_1 + e_2$. 
+
+As pointed out by others, $BB'C'D$ is also zero, where
+$C' = -\sqrt{2} e_3$ so the correct answer is
+$(8 - 1) + (4 - 1) - 3 = 7$ sides.
+
+\begin{xca}{(30 points)}
+Consider the one period model consisting of a bond, call, and
+put. Let $x = (1, c, p)$, $\Omega = [L,H]$, and
+$X(\omega) = (R, (\omega - K)^+, (K - \omega)^+)$ where
+$0\le L < K < H$.
+
+\begin{enumerate}
+
+\item Find the constraints on $c$ and $p$
+that preclude arbritrage.
+
+\item Suppose the underlying stock were also available
+for trading so $x = (1, c, p, s)$ and
+$X(\omega) = (R, (\omega - K)^+, (K - \omega)^+, \omega)$.
+Find the constraints on $c$, $p$, and $s$
+that preclude arbritrage.
+
+\end{enumerate}
+\end{xca}
+
+The smallest cone containing the range of $X$ is
+$\{aX(L) + bX(K) + cX(H)\colon a,b,c\ge 0\}$.
+Let $O$ be the origin, and use $L$ as shorthand for $X(L)$, etc.
+The point $x = e_b + ce_c + pe_p$ is in the cone if and
+only if $OxKH/OLKH \ge 0$, $OLxH/OLKH \ge 0$, and $OLKx/OLKH \ge 0$.
+
+It is easy to see that the first condition will reduce to $p \ge 0$ and
+the third to $c \ge 0$. We have $OLKH =
+O(O + Re_b + (K - L)e_p)(O + Re_b)(O + Re_b + (H - K)e_c)
+= O((K - L)e_p)(O + Re_b)((H - K)e_c)
+= O(K - L)e_p Re_b (H - K)e_c
+= (K-L)R(H-K)Oe_pe_be_c$.
+Using the distributive law and the fact products of repeated
+points are zero we have $OLxH =
+O(O + Re_b + (K - L)e_p)(O + e_b + ce_c + pe_p)(O + Re_b + (H - K)e_c)
+= O\cdot Re_b\cdot pe_p\cdot (H - K)e_c
++ O\cdot (K - L)e_p\cdot e_b\cdot (H - K)e_c
++ O\cdot (K - L)e_p\cdot ce_c\cdot Re_b
+= R(H - K)pOe_be_pe_c + (K - L)(H - K)Oe_pe_be_c + R(K-L)cOe_pe_ce_b$
+so the second condition is $-R(H - K)p + (K - L)(H - K) - R(K - L)c \ge0$.
+We can write this as $p/(K - L) + c/(H - K) \le 1/R$.
+
+Since $\omega - K = (\omega - K)^+ - (K - \omega)^+$ we must
+have $s - K/R = c - p$ so $s = K/R + c - p$. Adding the stock
+does not expand the market in this model.
+
+\end{document}

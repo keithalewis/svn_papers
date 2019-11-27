@@ -1,0 +1,146 @@
+% ef.tex - Efficient Frontier calculation
+
+\documentclass[11pt,fleqn]{amsart}
+
+\newcommand{\R}{\bf{R}}
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+
+\begin{document}
+\title{Notes on Portfolio Selection}
+\author{Keith A. Lewis}
+\address{KALX, LLC}
+\email{kal@kalx.net}
+\urladdr{http://kalx.net}
+\begin{abstract}
+Given an endowment and a choice of investments, how does one
+choose the ``best'' portfolio? This note gives a historically
+motivated account of what some of the best minds in the business
+had to say about this problem.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+The concept of being compensated for risk probably dates back to the
+time we still lived in caves, but starting in the 1950's a quantitative
+theory of this tradeoff started taking shape.
+
+efficient frontier
+factor models
+CAPM
+
+Kelly,
+Arrow,
+Markowitz,
+Sharpe,
+Fama,
+Ross,
+
+\section{The One Period Model}
+The one period model assumes there are $n$ instruments available for
+trading at prices $x = (x_1,\dots,x_n)$ at the beginning of the trading
+period that evolve to random prices $X = (X_1,\dots,X_n)$ at the end of
+the period.  No intraperiod trading is allowed. The prices are assumed
+to be perfectly liquid, i.e., trades occur exactly at the beginning and
+end of the period at the specified price no matter the quantity.
+
+The random vector, $X$, is completely determined by the joint density
+of the random variables $F(x_1,\dots, x_n) = P(X_1 \le x_1, \dots, X_n \le
+x_n) = P(\{\omega\in\Omega\colon X_1(\omega) \le x_1, \dots, X_n(\omega)
+\le x_n\})$, where $\Omega$ is the {\em sample space} of possible outcomes
+over the time period, and $P$ is a {\em probability measure} on $\Omega$.
+
+If the components of $X$ are jointly normal, then the joint disribution
+is completely specified by the vector mean $E[X]$, and the covariance
+matrix $\Cov(X,X) = E[XX^T] - E[X]E[X]^T$. Note this model allows prices
+to be negative.
+
+A {\em portfolio}, $\xi = (\xi_1,\dots,\xi_n)$, specifies how much of each
+instrument to buy (or sell) at the beginning of the period. The cost of
+establishing the portfolio at the beginning of the period is $\xi^T x =
+\xi_1 x_1 + \cdots + \xi_n x_n$. The value of the portfolio at the end of
+the period if it was liquidated is given by the random variable $\xi^T X$.
+
+Define $R^\xi = \xi^T X/\xi^T x$, to be the {\em realized return} on
+portfolio $\xi$. One unit invested at the beginning of the period will
+evolve to $R^\xi$ units at the end of the period.
+
+Sometimes it is convenient to work in terms of {\em simple return}
+defined as $r = R - 1$, or $r = (R - 1)/\Delta t$ where $R$ is the
+realized return and $\Delta t$ is the timespan of the period.
+
+The {\em volatility} of the return is defined to be the square root of
+its variance. Note, this is not the same as the Black-Scholes definition
+of volatility.
+
+\section{Kelly's Criterion}
+In 1956, J. L. Kelly Jr. suggested using a logarithmic utility function
+(as did Daniel Bernoulli in 1738 in his resolution of the St. Petersburg
+paradox). The maximum of $E[\log R^\xi]$ is obtained at $E[X/\xi^TX]
+- x/\xi^Tx = 0$, so $x = E(X/R^\xi)$ determines the optimal portfolio,
+$\xi$. Solving for $\xi$ is rarely tractable.
+
+\section{Sharpe Ratio}
+Is an investment with a 5\% simple return having 10\% volatility better
+than an investment with an 8\% simple return having 20\% volatiltiy? The
+{\em information ratio} is the quotient of return by volatility.
+Using this measure, the first investment is better.
+
+Now assume that it is possible to get a 3\% return at no risk. A portfolio
+with half invested in the risk free asset and half in the second asset has
+a volatility of 10\%, the same as the first investment, but a return of
+(3 + 8)/2 = 5.5\%. This suggests the second investment might be better
+since this portfolio has the same risk but better return than the first.
+
+Given two returns, $r_1$ and $r_2$, with nonzero volatilities, $\sigma_1$
+and $\sigma_2$, and expected returns, $\mu_1$ and $\mu_2$. Consider the
+portfolio consising of $1 - \sigma_1/\sigma_2$ shares in the riskless
+asset and $\sigma_1/\sigma_2$ in the second asset. The volatility
+of this portfolio is $\sigma_1$. The Sharpe ratio follows from the
+condition that we pefer the second investment if the expected return
+of this portfolio is greater than the expected return of the first,
+$\mu_1 < (1 - \sigma_1/\sigma_2)r + \sigma_1/\sigma_2 \mu_2$.  This can
+be rewritten $(\mu_1 - r)/\sigma_1 < (\mu_2 - r)/\sigma_2$.
+
+
+The {\em Sharpe Ratio} of a simple return is $(\mu
+- r)/\sigma$ where $\mu$ is the expected value of the simple return,
+$\sigma$ is its volatility and $r$ is the simple return on a portfolio
+having zero volatility (assuming such exists). This is an example
+of a {\em utility function}.
+
+This can be generalized somewhat.
+
+\section{Arbitrage}
+Arbitrage exists if there is a portfolio $\xi$ with $\xi^T x < 0$ and
+$\xi^T X\ge0$. Note that this is equivalent to the condition $R^\xi
+< 0$. (It is possible that $R^\xi < 1$ and there is no arbitrage.)
+The Fundamental Theorem of Asset Pricing states that arbitrage does not
+exist if and only if there is a random variable $\pi > 0$ such that $x
+= E[X\pi]$.
+
+One direction is easy. If $x = E[X\pi]$ and $\xi^T X\ge0$, then $\xi^T
+x = E[\xi^T X\pi] ge0$. The other direction can be proved using the
+Hahn-Banach theorem. (See Appendix.)
+
+\section{Efficient Frontiers}
+Maximize $\Phi(\xi, \lambda, \mu) = E[\xi^T X] - \lambda(\xi^T x - 1) -
+\mu/2(\Var(\xi^T X) - \sigma^2)$. We have $d\Phi/d\xi = E[X] - \lambda
+x - \mu \Var(X)\xi$, where $\Var(X) = E[XX^T] - E[X]E[X]^T$. Setting
+$d\Phi/d\xi = 0$ and solving for $\xi$ gives $\xi = V^{-1}(E[X]
+- \lambda x)/\mu$, where $V = \Var(X)$. Using $1 = \xi^T x$ and
+putting $\Lambda = V^{-1}$ gives
+\begin{equation*}
+\mu = E[X]^T\Lambda x - \lambda x^T\Lambda x.
+\end{equation*}
+
+Using $\sigma^2 = \Var(\xi^T X) = \xi^T V\xi$ yields
+\begin{align*}
+\sigma^2\mu^2 &= (E[X] - \lambda x)^T \Lambda  (E[X] - \lambda x)\\
+ &=  E[X]^T\Lambda E[X] - 2\lambda E[X]^T\Lambda x + \lambda^2 x^T\Lambda x
+\end{align*}
+
+Let $A = x^T\Lambda x$, $B = E[X]^T\Lambda x$, and $C = E[X]^T\Lambda E[X]$.
+
+\end{document}

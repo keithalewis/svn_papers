@@ -1,0 +1,99 @@
+\documentclass[11pt,fleqn]{amsart}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\tr}{\mathop{\rm{tr}}}
+\newcommand{\B}{\mathcal B}
+\newcommand{\M}{\mathcal M}
+
+\newtheorem{ex}{Exercise}
+
+\begin{document}
+\title{Taking derivatives with respect to a matrix}
+\author{Keith A. Lewis}
+\address{KALX, LLC}
+\email{kal@kalx.net}
+\urladdr{http://kalx.net}
+\begin{abstract}
+If we have a function whose argument is a matrix, it is sometimes possible
+to take the derivative of the function with respect to the matrix. This
+is usually much cleaner than trying to take partial derivatives with
+respect to the matrix entries since we only consider one case instead
+of a case for each entry in the matrix.
+\end{abstract}
+
+\maketitle
+
+\section{Fr\'echet Derivative}
+If $X$ and $Y$ are normed vector spaces and $F\colon X \to Y$ is a
+function, then the Fr\'echet derivative, $DF\colon X \to \B(X, Y)$,
+where $\B(X,Y)$ is the space of bounded linear operators from $X$ to $Y$,
+is defined by
+\begin{align*}
+	||F(x + h) - F(x) - DF(x)h|| = o(||h||),
+\end{align*}
+if it exists. (The {\em little o} notation, $f(h) = o(h)$ means
+$f(h)/h \to 0$ as $h \to 0$.)
+If $X$ and $Y$ are are one dimensional, the formula above is equivalent to
+\begin{align*}
+	\lim_{h\to 0} (F(x + h) - F(x))/h = F'(x)
+\end{align*}
+The existence of the derivative of $F$ at $x$ says $F$ looks like a linear
+function in the neighborhood of $x$. No surprise.
+
+For example, let $X = Y = \M_k$, the space of $k\times k$ matrices, and put
+$F(x) = x^2$.  The derivative is not $2x$. Since $(x + h)^2 - x^2
+= xh + hx + h^2$, the Frechet derivative is $DF(x)h = xh + hx$. Note
+$DF(x)\colon M_k \to \M_k$ and is linear.
+
+If we don't want to mention $F$ explicitly, we can write this as
+$d(x^2) = x\,dx + dx\,x$, the non commutative way to write $2x$.
+(Note the switch from $D$ to $d$.)
+
+\begin{ex}
+Show $d(x^n) = \sum_{j=1}^n x^{n - j} dx x^{j - 1} = x^{n-1}\, dx +
+x^{n - 2}\,dx\,x + \cdots + dx\,x^{n - 1}$, the non commutative version
+of $nx^{n - 1}$. 
+\end{ex}
+
+\begin{ex}
+Define $R_x y = xy$ and $L_x y = yx$, and let $F(x) = x^n$.
+Show $DF = \sum_{j=1}^n L_x^{n - j}R_x^{j - 1}$.
+\end{ex}
+
+A great example of the power of the Frechet derivative is computing
+the maximum likelihood estimator for the covariance of a $d$-dimensional
+brownian motion given ($d$-dimensional) observations $x_i$ at times $t_i$,
+$i = 1,\dots,n$.
+
+The function of interest is $F(\Lambda) = n\log\det \Lambda - \sum_i
+y^T_i \Lambda y_i$, where $y_i = (x_i - x_{i-1})/\sqrt(t_i - t_{i-1})$,
+and $\Lambda$ is the inverse of the covariance matrix. Here, $y^T$
+indicates the transpose of $y$. The problem is to find the matrix,
+$\Lambda$, that maximizes $F(\Lambda)$. Just like in one-dimensional
+calculus, we take the derivative and set it equal to zero.
+
+We need the fact that $\det(\exp A) = \exp(\tr A)$. This is clearly
+true if $A$ is a diagonal matrix, and less clearly true if $A$ is upper
+triangular.  Once you convince yourself of this fact, this proves the
+general case since all matrices have an upper triangular representation.
+
+If $B$ is invertible we have $\det B = \exp(\tr\log B)$. Taking
+derivatives gives $d(\det B) = \exp(\tr\log B)\tr (B^{-1} dB) = (\det
+B)\tr (B^{-1} dB)$.
+
+\begin{ex}
+Show $d(\exp A) = (\exp A) dA$ if $A$ and $dA$ commute, and
+$d(\log B) = B^{-1} dB$, if $B$ and $dB$ commute, using the definition
+of the Fr\'echet derivative and the power series representations
+for $\exp$ and $\log$.
+\end{ex}
+
+We now see $dF(\Lambda) = (n/(\det \Lambda)) (\det \Lambda) \Lambda^{-1}
+d\Lambda - \sum_i y_i^T d\Lambda y_i = n \Lambda^{-1} d\Lambda - \sum_i
+y_i^T d\Lambda y_i$. Setting this to zero and taking $d\Lambda = e_j e'_k$
+where the $e_j$'s are the standard basis of $\R^n$, we get $\Lambda_{j,
+k} = (1/n)\sum_i (y_i)_j (y_i)_k$. You need to know $\tr x y^T = x^T y$.
+
+This can be written in matrix form as $\Lambda = (1/n)\sum_i y_i y^T_i$.
+
+\end{document}

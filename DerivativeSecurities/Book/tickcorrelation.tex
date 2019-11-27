@@ -1,0 +1,117 @@
+\documentclass[11pt,fleqn]{article}
+\usepackage{amsmath}
+
+\def\tr{\qopname\relax n{tr}}
+
+\begin{document}
+
+\title{Estimating Covariance from Tick Data}
+\author{Keith A. Lewis}
+\maketitle
+
+\begin{abstract}
+Notes describing how to estimate covariance from asynchronous
+observations of individual components of a multidimensional
+Brownian process.
+\end{abstract}
+
+\section{Synchronous Observations}
+As a warm up for the asynchronous case, we derive the classical
+maximum likelihood estimator for the case of synchronous observations.
+
+Let $B_t$ be $d$ dimensional independent Brownian motion.
+Given times $t_1 < \cdots < t_n$, and $d$-dimensional vectors $x_1$,
+\dots, $x_n$,
+we wish to maximize the likelihood function
+\begin{eqnarray*}
+f(\Sigma|x_1,\dots,x_n) &=& P(\Sigma B_{t_1} = x_1, \dots,
+	\Sigma B_{t_n} = x_n)\\
+	&=& P(\Sigma B_{t_1} = x_1, \dots,
+		\Sigma(B_{t_n} - B_{t_{n-1}}) = x_n - x_{n-1})\\
+	&=& \Pi_{j = 1}^n \exp(-\Delta x_j^T \Gamma^{-1}\Delta x_j/2\Delta t_j)
+			/\sqrt{(2\pi)^n\det\Gamma},\\
+\end{eqnarray*}
+where $\Sigma$ is the $d\times d$ volatility matrix,
+$\Gamma = \Sigma\Sigma^T$,
+and $\Delta x_j = x_j - x_{j - 1}$, with the convention $x_0 = 0$.
+Similarly for $\Delta t_j$.
+
+Recall that $\det\exp A = \exp(\tr A)$ so if $B$ is invertible
+we have $\det B = \exp(\tr\log B)$ hence $d(\det B) = \exp(\tr\log B)
+\tr B^{-1}dB = (\det B) \tr B^{-1}dB$.
+
+Taking the derivative of $2\log f$ with respect to $\Gamma^{-1}$
+and setting it equal to zero yields
+\begin{equation*}
+	0 = -\sum \Delta x_k^T d\Gamma^{-1}\Delta x_k/\Delta t_k
+		+ n\tr \Gamma d\Gamma^{-1}.
+\end{equation*}
+Let $e_j$ be a vector with $j$-th element 1 and all others 0 and put
+$d\Gamma^{-1} = e_ie_j^T$. Since $\tr xy^T = x^Ty$, the expression
+above yields $\Gamma_{i,j} = (1/n)\sum_{k = 1}^n \Delta x_{k_i} \Delta
+x_{k_j}/\Delta t_k$ so $\Gamma = (1/n)\sum_{k=1}^n \Delta x_k \Delta
+x_k^T/\Delta t_k$ is the classical maximum likelihood estimator.
+
+\section{Asynchronous Observations}
+Let $B_t$ be $d$ dimensional independent Brownian motion
+as above.
+Given times $t_j$, $d$-dimensional vectors $a_j$, and
+scalars $x_j$, we wish to maximize the likelihood function
+$f(\Sigma|a_j, x_j) = P(a_1^T\Sigma B_{t_1} = x_1, \dots,
+a_n^T\Sigma B_{t_n} = x_n)$,
+where $\Sigma$ is the $d\times d$ volatility matrix.
+
+The main case of interest is when $a_j = e_{k_j}$ for some $k_j$, i.e.,
+we are sampling the components of the vector valued process $\Sigma B_t$.
+
+Note we do not need to assume the $t_j$ are increasing, or even
+distinct.
+
+The $a_j^T\Sigma B_{t_j}$ are jointly normal with covariance matrix
+$\Gamma_{i,j} = a_i^T\Sigma\Sigma^T a_j \min\{t_i, t_j\}$.
+The likelihood function is 
+\begin{equation*}
+	f(\Gamma|a, x) = \exp(-x^T\Gamma^{-1}x/2)/
+			\sqrt{(2\pi)^n\det\Gamma}
+\end{equation*}
+
+Taking the derivative of $2\log f(\Gamma)$ with respect to $\Gamma^{-1}$
+and setting it equal to zero yields
+\begin{equation*}
+	0 = -x^Td\Gamma^{-1}x + \tr\Gamma d\Gamma^{-1}
+\end{equation*}
+Putting $d\Gamma^{-1} = e_ie_j^T$ gives $\Gamma_{i,j} = x_i x_j$.
+
+Unfortunately, this does not have a solution in general.
+If $a_i = e_{k_i}$ for some $k_i$, the above equation implies
+$(\Sigma\Sigma^T)_{k_i,k_j} = x_i x_j/\min\{t_i, t_j\}$, but $k_i$
+will take on values between 1 and $d$ whereas $i$ takes values from 1
+to $n$. In general, $n$ will be much larger than $d$ so we can expect
+the right hand side of equation will give incompatible results for the
+estimate of $\Sigma\Sigma^T$.
+
+In the case $d = n = 2$ and $a_1 = e_1$, $a_2 = e_2$, if we let
+$\Gamma_{1,1} = \sigma_1^2 t_1$, $\Gamma_{1,2} = \Gamma_{2,1} = \sigma_1
+\sigma_2 \rho \min\{t_1, t_2\}$, and $\Gamma_{2,2} = \sigma_2^2 t_2$
+we get the maximum likelihood estimates $\sigma_1 = x_1/\sqrt{t_1}$,
+$\sigma_2 = x_2/\sqrt{t_2}$, and $\rho = \sqrt{t_1 t_2}/\min\{t_1, t_2\}$.
+This is not very satifying since $\rho\ge 1$.
+
+\section{Non Uniform Priors}
+
+We will use a Bayesian approach to specify a prior distribution, update
+it with the given data, then use the maximum likelihood estimator
+for the distribution of the parameter $\theta$.
+
+Recall this assumes the p.d.f of a vector valued random variable, $X$, is
+given by $f(x|\theta)$ for some parameter $\theta$. The Bayesian method
+specifies a p.d.f., $g(\theta)$ for $\theta$ and Bayes theorem implies
+the p.d.f. for $\theta$ given the observation $X = x$ is $g(\theta| x)
+= g(\theta) f(x|\theta)/f(x)$, where $f(x) = \int f(x| \theta)
+g(\theta)\,d\theta$. We do not need to compute this if we are using the
+maximum likelihood estimator since this term does not depend on $\theta$.
+
+Consider the case where we have a single observation of a single
+component of the $d$-dimensional Brownian motion.
+
+\end{document}

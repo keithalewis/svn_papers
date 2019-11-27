@@ -1,0 +1,55 @@
+\documentclass[11pt,fleqn]{amsproc}
+
+\renewcommand{\AA}{{\mathcal A}}
+\newcommand{\R}{{\bf R}}
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{ORIE 5914 Equity Derivatives Homework 3}
+\author{Due 4:00PM, 10 October 2012}
+
+\maketitle
+
+\begin{xca}{(20 points - dividends)}
+Suppose a stock pays dividend \(d_j\) at time \(t_j\) in a multi-period model.
+Let \((M_j)\) be any martingale on the probability space \((\Omega, P, (\AA_j))\). Show
+\(X_j = (R^j, sR^jM_j - \sum_{i \le j} d_iR^{j - i})\), \(C_j = (0, d_j)\), and
+\(\Pi_j = R^{-j}P\) is an arbitrage free model.
+\end{xca}
+
+\begin{xca}{(20 points - L\'evy processes)}
+If \((X_t)_{t\ge0}\) is a stationary process having independent increments
+show \(Ee^{sX_{t + u}} = Ee^{sX_t} Ee^{sX_u}\).
+\end{xca}
+
+\begin{xca}{(20 points)}
+Equation (7) in the original Black-Scholes paper \em{The Pricing of Options and Corporate Liabilities} is 
+\[w_2 = r w - rxw_1 - \frac{1}{2}v^2x^2 w_{11}.\]
+In the notation used in the notes, this would be written 
+\[w_t = \rho w - \rho s w_s - \frac{1}{2}\sigma^2s^2 w_{ss}.\]
+however the equation we derive has an extra term of \(\rho r v_r\)
+\[v_t = \rho v - \rho rv_r -\rho s v_s - \frac{1}{2}\sigma^2s^2 v_{ss}.\]
+Define \(w(t, s) = v(t, e^{\rho t}, s)\) and use the latter equation to
+derive the original Black-Scholes equation.
+\end{xca}
+
+\begin{xca}{(20 points - digital barrier option)}
+Use the reflection principle and Girsanov's theorem to show
+\(P(\bar{F}_t > h) = (1 + h/f)P(F_t > h)\), where \(F_t = fe^{-\sigma^2t/2 + \sigma B_t}\)
+and \(\bar{F}_t = \max_{0\le s\le t} F_s\). {\rm Hint: take \(\theta = -\sigma/2\).}
+\end{xca}
+
+\begin{xca}{(20 points)}
+Implement an Excel add-in {\tt UID\_(Forward, Volatility, Barrier, Expiration)} that
+calculates the value of \(P(\bar{F}_t > h)\) for barrier \(h\).
+\end{xca}
+
+\end{document}

@@ -1,0 +1,91 @@
+\chapter{Linear Algebra}
+
+\section{Vector Spaces}
+A {\em vector space} is an abelian group with a scalar product that
+distributes over addition, $t(v + w) = tv + tw$, where $t\in\R$ is a scalar
+and $v$, $w$ are vectors. A {\em linear transformation} is a function
+between vector spaces that preserves the vector space operations.
+$T\colon V\to W$, $T(tv + w) = tTv + Tw$.
+These are also called linear operators. If the dimension of the target space
+is 1, then it is called a linear functional.
+The space of all linear operators from $V$ to $W$ is denoted $\L(V,W)$.
+Note this itself is a vector space if we define the scalar product
+$(tT)v = t(Tv)$ and addition $(T + U)v = Tv + Uv$.
+The dimension of a vector space is the
+maximum cardinality of any set of independent vectors. Two vector
+spaces are isomorphic if they have the same dimension.
+
+A {\em subspace} is a subset of a vector space that is itself a vector space.
+
+A {\em cone} is a subset of a vector space that is closed under
+addition and multiplication by positive scalars. 
+
+For $T\colon V\to W$ define {\em kernel} of the operator to be the subspace
+of $V$, 
+$\ker T = \{v\in V:Tv = 0\}$ and
+the {\em range} to be the subspace of $W$, $\ran T = \{Tv:v\in V\}$.
+The map $\bar T\colon V/\ker T\to\ran T$ given by 
+$v + \ker T\mapsto Tv$ is one-to-one and onto.
+
+\subsection{Duality}
+The {\em dual} of a vector space is $V^* = \L(V,\R)$, the set of
+all linear functionals from the vector space to the scalar field.
+We will use the angle braket notation $\langle v, v^*\rangle =v^*(v)$. Give
+a linear operator $T\colon V\to W$, define its {\em adjoint}
+$T^*\colon W^*\to V^*$ by $\langle v, T^* w^*\rangle = \langle Tv, w^*\rangle$.
+There is a canonical linear map $\iota\colon V\to V^{**}$ defined by
+$\langle v^*, \iota(v)\rangle = \langle v, v^*\rangle$ for $v\in V$
+and $v^*\in V^*$.
+The dual of $\R^m$ is $\R^m$ with the pairing $\langle v,w\rangle
+= \sum_i v_i w_i$.
+
+For any subset $E\subset V$ define $E^\perp = \{v^*\in V^*: \langle e, v^*\rangle = 0 {\rm\ for\ all\ }e\in E\}$.
+For any set, $E$, $E^\perp$ is a subspace of $V^*$.
+
+For any subset $E\subset V$ define $E^+ = \{v^*\in V^*: \langle e, v^*\rangle > 0 {\rm\ for\ all\ }e\in E\}$.
+For any set, $E$, $E^+$ is a cone.
+
+If $T\colon V\to W$, $(\ran T)^\perp = \ker T^*$.
+
+\subsection{Direct Sum}
+Given vector spaces $V$, $W$, the {\em direct sum}, $V\oplus W$ is
+a vector space with
+elements $v\oplus w$ for $v\in V$ and $w\in W$ where the scalar
+multiplication is $t(v\oplus w) = tv\oplus tw$ and the addition
+is $(v\oplus w) + (v'\oplus w') = (v + v')\oplus(w + w')$
+
+\subsection{Tensor Product}
+For $v\in V$, $w\in W$ define the {\em tensor product} of vectors
+$v\otimes w\in\L(W^*,V)$ by
+$(v\otimes w)w^* = \langle w, w^*\rangle v$. The smallest
+subspace of $\L(W^*,V)$ containing all such tensor products is denoted
+$V\otimes W$. If $T\colon V\to W$ and $U\colon X\to Y$ define
+$T\otimes U\colon V\otimes X\to W\otimes Y$ by $T\otimes U(v\otimes x)
+= Tv\otimes Ux$.
+
+\subsection{Topological Vector Spaces}
+A {\em topological vector space} is a vector space with a topology
+such that scalar multiplication and addition are continuous. If it has
+a base for the topology consisting entirely of convex sets, then it
+is a {\em locally convex} topological vector space.
+
+\subsection{Banach Spaces}
+A {\em Banach space} is a topological vector space where the topology
+comes from a norm and the topology is complete.
+
+\section{Hahn-Banach Theorem}
+\begin{theorem}
+If $M$ is a closed subspace of the locally convex topological vector space $V$ and
+$P$ is a cone in $V$ with $M\cap P=\emptyset$, then there exists a hyperspace
+$N\supset M$ with $N\cap P=\emptyset$.
+\end{theorem}
+
+\begin{corollary}
+If $M$ is a closed subspace of the locally convex topological vector space $V$ and
+$P$ is a cone in $V$,  then  $M\cap P=\emptyset$ if and only if $M^\perp\cap P^+\not=\emptyset$.
+\end{corollary}
+
+\section{Fr\'echet Derivative}
+If $F\colon X\to Y$ is a function between normed linear spaces, 
+the {\em Fr\'echet derivative}, $DF\colon X\to\L(X,Y)$, when it exists,
+is defined by $F(x + h) - F(x) - DF(x)h = o(h)$.

@@ -1,0 +1,51 @@
+\chapter{Category Theory} 
+\label{cat} 
+
+\section{Definition}
+A {\em category} consists of {\em objects} and {\em arrows}. Every
+arrow has a {\em domain} and a {\em codomain} that are objects.
+The canonical example is the category of sets where the objects
+are sets and the arrows are functions. Other examples are provided by
+replacing functions with partial functions, relations, or inclusion
+as arrows. 
+
+In a category, an arrow with a codomain that is the same as the
+domain of another arrow can be {\em composed} resulting in an
+arrow having the domain of the first and the codomain of the second.
+The composition is required to be associative, it does not matter
+which composition is applied first.
+
+In a category, every object has an {\em identity arrow}. The object is
+the domain and codomain of the arrow and composition of any arrow with
+an identity arrow results in the original arrow.
+
+\section{Special Arrows}
+An arrow is {\em monic} if when the domain of two arrows equals its codomain,
+then the two arrows must be the same. For the category of sets, this is
+the same as 1-to-1, or injective. 
+
+An arrow is {\em epic} if when the codomain of two arrows equals its domain,
+then the two arrows must be the same. For the category of sets, this is
+the same as onto, or surjective.
+
+An arrow is {\em iso} if there exist arrows that compose to the identity
+arrow with its domain and codomain.
+
+\section{Special Objects}
+An object is {\em initial} if it is the domain of an arrow for every
+object in the category. An object is {\em terminal} if it is the codomain
+of an arrow every object in the category.
+
+\section{Functors}
+A {\em functor} maps a category to a category. It assigns objects of the
+first to objects of the second and arrows of the first to arrows of the
+second while preserving the structure of each category.
+
+Functors form a category. The objects are categories and the arrows
+are functors.
+
+\section{Natural Transformations}
+Given two functors, a {\em natural transformation} associates the
+the objects of the first functor with arrows of the second functor
+preserving the structure of each functor. It is a 2-functor. There
+are n-functors.

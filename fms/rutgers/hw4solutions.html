@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>
+Homework 4
+</title>
+
+</head>
+<body>
+
+<h1>
+Math 628 Sp12 Homework 4
+</h1>
+<h4>
+Due Mar. 1, 2012 at 6:40PM
+</h4>
+<p>
+Your job is to provide a convincing argument that what you claim
+is correct.
+</p>
+<p>The Ho-Lee model with short rate process
+\(r_t = \phi(t) + \sigma(t)B_t\) has the closed form solution
+\(D(t, u) = \exp(-\int_t^u \phi(s) - \frac{1}{2}(\Sigma(s)
+- \Sigma(u))^2\,ds - (\Sigma(u) - \Sigma(t))B_t)\) for the
+price at time \(t\) of a zero coupon bond maturing at time \(u\).
+</p>
+
+<p>
+<span class="ex">Exercise 1.</span>
+<span class="it">
+If \(D(0,t) = \exp(-\int_0^t f(s)\,ds)\) show
+\(\phi(t) - f(t) = \sigma(t)(t\Sigma(t) - \int_0^t \Sigma(s)\,ds)\).
+What does this work out to when \(\sigma\) is constant?
+</span>
+</p>
+<p>
+We have \(f(t) = d(-\log D(0,t))/dt
+= \phi(t) + \int_0^t (\Sigma(s) - \Sigma(t))\sigma(t)\,ds
+= \phi(t) + \sigma(t)(\int_0^t \Sigma(s)\,ds - t\Sigma(t))\).
+If \(\sigma(t) = \sigma\) is constant, then
+\(\phi(t) - f(t) = \sigma(t\sigma t - \sigma t^2/2) = \sigma^2 t^2/2\).
+</p>
+
+<p>
+<span class="ex">Exercise 2.</span>
+<span class="it">
+Using the Ho-Lee model, find a closed form for
+\(E\max\{F_{\delta(t,u)} - k, 0\}\delta(t,u)\)
+in terms of the function
+</span>
+<code>black::value(double f, double sigma, double k, double t)</code>
+<span class="it">
+defined in
+</span>
+<code>xllbms/black.h</code>.
+</p>
+<p>
+We have \(E(F - k)^+\delta = E(1/D(t,u) - 1 - k\delta)^+\) so
+<code>f</code>\(\ = E 1/D(t,u)\),
+<code>sigma</code>\(\ = \sqrt{\Var\log(1/D(t,u))/u}\),
+<code>k</code>\(\ = 1 + k\delta\), and <code>t</code>\(\ = u\).
+</p>
+
+<p>
+Update the Rutgers branch of <code>xllpwflat</code> or check out
+<code>https://xllpwflat.svn.codeplex.com/svn/branches/rutgers</code>.
+</p>
+
+<p>
+<span class="ex">Exercise 3.</span>
+<span class="it">
+Implement the functions in
+</span>
+<code>xllpwflat/rutgers/hw4/ho_lee.h</code>
+<span class="it">
+and
+</span>
+<code>xllpwflat/rutgers/hw4/ho_lee.cpp</code>.
+</p>
+
+<p>
+<span class="ex">Exercise 4.</span>
+<span class="it">
+Use the functions in excercise 3 to price the caplet in
+</span>
+<code>xllpwflat/rutgers/hw4/hw4.xls</code>
+<span class="it">
+using the Ho-Lee model with constant volatility.
+Verify the price by a Monte Carlo simulation using
+<a href="http://kalx.net/fms/rutgers/monte.zip">monte</a>.
+
+</p>
+
+</body>
+</html>
+

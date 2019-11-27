@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>Basic Facts about Futures</title>
+</head>
+
+<body>
+<h1>Basic Facts about Futures</h1>
+<p>
+A <em>futures</em> contract is specified by an underlying index and
+an expiration date. Prior to the the expiration the price is whatever
+the market says it is.
+</p>
+<p>
+The actual mechanics of trading a futures contract is that it costs
+nothing to enter into the contract, modulo setting up an account
+with a broker and providing an initial margin. You get paid the
+change in the market quoted price each day until your margin is
+used up. Then your broker will take you out of your position, usually
+at a price unfavorable to you.
+</p>
+<p>
+The mathematical idealization of this is that the quoted price of a futures
+is a martingale.
+</p>
+<p>
+Let \(F\) be the value of the futures at expiration having cumulative
+distribution function \(\Phi(x) = P(F\le x)\).
+and \(f = E F\).
+We assume \(F\ge0\).
+\(p(k) = E(k -F)^+\), \(c(k) = E(F - k)^+\), \(p(0) = 0\), \(c(0) = EF\).
+\(p(0) = 0\), \(c(k) - (f - k)\to 0\) as \(k\to\infty\).
+\(p(k) - c(k) = k - EF\), \(p'(k) - c'(k) = 1\).
+\(p'(k) = P(F\le k) = \Phi(k)\), \(c'(k) = -P(F\ge k) = \Phi(k) - 1\).
+\(p'(0) = 0\), \(c'(0) = 1\).
+\(p'(k) \ge 0\),
+\(c'(k) \le 0\),
+\(p''(k) = c''(k) = \Phi'(k) \ge 0\).
+</p>
+<p>
+\(E(F - a)^2 = 2\int_0^a p(k)\,dk + 2\int_a^\infty c(k)\,dk\).
+</p>
+</body>
+</html>

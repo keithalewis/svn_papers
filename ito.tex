@@ -1,0 +1,74 @@
+\documentclass[fleqn]{amsart}
+\usepackage{amssymb,amsmath,amsthm,hyperref}
+
+\def\F{\mathcal{F}}
+\def\Var{\mathop{\rm Var}}
+\def\Cov{\mathop{\rm Cov}}
+\newcommand{\RR}{\mathbb{R}}
+
+\title{It\=o}
+\author{Keith A. Lewis}
+\email{kal@kalx.net}
+\address{KALX, LLC \tt{\url{http://kalx.net}}}
+
+\begin{document}
+\maketitle
+
+\begin{section}{Warmup}
+Chop up the interval $[0, t]$ into $n$ segments $0 = t_0 < t_1 <
+\cdots < t_n = t$.  The sum of the squares of the increments satisfies
+$\sum_j (\Delta t_j)^2 \le \max_j\{\Delta t_j\} \sum_j \Delta t_j =
+t \max_j\{\Delta t_j\}$ which tends to zero as the largest increment
+gets smaller.
+
+A (binomial) random walk is a stochastic process, $(W_j)_{j\ge0}$,
+where the increments, $\Delta W_j = W_{j+1} - W_j$, take on the values
+1 and -1 with probability 1/2 and are independent.  The sum of the
+squares of the increments is $\sum_{j=0}^{n-1} (\Delta W_j)^2 = n$.
+Note this value is not random and has nothing to do with independence
+or probability. It is a consequence of the fact that $1^2 = 1 = (-1)^2$.
+
+Brownian motion is a stochastic process, $(B_t)_{t\ge0}$, where the
+increments, $\Delta B_j = B_{t_{j+1}} - B_{t_j}$, are normally distributed
+with mean $0$ and variance $\Delta t_j$, and are independent
+
+The sum if the increments is $\sum_{j=0}^{n-1} B_{t_{j+1}}
+- B_{t_j} = B_{t_n} - B_{t_0} = B_t$. 
+If $0 = t_0 < t_1 < \cdots < t_n = t$, then $E[\sum_{j=0}^{n-1}
+(B_{t_{j+1}} - B_{t_j)}] = E[B_t - B_0] = 0$ and $\Var(\sum_j \Delta B_j)
+= \sum_j \Var(\Delta B_j) = \sum_j \Delta t_j = t$.
+
+The sum of the increments of Brownian motion has variance linear in $t$.
+The sum of the squares of the increments results in the somewhat
+surprising result that the variance tends to zero.
+
+The It\=o calculus states
+$(dB)^2 = dt$. In order to turn this into a true mathematical statement,
+we need to express it as an integral: $\int_0^t (dB_s)^2 = t$.
+
+\end{section}
+
+\begin{section}{It\=o Integral}
+For $\beta\colon [0,\infty)\times
+\Omega\to\RR$ with $\omega\mapsto\beta(t,\omega)$ $\F_t$
+measurable ({\em adapted}) and $t\mapsto\beta(t, \omega)$ continuous, define
+\begin{equation*}
+\int_0^t \beta(s,\omega)\,dB_s(\omega)
+    = \lim_{t} \sum_{j = 0}^{n - 1} \beta(t_j, \omega)\,\Delta B_j(\omega),
+\end{equation*}
+where $\Delta B_j(\omega) = B_{t_{j+1}}(\omega) - B_{t_j}(\omega)$ and
+the limit is with respect to the net of finite partitions of $[0,t]$
+ordered by inclusion and convergence is in probability. Note the left
+endpoint is used when evaluating the integrand. 
+\end{section}
+
+\begin{section}{It\=o Process}
+An It\=o process is a stochastic process that is defined in terms
+of an It\=o integral. $X_t(\omega) = \int_0^t \alpha(s, \omega)\,ds
++ \int_0^t \beta(s, \omega)\,dB_s(\omega)$.
+
+\end{section}
+% Ito diffusion
+% Ito formula
+
+\end{document}

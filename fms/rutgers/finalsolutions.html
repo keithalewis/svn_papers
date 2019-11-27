@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>
+Final Exam
+</title>
+
+</head>
+<body>
+
+<h1>
+<center>Math 628 Sp12 Final Exam</center>
+</h1>
+<h2>
+<center>May 5, 2012</center>
+</h2>
+<p>
+Your job, except for Problem 0, is to provide a convincing argument that
+what you claim is correct. Each problem is worth 20 points.
+</p>
+
+<p>
+<span class="ex">Problem 0.</span>
+What is your name?
+<span class="it">
+</span>
+</p>
+
+<p>
+<span class="ex">Problem 1.</span>
+Using the fact \(X_j\Pi_j = E_j (X_{j+1} + C_{j+1})\Pi_{j+1}\) show
+that \(X_j\Pi_j = E_j \sum_{j\lt i\lt k} C_i\Pi_i + (X_k + C_k)\Pi_k\).
+<span class="it">
+</span>
+</p>
+<p>
+Clearly true for \(k = j + 1\). Assume true for \(k\) then
+\begin{aligned}
+X_j\Pi_j &= E_j \sum_{j\lt i\lt k} C_i\Pi_i + (X_k + C_k)\Pi_k\\
+&= E_j \sum_{j\lt i\lt k} C_i\Pi_i
+	+ (E_k(X_{k+1} + C_{k+1})\Pi_{k+1} + C_k)\Pi_k\\
+&= E_j \sum_{j\lt i\lt k + 1} C_i\Pi_i + E_j(X_{k+1} + C_{k+1})\Pi_{k+1}.\\
+\end{aligned}
+</p>
+
+<p>
+<span class="ex">Problem 2.</span>
+<span class="it">
+If \((\Phi_j)_{j=0}^n\) are futures quotes, show \(\Phi_0 = E_0\Phi_n\)
+when the price deflator is \(\Pi_k = 1/R_0\cdots R_{k-1}\) and
+\(R_j\) is measurable with respect to information at time \(t_j\).
+</span>
+</p>
+<p>
+We have \(0 = E_j(\Phi_{j+1} - \Phi_j)\Pi_{j+1}\) so
+\(0 = E_j(\Phi_{j+1} - \Phi_j)/R_j\) and
+\(0 = E_j(\Phi_{j+1} - \Phi_j)\) since \(R_j\) is \(t_j\) measurable.
+Note \(E\Phi_n - \Phi_0 = E\sum_1^n \Phi_{j+1} - \Phi_j\).
+
+</p>
+
+<p>
+<span class="ex">Problem 3.</span>
+<span class="it">
+Show \(E\sum_{j=1}^n(\Xi_{j−1}\cdot(X_j+C_j)−\Xi_j\cdot X_j)\Pi_j
+= \Xi_0\cdot X_0\Pi_0\).
+</span>
+</p>
+<p>
+We have
+\begin{aligned}
+&E\sum_1^n(\Xi_{j-1}\cdot (X_j + C_j) - \Xi_j\cdot X_j)\Pi_j\\
+&= E\sum_0^{n-1}(\Xi_j\cdot (X_{j+1} + C_{j+1})\Pi_{j+1}
+- E\sum_1^n\Xi_j\cdot X_j)\Pi_j\\
+&= E\sum_0^{n-1}(\Xi_j\cdot E_j(X_{j+1} + C_{j+1})\Pi_{j+1}
+- E\sum_1^n\Xi_j\cdot X_j)\Pi_j\\
+&= E\sum_0^{n-1}(\Xi_j\cdot X_j\Pi_j
+- E\sum_1^n\Xi_j\cdot X_j)\Pi_j\\
+&= \Xi_0\cdot X_0\Pi_0 - E\Xi_n\cdot X_n\Pi_n.
+\end{aligned}
+</p>
+
+<p>
+<span class="ex">Problem 4.</span>
+<span class="it">
+If the short rate process is \(r_t = \phi(t) + \sigma B_t\),
+where \(B_t\) is Brownian motion
+and the discount is \(D(0,t)=e^{-\int_0^t f(s)\,ds}\), show
+\(\phi(t) - f(t) = \sigma^2 t^2/2\).
+</span>
+</p>
+<p>
+We have \((d/dt)D(0,t) = D(0,t)(-f(t))\) and
+\((d/dt)D(0,t) = Ee^{-\int_0^t r_s\,ds}(-r_t)
+= D(0,t)(-\phi(t) + \Cov(-r_t, -\int_0^t r_s\,ds)\)
+so
+\(f(t) = \phi(t) - \sigma^2\int_0^t\min\{t,s\}\,ds 
+= \phi(t) - \sigma^2t^2/2\). 
+</p>
+
+<p>
+<span class="ex">Problem 5.</span>
+<span class="it">
+If \(D(0,t) = e^{-rt}\) and \(P(T\gt t) = e^{-\lambda t}\),
+use \(e^{-(r + s)t} = D_{T,R}(0,t) = D(0,t) E[1(T>t) + R1(T\le t)]\) to find the
+hazard rate in terms of the credit spread and recovery.
+</span>
+</p>
+<p>
+We have \(e^{-(r + s)t} = e^{-rt}(e^{-\lambda t} + R(1 - e^{-\lambda t}\)
+so \(e^{-st} = e^{-\lambda t}(1 - R) + R\) and
+\(\lambda = (-1/t)\log (e^{-st} - R)/(1 - R)\).
+</p>
+
+<p>
+<span class="ex">Problem 6.</span>
+<span class="it">
+Use the fact \(P(A\cap B) = P(A) + P(B) - P(A\cup B)\) to show
+\(C(u, v) \ge u + v - 1\) for any copula \(C\). Also show
+\(C(u, v) \le u\) and \(C(u, v) \le v\).
+</span>
+</p>
+<p>
+We have \(C(u,v) = P(U\le u,V\le v)
+= P(U\le u) + P(V\le v) - P(\{U\le u\}\cup\{V\le v\})
+\ge u + v - 1\). The second result follows from \(P(A\cap B)\le P(A)\)
+and \(P(A\cap B)\le P(B)\).
+</p>
+
+<p>
+<span class="ex">Problem 7.</span>
+<span class="it">
+Show \(V_n = \sum_1^n (e^{-r(j-1)/n} - e^{-rj/n}) e^{-\lambda j/n}
+= (1 - (RS)^n)(S - RS)/(1 - RS)\) where
+\(R = e^{-r/n}\) and \(S = e^{-\lambda/n}\).
+Show for large \(n\) that \(V_n \approx
+(1 - e^{-r-\lambda})e^{-\lambda/n}r/(r + \lambda)\).
+</span>
+</p>
+<p>
+We have
+\begin{aligned}
+V_n &= \sum_1^n(R^{j-1} - R^j)S^j\\
+&= \sum_0^{n-1}R^jS^{j+1} - \sum_1^n R^jS^j\\
+&= S\frac{1 - (RS)^n)}{1 - RS} - \frac{RS - (RS)^{n+1}}{1 - RS}\\
+&= (S - RS)\frac{1 - (RS)^n}{1 - RS}\\
+\end{aligned}
+The approximation follows from \(1 - R \approx r/n\) and
+\(1 - RS \approx (r + \lambda)/n\).
+</p>
+
+</body>
+</html>
+

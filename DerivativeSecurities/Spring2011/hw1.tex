@@ -1,0 +1,65 @@
+\documentclass[11pt,fleqn]{amsproc}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 1}
+\author{Due 7:10PM, 7 Feb 2011}
+
+\maketitle
+
+\begin{xca}{(20 points)}
+If today's USD/JPY exchange rate is $82$, the one year USD zero price is 99,
+and the one year JPY zero price is 100, what is today's one year forward 
+USD/JPY exchange rate assuming no arbitrage and perfect liquidity?
+\end{xca}
+
+\begin{xca}{(30 points)}
+Consider the one period model $x = (1, s, v)$,
+$\Omega = \{u, d\}$ and $X = (R, s\omega, f(s\omega))$.
+\begin{enumerate}
+\item Show no arbitrage implies $v = (qF^+ + (1 - q)F^-)/R$, where
+$q = (R - d)/(u - d)$, $F^+ = f(su)$, and $F^- = f(sd)$.
+\item Find a payoff, $f$, such that $\partial v/\partial s \not= n$, where
+$n = (f (su) - f (sd))/(su - sd)$.
+\item Show $ns = (\partial/\partial R)(Rv)$ for any payoff $f$.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}{(20 points)}
+Show a regular tetrahedron and a regular octohedron joined at a face
+has $8 - 1 + 4 - 1 - 2 = 8$ sides. Hint: consider the points
+$A = e_1 - e_2$, $B = e_1 + e_2$, $C = h e_3$ for some $h$, and
+$D = e_2 + h e_3$.
+\end{xca}
+
+\begin{xca}{(30 points)}
+Consider the one period model consisting of a bond, call, and
+put. Let $x = (1, c, p)$, $\Omega = [L,H]$, and
+$X(\omega) = (R, (\omega - K)^+, (K - \omega)^+)$ where
+$0\le L < K < H$.
+
+\begin{enumerate}
+
+\item Find the constraints on $c$ and $p$
+that preclude arbritrage.
+
+\item Suppose the underlying stock were also available
+for trading so $x = (1, c, p, s)$ and
+$X(\omega) = (R, (\omega - K)^+, (K - \omega)^+, \omega)$.
+Find the constraints on $c$, $p$, and $s$
+that preclude arbritrage.
+
+\end{enumerate}
+\end{xca}
+
+\end{document}

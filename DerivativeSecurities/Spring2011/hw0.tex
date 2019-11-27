@@ -1,0 +1,47 @@
+\documentclass[11pt,fleqn]{amsproc}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Bonus Homework}
+\author{Due 7:10PM, 2 May 2011}
+
+\maketitle
+
+A Poisson process, $(N_t^\lambda)_{t\ge0}$, with hazard rate $\lambda$
+satisfies $P(N_t^\lambda = k) = e^{-\lambda t}(\lambda t)^k/k!$, $k\ge0$
+an integer.
+
+\begin{xca}{(20 points)}
+Let $X_t = \alpha t + aN_t^\lambda$. Find the {\em characteristic
+function} $\phi(u) = E[e^{iuX_t}]$.
+
+\end{xca}
+
+\begin{xca}{(20 points)}
+Use the L\'evy-Khinchine theorem to find the characteristic function
+of the infinitely divisible distribution parameterized by $\gamma$
+and $G = b1_{[c,\infty)}$ where $c\not=0$. (Recall $c = 0$ gives
+Brownian motion.)
+
+\end{xca}
+
+\begin{xca}{(20 points)}
+Find $\alpha$, $a$, and $\lambda$ in Excercise 1 in terms of
+$\gamma$, $b$, and $c$ in Excercise 2.
+
+\end{xca}
+
+Every increasing function can be uniformly approximated by a sum of
+step functions, so this shows every L\'evy process is approximated by
+a Brownian motion plus a linear combination of Poisson processes.
+\end{document}

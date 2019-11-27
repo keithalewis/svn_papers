@@ -1,0 +1,88 @@
+\documentclass{article} 
+\usepackage{amssymb,amsmath}
+
+\newcommand{\R}{{\bf{R}}}
+\newcommand{\onehalf}{\frac{1}{2}}
+
+\begin{document}
+In \cite{BlaSch1973}, Fisher Black and Myron Scholes derived a partial
+differential equation and boundary conditions that give the 
+price of a European option assuming the underlying stock can 
+be modeled as geometric Brownian motion and financing is
+available from a riskless bond. In \cite{Mer1973} Robert
+Merton derives a similar, but different, equation. [(33) in
+section 6.]
+
+Their model posits a risk-free bond 
+is $X(t) = (R(t), S(t))$ where $dR/R = \rho\,dt$ is a
+bond and $dS/S = \mu\,dt + \sigma\,dB$ is a stock with $\rho$, $\mu$,
+and $\sigma$ constant and initial conditions $R(0) = 1$, $S(0) = s$.
+There are no dividends. They consider portfolios $\Xi(t) = (M(t), N(t))$
+consisting of $M$ shares in the bond and $N$ shares in the stock, where
+$M$ and $N$ are also Ito diffusions.  The value of the option is $V(t)
+= \Xi(t)\cdot X(t) = M(t)R(t) + N(t)S(t)$.
+
+Their {\em self financing} condition is that $d(MR + NS) = M dR + N dS$.
+The Ito calculus says $d(MR + NS) = M\,dR + N\,dS + R\,dM + S\,dN + dM\,dR
++ dN\,dS$ so the self financing condition is $0 = R\,dM + S\,dN + dM\,dR +
+dN\,dS$.  The financial interpretation is that changing the position $M$
+in the bond and $N$ in the stock that were put on at time $t$ to $M +
+dM$ and $N + dN$ at time $t + dt$ costs $dM\,(R + dR) + dN\,(S + dS) = 0$.
+
+There exists a function $v\colon [0,\infty)\times\R^2\to\R$ such that
+$V(t) = v(t, R(t), S(t))$. Similar functions, $m$ and $n$, exist for
+$M$ and $N$.  By the Ito formula applied to $V$ and the self financing
+condition, $(v_t + \rho R v_r + \onehalf \sigma^2 S^2 v_{ss}) dt + v_s
+dS = M dR + N dS$.  Equating the $dS$ terms gives $N = v_s$. Using $M =
+(V - v_s S)/R$, and equating the $dt$ terms yields $v_t + \rho R v_r +
+\onehalf\sigma^2 S^2 v_{ss} = \rho(V - v_s S)$, the Black-Scholes/Merton
+partial differential equation, almost.
+
+This gives necessary conditions on $M$ and $N$. We show that
+they satisfy the self financing condition.
+
+Since $n(t, r, s) = v_s(t, r, s)$,
+\begin{equation*}
+dN = (v_{st} + \rho R v_{sr} + \onehalf \sigma^2 S^2 v_{sss})\,dt
+	+ v_{ss}\,dS.
+\end{equation*}
+Using $m(t, r, s) = (v - v_s s)/r$, gives
+\begin{eqnarray*}
+dM &=& \bigl((v_t - v_{st}S)/R + \rho(v_r - v_{sr}S - (v - v_s S)/R)\\
+ &&- \onehalf\sigma^2 S^2(v_{ss} + v_{sss}S)/R\bigr)\,dt - (v_{ss}S)/R\,dS.
+\end{eqnarray*}
+
+The $dS$ term of $R\,dM + dM\,dR + S\,dN + dN\,dS = R\,dM + S\,dN + dN\,dS$ is 
+$-v_{ss}S + v_{ss}S + 0= 0$
+and the $dt$ term is
+\begin{eqnarray*}
+&&\bigl((v_t - v_{st}S) + \rho((v_r - v_{sr}S)R - (v - v_s S)) \\
+&&\quad -\onehalf\sigma^2 S^2(v_{ss} + v_{sss}S)\bigr)\\ 
+&&+ (v_{st} + \rho R v_{sr} + \onehalf \sigma^2 S^2 v_{sss})S\\
+&&+ \sigma^2 S^2 v_{ss}
+\end{eqnarray*}
+
+Canceling and combining terms yields
+\begin{equation*}
+v_t + \rho(v_r R - (v - v_s S))
++\onehalf\sigma^2 S^2v_{ss}
+\end{equation*}
+Since $v$ satisfies the Black-Scholes/Merton PDE, this
+quantity is zero and hence $M$ and $N$ are
+self financing.
+
+%This gives necessary conditions on $M$ and $N$. We must show they
+%are sufficient. Given $t$, $r$, and $s$, there exists a
+%unique strong solution to $(dR, dS) = (\rho R, \mu S) dt
+%+ (0, \sigma S)dB$ that satisfies the initial condition 
+%$R(t) = r$ and $S(t) = s$ \cite{Oks}.
+%For a European option that pays $\phi(S_T)$ at time $T$,
+%define $V(t, r, s) = E^(t, r, s)[\phi(S_T)R_T/R_t | \F_t]$.
+%The Kolomogorov backward equation \cite{Oks} states
+%$V_t = \rho r V_r + \mu_s s V_s + \onehalf \sigma^2 s^2 V_ss$
+%and $V(T, r, s) = \phi(s)$. Since $V_r = -V_r/r$ it follows ...
+
+
+%\bibliographystyle{plain}
+%\bibliography{chapter}{}
+\end{document}

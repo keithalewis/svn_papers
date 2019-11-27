@@ -1,0 +1,220 @@
+\documentclass[11pt,fleqn]{amsart}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}{Corollary}[section]
+\newtheorem{lem}{Lemma}[section]
+\newtheorem{formula}{Formula}[section]
+
+\begin{document}
+\title{Useful Formulas}
+\address{Keith A. Lewis}
+\email{kal@kalx.net}
+\urladdr{http://kalx.net}
+
+\maketitle
+
+
+This formula shows how to replicate any European payoff using cash, a
+forward contract having strike $a$, a portfolio of puts having strikes
+below $a$, and a portfolio of calls having strikes above $a$.
+
+\begin{formula}
+If $f\colon [0,\infty)\mapsto\R$ is twice differentiable and $a\ge0$,
+\begin{equation*}
+f(x) = f(a) + f'(a)(x - a)
+	+ \int_0^a f''(k) (k - x)^+ \,dk + \int_a^\infty f''(k) (x - k)^+ \,dk,
+\end{equation*}
+\end{formula}
+\begin{proof}
+Define $x^+ = \max\{x, 0\}$, the positive part of the number $x$.
+By the fundamental theorem of calculus.
+\begin{eqnarray*}
+f(x) &=& f(a) + \int_a^x f'(y)\,dy\\
+ &=& f(a) + \int_a^x \left\{ f'(a) + \int_a^y f''(z)\,dz\right\} \,dy\\
+ &=& f(a) + f'(a)(x - a) + \int_a^x \int_a^y f''(z)\,dz \,dy\\
+ &=& f(a) + f'(a)(x - a) + \int_a^x \int_z^x f''(z)\,dy \,dz\\
+ &=& f(a) + f'(a)(x - a) + \int_a^x (x - z) f''(z) \,dz\\
+\end{eqnarray*}
+If $x \ge a$, then
+$\int_a^x (x - z) f''(z) \,dz = \int_a^\infty (x - z)^+ f''(z) \,dz$. 
+If $x \le a$ then the last expressing is zero.
+Similarly, if $x \le a$, then $\int_a^x (x - z) f''(z) \,dz
+= \int_0^a (z - x)^+ f''(z) \,dz$.
+\end{proof}
+
+
+\begin{formula}
+$\displaystyle \int_{-\infty}^\infty \exp(-\pi x^2)\,dx = 1$.
+\end{formula}
+
+\begin{proof}
+\begin{eqnarray*}
+(\int_{-\infty}^\infty \exp(-\pi x^2)\,dx)^2
+&=& \int_{-\infty}^\infty\int_{-\infty}^\infty\exp(-\pi(x^2 + y^2))\,dx\,dy\\
+&=& \int_0^{2\pi}\int_0^\infty \exp(-\pi r^2)\,r dr d\theta\\
+&=& \int_0^{2\pi} \frac{-1}{2\pi}\exp(-\pi r^2)\bigl|_0^\infty\,d\theta\\
+&=& \int_0^{2\pi} \frac{1}{2\pi}\,d\theta = 1\\
+\end{eqnarray*}
+\end{proof}
+
+\begin{formula}
+$\displaystyle\int_{-\infty}^\infty \exp(-\alpha x^2)\,dx = \sqrt{\pi/\alpha}$.
+\end{formula}
+\begin{proof}
+Let $x = y\sqrt{\pi/\alpha}$. 
+\end{proof}
+
+\begin{formula}
+$\displaystyle\int_{-\infty}^\infty x^2\exp(-x^2/2)\,dx = 1/\sqrt{2\pi}.$
+\end{formula}
+\begin{proof}
+Let $u = x$, $dv = x\exp(-x^2/2)$, so $du = dx$ and $v = -\exp(-x^2/2)$
+in the formula for integration by parts.
+\end{proof}
+
+A {\em standard normally distributed} random variable has density function
+$f(x) = \exp(-x^2/2)/\sqrt{2\pi}$. The formulas above show that $f$
+is a density function and
+$E[X^2] = \Var(X) = 1$.
+
+\begin{formula}
+$E[\exp(\sigma X)] = \exp(\sigma^2/2)$.
+\end{formula}
+
+\begin{proof}
+\begin{eqnarray*}
+E[\exp(\sigma X)]
+	&=& \int_{-\infty}^\infty \exp(\sigma x)\exp(-x^2/2)\,dx/\sqrt{2\pi}\\
+	&=& \exp(\sigma^2/2)
+		\int_{-\infty}^\infty \exp(-(x - \sigma)^2/2)\,dx/\sqrt{2\pi}\\
+	&=& \exp(\sigma^2/2)
+		\int_{-\infty}^\infty \exp(-x^2/2)\,dx/\sqrt{2\pi}\\
+	&=& \exp(\sigma^2/2)\\
+\end{eqnarray*}
+\end{proof}
+
+\begin{thm}
+If $N$ is a normally distributed random variable,
+$$E[\exp(N)] = \exp(E[N] + \Var(N)/2).$$
+\end{thm}
+
+\begin{proof}
+$N = \mu + \sigma X$, where $X$ is standard normal.
+\end{proof}
+
+\begin{thm}
+For any measurable function, $f$, 
+$$E[\exp(\sigma X) f(X)] = E[\exp(\sigma X)] E[f(X + \sigma)].$$
+\end{thm}
+
+\begin{proof}
+\begin{eqnarray*}
+E[\exp(\sigma X) f(X)]
+	&=& \int_{-\infty}^\infty \exp(\sigma x) f(x) \exp(-x^2/2)\,dx/\sqrt{2\pi}\\
+	&=& \exp(\sigma^2/2)
+		\int_{-\infty}^\infty f(x)\exp(-(x - \sigma)^2/2)\,dx/\sqrt{2\pi}\\
+	&=& \exp(\sigma^2/2)
+		\int_{-\infty}^\infty f(x + \sigma)\exp(-x^2/2)\,dx/\sqrt{2\pi}\\
+	&=&
+		\exp(\sigma^2/2) E[f(X + \sigma)]\\
+\end{eqnarray*}
+\end{proof}
+
+\begin{thm}
+If $N$ is a normally distributed random variable, for any measurable function, $g$,
+$$E[\exp(N) g(N)] = E[\exp(N)] E[g(N + \Var(N))].$$
+\end{thm}
+
+\begin{proof}
+$N = \mu + \sigma X$, $f(x) = g(\mu + \sigma x)$.
+\end{proof}
+
+Let $S_t = S_0\exp((r - \sigma^2/2)t + \sigma B_t)$, where $B_t$ is
+Brownian motion. The only facts we need are that $B_t$ is normal with
+mean 0 and variance $t$. This implies$E[S_t] = S_0\exp(rt)$ and
+$\Var(\log S_t) = \sigma^2t$.
+
+\begin{thm}
+For any measurable function, $h$,
+$$E[S_t h(S_t)] = S_0 \exp(rt) E[h(S_t\exp(\sigma^2t))].$$
+\end{thm}
+\begin{proof}
+$S_t = \exp(N)$, $g(n) = h(\exp(n))$.
+\end{proof}
+
+\begin{thm} With $S_t$ as above,
+$$E[\max\{S_t - k,0\}] = E[S_t] P(S_t \exp(\sigma^2t) > k) - k P(S_t > k).$$
+\end{thm}
+\begin{proof}
+\begin{eqnarray*}
+E[\max\{S_t - k,0\}] &=& E[(S_t - k)1(S_t > k)]\\
+	&=& E[S_t 1(S_t > k)] - kP(S_t > k)\\
+	&=&  E[S_t] P(S_t \exp(\sigma^2t) > k) - k P(S_t > k).\\
+\end{eqnarray*}
+\end{proof}
+
+\begin{thm}
+With $S_t$ as above, for any measurable function, $h$,
+$$(d/dS_0)E[h(S_t)] = \exp(rt) E[h'(S_t\exp(\sigma^2t))].$$
+\end{thm}
+\begin{proof}
+$(d/dS_0)E[h(S_t)] = E[h'(S_t) dS_t/dS_0] = \exp(rt) E[h'(S_t\exp(\sigma^2 t))]$.
+\end{proof}
+
+As a corollary, $(d/dS_0)E[(S_t - k)^+] = \exp(rt) P(S_t\exp(\sigma^2 t) > k)$.
+This proves delta is $N(d_1)$.
+
+\begin{formula}
+If $f$ is a continuous function with $f(u + t) = f(u) f(t)$ for $t$, $u\ge0$,
+then $f(t) = f(1)^t$ for $t\ge 0$.
+\end{formula}
+\begin{proof}
+For integers $m$, $n>0$, $f(m/n) = f(1/n)\cdots f(1/n) = f(1/n)^m = (f(1)^{1/n})^m
+= f(1)^{m/n}$ so the result holds for positive rational numbers. By continuity it 
+holds for all nonnegative real numbers.
+\end{proof}
+
+\begin{thm}
+If $X_t$ is a stochastic process with $X_{t + u} - X_t$ independent of $X_t$
+and $X_{t + u} - X_t$ has the same distribution as $X_u$ for $u$, $t\ge 0$,
+then $E[\exp(s X_t)] = E[\exp(s X_1)]^t$ for $t\ge 0$.
+\end{thm}
+\begin{proof}
+\begin{eqnarray*}
+E[\exp(s X_{t + u})] &=& E[\exp(s (X_{t + u} - X_t + X_t))] \\
+	&=& E[\exp(s (X_{t + u} - X_t))] E[\exp(s X_t))] \\
+	&=& E[\exp(s X_u)] E[\exp(s X_t))] \\
+\end{eqnarray*}
+\end{proof}
+
+A L\'evy process is a stochastic process with increments that are independent
+and stationary. This result implies that the distribution of the L\'evy
+process at time 1 (or any time) determines the entire process.
+
+\begin{cor}
+With $X_t$ as above, $\Var(\log X_t) = t\Var(\log X_1)$.
+\end{cor}
+\begin{proof}
+Define the {\em cumulant}$\kappa(s) = \log E[\exp(s X)]$. The
+result follows from the facts
+$\kappa'(0) = E[X]$ and $\kappa''(0) = \Var(X)$.
+\end{proof}
+
+The distribution of $X_1$ is not arbitrary. For any $n$,
+$X_1 = \sum_{j = 0}^{n - 1} X_{(j+1)/n} - X_{j/n}$. Since the
+summands are independent hand identically distributed we
+see that $X_1$ is {\em infinitely divisible}. The
+(L\'evy-Khintchine) theorem describes all such distributions.
+
+\begin{thm}
+For andd real numbers $x$ and $a$, $1(x > a)
+= \int_\gamma e^{iz(x - a)}\,dz/2\pi iz$ where
+$\gamma$ is a curve describing $Im z = b$ with $b < 0$.
+\end{thm}
+
+% Rigourous derivation of Black-Merton-Scholes.
+
+\end{document}

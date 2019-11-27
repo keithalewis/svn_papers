@@ -1,0 +1,70 @@
+\chapter{Simple Examples}
+
+This chapter describes a computationally simple one period model
+that illustrates some features and drawbacks of such a simple model.
+
+\begin{section}{1-2-3 Example}
+
+Suppose a stock has price $1$ at the beginning of a period and will have
+price $3$ with probability $0.9$ and price $1$ with probability $0.1$
+at the end of the period. Suppose further a bond has price $1$ at the
+beginning of the period and price $2$ with certainty at the end of
+the period. What is the price of a call option on the stock having
+strike $2$ expiring at the end of the period?
+\end{section}
+
+The option can be replicated for a cost of $0.25$. Borrow $0.25$ and
+buy $0.5$ shares of stock for $0.5$. At the end
+of the period, if the stock price is $3$ then sell the half share
+for $1.5$. Use $0.5$ to pay off the bond and $1$ to pay off the
+option that is now in the money. If the stock price stays at $1$
+then sell the half share for $0.5$ to pay off the bond. The option
+is out of the money.
+
+The discounted expected payoff of the option is
+is $(1/2)(1\times 0.9 + 0\times 0.1) = 0.45$. 
+Note $(1/2)(3\times 0.9 + 1\times 0.1) = 1.4 \not= 1$
+so this method does not reprice the stock. However
+$(1/2)(3\times 0.5 + 1\times 0.5) = 1$ reprices the
+stock. Using the same probabilities we have
+$(1/2)(1\times 0.5 + 0\times 0.5) = 0.25$, the correct cost
+for replicating the option using the stock and bond.
+
+\begin{section}{One period Trinomial Example}
+
+Suppose a stock has price $100$ at the beginning of a period and
+can have price $90$, $100$, or $110$ at the end of the period. Suppose
+the interest rate is zero over the period. If a call with strike
+$100$ has price $6$ then an arbitrage exists.
+
+Borrow $90$, buy one share of stock, and sell two options. The initial
+cost is $-90 + 100 + 2\times 6 = 2$. Put that money in your pocket
+because you will get to keep it. If the stock is $90$ at the end
+of the period, the value of your position is $-90 + 90 - 2\times 0 = 0$,
+if the stock is $100$ the value is $-90 + 100 - 2\times 0 = 10$,
+if the stock is $110$ the value is $-90 + 110 - 2\times 10 = 0$.
+In no case will you lose money.
+
+All solutions of $100 = 90p_1 + 100p_2 + 110p_3$ with $p_j \ge 0$
+and $p_1 + p_2 + p3$ have the form $p_1 = p$, $p_2 = 1 - 2p$,
+$p_3 = p$, with $0\le p \le 0.5$, and the expected payoff on
+the call is therefore $10p$.
+
+\end{section}
+
+\begin{section}{Notes}
+The 1-2-3 example is a question I have posed over the years when interviewing
+quant candidates as a test of whether
+or not they understood the difference between
+`real world' and `risk-neutral' probabilities. 
+As Mathematical Finance programs became popular
+all candidates were able to produce the correct answer.
+I hated to see such a good question go to waste,
+so I decided to change the answer. 
+
+If you show this problem to a trader they would probably tell you the
+option is underpriced at 0.25 and simply buy it all day long. If
+they don't hedge, the will make 0.90 on average, discounted by
+$1/2$. which works out to making $0.45 - 0.25$ on average. 
+
+\end{section}

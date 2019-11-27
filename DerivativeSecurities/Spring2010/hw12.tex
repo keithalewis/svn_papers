@@ -1,0 +1,59 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 12}
+\author{Due 7:10PM, 3 May 2010}
+
+\maketitle
+
+\begin{xca}{(30 points)}
+If {\small\tt EUR|GBP} is trading at $0.9110/15$ and {\small\tt GBP|USD}
+is trading at $1.2805/16$ what is the largest trading range for {\small\tt
+EUR|USD} that does not admit arbitrage?
+\end{xca}
+
+\begin{xca}{(70 points)}
+Suppose the current exchange rates are {\small\tt EUR|GBP} $0.91$,
+{\small\tt EUR|USD} $1.28$, and {\small\tt GBP|USD} $1.28/0.91 \approx
+1.41$. An at-the-money straddle costs $\sigma_{\alpha|\beta}$ in currency
+$\alpha$ at the beginning of the period and and pays $|X_{\alpha|\beta}
+- x_{\alpha|\beta}|$ in currency $\beta$ at the end of the period,
+where $x_{\alpha|\beta}$ is the exchange rate at the beginning of the
+period and $X_{\alpha|\beta}$ is the exchange rate at the end of the
+period. Assume no arbitrage and the {\small\tt EUR|GBP} rate will be in
+the interval $[0.55, 2.2]$ and the {\small\tt EUR|USD} rate will be in
+the interval $[0.36, 1.56]$ at the end of the period. 
+\begin{enumerate}
+\item Express the cash flows on the straddles in the three currency
+pairs above in terms of {\small\tt EUR} by converting at the appropriate
+exchange rates. 
+\item Show $\sigma_{\tt GBP|USD}/x_{\tt EUR|GBP} > \sigma_{\tt EUR|GBP}
++ \sigma_{\tt EUR|USD}$ implies an arbitrage exists and find one.
+\end{enumerate}
+Hint: Use problem 2 in homework 3.
+\end{xca}
+
+\end{document}

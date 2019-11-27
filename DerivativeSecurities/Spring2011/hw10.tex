@@ -1,0 +1,62 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 10}
+\author{Due 7:10PM, 2 May 2011}
+
+\maketitle
+
+\begin{xca}{(50 points)}
+Consider the one period model $x = (\sigma_1, \sigma_2, \sigma_3)$,
+$\Omega = [1/2,2] \times [1/2, 2]$, $X(\omega_1, \omega_2)
+= (|1 - \omega_1|, |1 - \omega_2|, |\omega_1 - \omega_2|)$.
+\begin{enumerate}
+\item Describe the range of $X$, $X(\Omega)$.
+\item Find an arbitrage if $x = (0.2, 0.2, 0.5)$.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}{(50 points)}
+Suppose the current exchange rates are {\small\tt EUR|GBP} $0.91$,
+{\small\tt EUR|USD} $1.28$, and {\small\tt GBP|USD} $1.28/0.91 \approx
+1.41$. An at-the-money straddle costs $\sigma_{\alpha|\beta}$ in currency
+$\alpha$ at the beginning of the period and and pays $|X_{\alpha|\beta}
+- x_{\alpha|\beta}|$ in currency $\beta$ at the end of the period,
+where $x_{\alpha|\beta}$ is the exchange rate at the beginning of the
+period and $X_{\alpha|\beta}$ is the exchange rate at the end of the
+period. Assume no arbitrage and the {\small\tt EUR|GBP} rate will be in
+the interval $[0.55, 2.2]$ and the {\small\tt EUR|USD} rate will be in
+the interval $[0.36, 1.56]$ at the end of the period.
+\begin{enumerate}
+\item Express the cash flows on the straddles in the three currency
+pairs above in terms of {\small\tt EUR} by converting at the appropriate
+exchange rates.
+\item Show $\sigma_{\tt GBP|USD}/x_{\tt EUR|GBP} > \sigma_{\tt EUR|GBP}
++ \sigma_{\tt EUR|USD}$ implies an arbitrage exists and find one.
+\end{enumerate}
+\end{xca}
+\end{document}
+

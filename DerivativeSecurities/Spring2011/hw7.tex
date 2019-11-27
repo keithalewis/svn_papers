@@ -1,0 +1,64 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 7}
+\author{Due 7:10PM, 4 April 2011}
+
+\maketitle
+
+\begin{xca}{(30 points)}
+Consider the model with prices $X_j = (R_j, S_j, 0)$, $0\le j\le n$,
+and cash flows $C_j = (0, 0, \Phi_j - \Phi_{j-1})$, $0 < j\le n$,
+at times $t_0$, \dots, $t_n$, where $\Phi_n = S_n$.
+Assume $\Pi_j$
+is the no arbitrage price deflator.
+Show $\Phi_j = E[\Phi_{j+1}\mid \F_j]$ if $\Pi_j$ is
+$\F_{j-1}$ measurable. (We say $(\Pi_j)$ is {\em predictable}.)
+Conclude $\Phi_0 = E[S_n]$.
+\end{xca}
+
+\begin{xca}{(30 points)}
+Let $f = F(0;t,u)$ be the forward rate now and $F = F(t;t,u)$
+be the forward rate expiration $t$ over the interval $[t,u]$.
+From exercise 1, we know the futures rate at time zero is
+$E[F]$. Find a formula for $E[F] - f$ involving $D_u$, the
+stochastic discount to time $u$, and determine
+under what conditions this difference is positive.
+\end{xca}
+
+\begin{xca}{(40 points)}
+Consider the Ho-Lee short rate model $R_t = r + \sigma B_t$, where $r$
+and $\sigma$ are constants and $B_t$ is standard Brownian motion.
+\begin{enumerate}
+\item Show $\int_s^t B_u\,du = tB_t - sB_s - \int_s^t u\,dB_u$.
+\item Using the fact $e^{-\int_0^t\theta(u)\,dB_u - \int_0^t\theta^2(u)/2\,du}$
+is a martingale, find a closed form formula for
+$D(s,t) = E[D_t/D_s|\F_s]$ where $D_t = e^{-\int_0^t R_u\,du}$ is
+the stochastic discount.
+\end{enumerate}
+\end{xca}
+
+\end{document}

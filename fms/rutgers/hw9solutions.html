@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>
+Homework 9
+</title>
+
+</head>
+<body>
+
+<h1>
+Math 628 Sp12 Homework 9 Solutions
+</h1>
+<h4>
+Due Apr. 12, 2012 at 6:40PM
+</h4>
+<p>
+Your job is to provide a convincing argument that what you claim
+is correct.
+</p>
+
+<p>
+<span class="ex">Exercise 1.</span>
+<span class="it">
+Find the credit spread of a one year zero coupon bond
+assuming a risk free rate of 1%, a default intensity of 5%, and 50% recovery.
+</span>
+</p>
+<p>
+Since \(D_{T,R}(s, t) = D(s,t)E[1(T > t) + R1(s\lt T\le t)]\) we have
+\(D_{T,R} = e^{-0.01}(e^{-0.05} + 0.5(1 - e^{-0.05})) = .9659 =
+e^{-0.01 - s}\) and \(s = 0.0247\).
+
+</p>
+<p>
+<span class="ex">Exercise 2.</span>
+<span class="it">
+Consider an option on a risky 1 year zero coupon bond having $100 notional
+that pays $1 if the bond is trading between $10 and $90 one day prior
+to expiration. Assuming the risk free rate is 1%, the default intensity
+is 5%, and recovery is zero, what is the value of this option rounded
+to the nearest penny.
+
+</span>
+</p>
+<p>
+The value of the option is \(E[1(0.1 < D(t,1) < 0.9)D_t]\) where
+\(t\) is one year minus one day. Recall \(D_{T,R}(s,t) = D(s,t)((1 -
+R)P(T>t|T>s) + R)1(T > s)\) so with \(R = 0\) \(D(t,1) \approx P(T >
+1 | T > t)1(T>t)\).  Hence the bond will be trading at either 0 or 100
+one day before expiration so the option is worthless.
+
+</p>
+<p>
+The Plackett family of copulas are given by
+\[
+C_\theta(u,v) =
+\frac{1 + (\theta - 1)(u + v)
+- \sqrt{[1 + (\theta - 1)(u + v)]^2 - 4uv\theta(\theta - 1)}}
+{2(\theta - 1)}
+\]
+for \(\theta\ge0\) and \(C_1(u,v) = uv\). Note that
+\(C_0(u, v) = \max\{u + v - 1, 0\}\) and
+\(C_\infty(u, v) = \min\{u, v\}\) give the bookends of
+the Frech\'et-Hoeffding inequality.
+</p>
+<p>
+Given two random variables \(X\) and \(Y\) the <em>odds ratio</em>
+is \(\theta(x,y) = P(X>x,Y>y)P(X\le x,Y\le y)/P(X>x,Y\le y)P(X\le x,Y>y)\).
+Note that if \(X\) and \(Y\) are independent, then \(\theta = 1\),
+if \(Y = X\) then \(\theta = \infty\), and if \(Y = -X\) then
+\(\theta = 0\) for all \(x\), \(y\).
+</p>
+<p>
+<span class="ex">Exercise 3.</span>
+<span class="it">
+If \(U\) and \(V\) are two random variables uniformly distributed
+on the unit interval having a Plackett joint distribution, show
+the odds ratio \(\theta(u,v)\) is constant.
+</span>
+</p>
+<p>
+Note that \(\theta(u,v) = (1 - C(u,1) - C(1,v) + C(u,v))C(u,v)
+/(C(1,v) - C(u,v))(C(u,1) - C(u,v))
+= (1 - u - v + C(u,v))C(u,v)/(v - C(u,v))(u - C(u,v))\). Solving
+the quadratic for \(C(u,v)\) gives the Plackett formula.
+</p>
+
+<p>
+<span class="ex">Exercise 4.</span>
+<span class="it">
+Consider a one year floating leg of a risky swap no recovery and payment
+frequency \(f\) times per year. Let \(V(f) = \sum_{j=1}^f (D(0,(j-1)/f) -
+D(0,j/f))P(T > j/f)\). Show \(V(2) \ge V(1)\).
+
+</span>
+</p>
+<p>
+\begin{aligned}
+V(2) - V(1)
+&= (1 - D(0,1/2))P(T>1/2) + (D(0,1/2) - D(0,1))P(T>1)
+- (1 - D(0,1))P(T>1)\\
+&= (1 - D(0,1/2))P(T>1/2) + (D(0,1/2) - D(0,1))P(T>1)
+- (1 - D(0,1/2) + D(0,1/2) - D(0,1))P(T>1)\\
+&= 1 - P(T>1/2) + D(0,1/2)(P(T>1/2) - P(T>1)) > 0\\
+\end{aligned}
+since
+\(t\mapsto P(T>t)\) is decreasing.
+</p>
+<p>
+<span class="ex">Extra Credit (25 points).</span>
+<span class="it">
+Show \(V(f)\) in exercise 4 is an increasing function of \(f\).
+</span>
+</p>
+<p>
+If we assume \(D(0,t) = e^{-rt}\) and \(P(T > t) = e^{-\lambda t}\) then
+\begin{aligned}
+V(n) &= \sum_1^n (D(0,(j-1)/n) - D(0,j/n)P(T > j/n)\\
+     &= \sum_0^{n-1} D(0,j/n)P(T > (j+1)/n) -
+        \sum_1^n D(0,j/n)P(T > j/n)\\
+     &= 1 + \sum_1^{n-1} D(0,j/n)(P(T > (j+1)/n) - P(T > j/n) - D(0,1)P(T > 1)\\
+     &= 1 + \sum_1^{n-1} e^{-(r + \lambda)j/n}(e^{-\lambda/n} - 1)
+	 	- D(0,1)P(T > 1)\\
+\end{aligned}
+The first and last terms do not depend on \(n\). The middle term
+is ...
+</p>
+
+</body>
+</html>

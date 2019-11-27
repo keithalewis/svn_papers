@@ -1,0 +1,56 @@
+\documentclass[11pt,fleqn]{amsproc}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 2}
+\author{Due 7:10PM, 9 Feb 2009}
+
+\maketitle
+
+\begin{xca}{(40 points)}
+Consider the one period model $x = (1, s, v)$, $\Omega = \{S^+, S^-\}$ and $X = (R, \omega, f(\omega))$.
+Write $F^+ = f(S^+)$ and $F^- = f(S^-)$.
+\begin{enumerate}
+\item Find $m$ and $n$ such that $m R + n S^+ = F^+$ and $m R + n S^- = F^-$. Show no arbitrage
+implies $v = (qF^+ + (1 - q)F^-)/R$, where $q = (Rs - S^-)/(S^+ - S^-)$.
+\item Find scalars $\pi^+$, $\pi^-$ such that $(1, s) = (R, S^+)\pi^+ + (R, S^-)\pi^-$. Use the fundamental theorem of asset pricing to derive the formula for the option value in the previous item.
+\item Show $\partial v/\partial s = n$.
+\item Show no arbitrage exists if and only if $S^-\le Rs \le S^+$.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}{(30 points)}
+Consider the one period model $x = (1, s, v)$, $\Omega = \{u, d\}$ and $X = (R, s\omega, f(\omega))$.
+\begin{enumerate}
+\item Show no arbitrage imples $v = (qF^+ + (1 - q)F^-)/R$, where $q = (R - d)/(u - d)$,
+$F^+ = f(su)$, and $F^- = f(sd)$.
+\item Find a payoff, $f$, such that $\partial v/\partial s \not= n$, where $n$ is as defined in the
+previous problem.
+\item Show $ns = (\partial v/\partial R)(Rv)$, for any payoff, $f$.
+\end{enumerate}
+
+\end{xca}
+
+\begin{xca}{(30 points)}
+For a general one period model with finite sample space, $\Omega = \{\omega_j\}$, assume there exists
+scalars $\pi_j\ge0$ such that $x = \sum_j X(\omega_j)\,\pi_j$.
+\begin{enumerate}
+\item Show this implies the lack of arbitrage for this model directly without appealing to
+the fundamental theorem of asset pricing.
+\item Assume there exists a portfolio, $\zeta\in\R^n$ with $\zeta\cdot X(\omega) = 1$ for all $\omega\in\Omega$. Show the cost at the beginning of the period of this portfolio is $\sum_j \pi_j$.
+\item Define $R = 1/\sum_j \pi_j$ to be the return over the period. Show $x$ belongs
+to the smallest convex set containing $\{X(\omega)/R : \omega\in\Omega\}$.
+\end{enumerate}
+\end{xca}
+
+\end{document}

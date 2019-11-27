@@ -1,0 +1,59 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 11}
+\author{Due 7:10PM, 9 May 2011}
+
+\maketitle
+
+\begin{xca}{(30 points)}
+Find a position in cash, and calls (only) that
+replicates the payoff $\min\{10, |100 - x|\}$, $x\ge0$.
+\end{xca}
+
+\begin{xca}{(30 points)}
+\begin{enumerate}
+\item
+Assume $dX/X = \mu\,dt + \sigma\,dB$ is geometric Brownian motion.
+Show $(d\log X)^2 = (dX/X)^2$.
+\item Find the cubic term of $(\Delta\log x)^2 - (\Delta x/x)^2$.
+Recall $\Delta f(x) = f(x + \Delta x) - f(x)$ for any function $f$.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}{(40 points)}
+Back up your answers to the following questions.
+\begin{enumerate}
+\item If you are replicating the floating leg of a log quotient
+variance swap using a static and dynamic hedge, are you long
+or short jumps?
+\item If you are replicating the floating leg of a realized return
+variance swap using a static and dynamic hedge, are you long
+or short jumps?
+\end{enumerate}
+\end{xca}
+
+\end{document}

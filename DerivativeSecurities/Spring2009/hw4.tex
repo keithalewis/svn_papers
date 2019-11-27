@@ -1,0 +1,82 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 4}
+\author{Due 7:10PM, 2 Mar 2009}
+
+\maketitle
+
+\begin{xca}{(25 points)}
+Let $\H$ be a Hilbert space and $\zeta\colon\H\to\R$ a continuous linear functional.
+Choose $z\in(\ker\zeta)^\perp$ with $z\not=0$.
+\begin{enumerate}
+\item Show $\zeta(z)\not=0$.
+\item Show for every $x\in\H$, $x = y + \frac{\zeta(x)}{\zeta(z)}z$ with $y\in\ker\zeta$.
+\item Find a scalar, $t$, such that $\zeta(x) = (x,tz)$ for every $x\in\H$.
+\end{enumerate}
+[Note: This shows $\H^*\cong\H$.]
+\end{xca}
+
+\begin{xca}{(10 points)}
+Let $\H$ and $\K$ be Hilbert spaces and $T\colon\H\to\K$ be a bounded linear operator.
+Define the adjoint, $T^*\colon\K\to\H$ by $(T^*k,h) = (k,Th)$ for $k\in\K$, $h\in\H$.
+Let $\ran T = \{Tx:x\in\H\}$ and $\ker T = \{x\in\H : Tx = 0\}$.
+Show $(\ran T)^\perp = \ker T^*$.
+\end{xca}
+
+\begin{xca}{(10 points)}
+Let $\P = \{(p_1,p_2): p_1 > 0, p_2 \ge0\}\subset\R^2$. Show
+$\P^+ = \P$ where $\P^+ = \{(q_1,q_2):p_1q_1 + p_2q_2 > 0\}$.
+\end{xca}
+
+\begin{xca}{(25 points)}
+Suppose $\M$ is a closed subspace of a Hilbert space, $\H$, $\P\subset\H$ is a cone,
+and $\M\cap\P=\emptyset$. Assume there is a hyperplane $\N\supset\M$
+such that $\N\cap\P=\emptyset$. Find $n\in\N^\perp$ with $n\in\P^+$. Show $n\in\M^\perp$.
+Conclude $\M^\perp\cap\P^+\not=\emptyset$.
+\end{xca}
+
+Given a probability space $(\Omega, P, \F)$ and a filtration $(\F_j)$, 
+let $L^2_j\otimes\R^m$ be the space of square integrable, $\F_j$ measurable
+functions taking values in $\R^m$.
+
+\begin{xca}{(30 points)}
+Suppose $(X_j\Pi_j)_{j=0}^n$ with $X_j\Pi_j\in L^2_j\otimes\R^m$ is a martingale and
+$\Xi_j\in L^2_j\otimes\R^m$, $0\le j < n$ with $(\Xi_{j - 1} - \Xi_j)\cdot X_j = 0$
+for $0 < j < n$. Show $\Xi_0\cdot X_0\Pi_0 = E[\Xi_{n-1}\cdot X_n\Pi_n]$.
+%Given $X_j\in L_j^\infty\otimes\R^m$, define
+%the bounded linear operator $\X\colon\oplus_0^{n-1} L^2_j\otimes\R^m\to\oplus_0^n L^2_j$
+%by 
+%$$
+%\X(\Xi_0\oplus\cdots\oplus\Xi_{n-1}) 
+%= -\Xi_0\cdot X_0\oplus(\Xi_0 - \Xi_1)\cdot X_1\oplus\cdots\oplus \Xi_{n-1}\cdot X_n
+%$$
+%Show the adjoint $\X^*\colon\oplus_0^n L^2_j\to\oplus_0^{n-1} L^2_j\otimes\R^m$ is 
+%$$\X^*(\oplus_0^n\Pi_j)
+%	= \oplus_0^{n-1} -X_j\Xi_j + E[X_{j+1}\Pi_{j+1}|\F_j].
+%$$
+\end{xca}
+
+\end{document}

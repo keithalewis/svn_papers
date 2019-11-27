@@ -1,0 +1,42 @@
+﻿body
+{
+    margin-top: 20px; 
+    margin-left: 20px; 
+    margin-right: 20px; 
+    font-family:trebuchet MS, trebuchet, verdana, arial, sans-serif; 
+    font-size: 14px; 
+    color: #333;
+}
+p
+{
+	line-height: 120%;
+}
+.ue
+{
+    background-color: #F0F0F0;
+	margin-top: 10px;
+	margin-bottom: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-style: solid;
+    border-width: 1px;
+}
+.def
+{
+    font-style: italic;
+}
+.it
+{
+    font-style: italic;
+}
+.ex
+{
+    font-weight: bold;
+}
+.thm
+{
+    font-weight: bold;
+}.lem
+{
+    font-weight: bold;
+}

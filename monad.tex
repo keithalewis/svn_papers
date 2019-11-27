@@ -1,0 +1,76 @@
+\documentclass[12pt,letterpaper,fleqn]{report}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath,amscd}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{lmodern}
+\usepackage{kpfonts}
+\usepackage{bm}
+\usepackage[mathscr]{euscript}
+
+\author{Keith A. Lewis}
+\title{Programs and Monads}
+\begin{document}
+\maketitle
+The typed \(\lambda\)-calculus is a simple language for expressing computer
+programs. A program takes a type, performs a calculation, and returns a
+type as the result. Cartesian monoidal categories provide a model of
+the typed \(\lambda\)-calculus. A short description is that there is an associative 
+bifunctor \(\times\)
+with adjoint \(\Rightarrow\).
+In particular, \(\mathrm{Hom}(A\times B,C)\) is isomorphic to 
+\(\mathrm{Hom}(A,B\Rightarrow C)\) that is natural in \(A\) and \(C\)	.
+There is a terminal object \(1\) such that \(1\times A = A\times 1\), and
+various isomorphisms \(A\times B\cong B\times A\), \(A\times(B\times C)
+\cong (A\times B)\times C\).
+
+A {\em monad}, \(M\), is an endofunctor on a category together with two
+{\em natural transformations} \(\nu\colon I\to M\) ({\em unit}) 
+and \(\mu\colon M^2\to M\) ({\em join}),
+where \(I\) is the identity functor, for which the following diagrams commute
+\[
+\begin{CD}
+M^3 @>{M\mu}>>M^2\\
+@V{\mu M}VV	@VV\mu V\\
+M^2 @>>\mu> M
+\end{CD}
+\qquad
+\begin{CD}
+M @>{M\nu}>>M^2\\
+@V{\nu M}VV	@VV\mu V\\
+M^2 @>>\mu> M
+\end{CD}
+\]
+and \(\mu(M\nu) = \mu(\nu M)\). Recall \((M\mu)_x = M(\mu_x)\) and
+\((\mu M)_x = \mu_{M x}\).
+
+\subsection{List monad}
+A list of type \(X\) a is an object of the type \([X] = X\times (X\times(\cdots (X\times 1)))\).
+If \(f\colon X\to Y\) define \([f]\colon [X]\to [Y]\) by
+\(f = f\times (f\times(\cdots (f\times 1)))\).
+The {\em head}, or {\em car} in lisp speak, is the projection on the first term
+and the {\em tail}, or {\em cdr} in lisp speak, is the projection on the second term.
+If \(f\colon X\to Y\) define \(\mathrm{fmap} f\colon [X]\to [Y]\)
+by \(\mathrm{head}((\mathrm{fmap} f)([X]) = f(\mathrm{head}[X])\)
+and \(\mathrm{tail}((\mathrm{fmap} f)([X]) = (\mathrm{fmap} f)(\mathrm{tail}[X])\).
+
+Or \((\mathrm{fmap} f)(X\times [X]) = f(X)\times (\mathrm{fmap} f)([X])\).
+
+\begin{align*}
+	\nu\colon& t\to M t\\
+	\mu\colon& (t\to u)\to (M t\to Mu).
+\end{align*}
+The function \(\nu\) is called {\em unit} and it ``wraps up'' its argument.
+The function \(\mu\) is called {\em lift} and it takes a function to
+a function that acts on wrapped up arguments.
+They satisfy the rule \((\mu f)\nu = \nu f\).
+
+A more general function than \(\mu\) is {\em bind}
+\[
+	\beta\colon \nu . 
+\]
+
+It can be used to define lift by
+\((\mu f)\nu = \beta \nu f\).
+%by \((\mathrm{lift} f) M t = \mathrm{bind} (M t) (\lambda x. f(x)\).
+\end{document}

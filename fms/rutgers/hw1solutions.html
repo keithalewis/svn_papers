@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>
+Homework 1
+</title>
+
+</head>
+<body>
+
+<h1>
+Math 628 Sp12 Homework 1
+</h1>
+<h4>
+Due Feb. 2, 2012 at 6:40PM
+</h4>
+<p>
+Your job is to provide a convincing argument that what you claim
+is correct.
+</p>
+
+<p>
+<span class="ex">Exercise 1.</span>
+<span class="it">
+Consider the two period deterministic model having three instruments
+\(D_{01}\), \(D_{02}\), and \(D_{012}\); a zero coupon bond maturing
+at \(t_1\), a zero coupon bond maturing at \(t_2\), and a forward
+starting zero coupon bond from \(t_1\) to \(t_2\).
+The non zero cash flows for the bonds are \(C_1(D_{01}) = 1\),
+\(C_2(D_{02}) = 1\), \(C_1(D_{012}) = -D_{012}\), and \(C_2(D_{012}) = 1\).
+Given prices \(X_0(D_{01}) = D_{01}\), \(X_0(D_{02}) = D_{02}\), and
+\(X_0(D_{012}) = 0\), find the the value of \(D_{012}\) in terms
+of \(D_{01}\) and \(D_{02}\) that ensures
+the model is arbitrage free.
+</span>
+(Hint: Find the unique price deflators \(\Pi_0 = 1\), \(\Pi_1\) and \(\Pi_2\).)
+</p>
+
+<h4>Solution</h4>
+<p>
+By the FTAP \(D_{01} = 1\Pi_1\), \(D_{02} = 1 \Pi_2\) and \(0 = -D_{012}\Pi_1
++ 1 \Pi_2\) so \(D_{012} = \Pi_2/\Pi_1 = D_{02}/D_{01}\).
+</p>
+
+<p>
+<span class="ex">Exercise 2.</span>
+<span class="it">
+Consider the n period model having instruments \(R_j\), \(0\le j\lt n\)
+where \(X_j(R_j) = 1\), \(X_{j+1}(R_j) = 0\)
+and \(C_{j+1}(R_j) = R_j\) and is zero otherwise. 
+Assuming \(R_j\) is measurable with respect
+to the algebra corresponding to time \(t_j\) and \(\Pi_j\) is
+predictable, i.e., \(\Pi_j\) is measurable with respect to the algebra
+corresponding to time \(t_{j-1}\).
+Find a formula for the
+price deflators \(\Pi_j\) and use that to determine the cash flow,
+\(-D_{ijk}\), at time
+\(t_j\) for a forward starting zero coupon bond over the interval \(t_j\)
+to \(t_k\), \(i\le j\lt k\) in terms of the price at time \(t_i\) of
+zero coupon bonds maturing at times \(t_j\) and \(t_k\).
+</span>
+(Hint: The price of the forward starting zero coupon bond is 0 at time
+\(t_i\) and has non-zero cash flows \(-D_{ijk}\) at time \(t_j\)
+and 1 at time \(t_k\).)
+</p>
+
+<h4>Solution</h4>
+<p>
+By the FTAP \(1 \Pi_j = E_{j} R_{j} \Pi_{j+1} = R_{j} \Pi_{j+1}\)
+since \((\Pi_j)\) is predictable, hence \(\Pi_j = 1/R_0\cdots R_{j-1}\).
+Also \(D_{ij}\Pi_i = E_i 1 \Pi_j\) so \(D_{ij} = E_i \Pi_j/\Pi_i\).
+Again using the FTAP, \(0 = E_i -D_{ijk} \Pi_j + 1 \Pi_k\) so
+\(D_{ijk} = E_i \Pi_k/\Pi_j = D_{ik}/D_{ij}\).
+
+</p>
+<p>
+<span class="ex">Exercise 3.</span>
+<span class="it">
+Using the same model as in exercise 2, find the quote, \(F_{ijk}\),
+at time \(t_i\)
+of a forward rate agreement over the interval \([t_j, t_k]\) having
+day count fraction \(\delta_{jk}\) in terms of \(D(t, u) = E_t[\Pi_u]/\Pi_t\),
+the price at time \(t\) of a zero coupon bond maturing at \(u\).
+The price of the FRA is zero at \(t_i\) and has cash flows of \(-1\)
+at time \(t_j\) and \(1 + F_{ijk}\delta_{jk}\) at time \(t_k\).
+</span>
+</p>
+
+<h4>Solution</h4>
+<p>
+We have \(0 = E_i -1\Pi_j + (1 + F_{ijk}\delta_{jk})\Pi_k\) so
+\(F_{ijk} = E_i (\Pi_j/\Pi_k - 1)/\delta_{jk}
+= (D_{ij}/D_{ik} - 1)/\delta_{jk}\).
+</p>
+
+<span class="ex">Exercise 4.</span>
+<span class="it">
+Using the notation in exercise 3, show that in an arbitrage free model
+that receiving the cash flows \(F_{j,j,j+1}\delta_{j,j+1}\) at time \(t_{j+1}\)
+for \(0\le j\lt n\) has the same value as receiving \(1\)
+at \(t_0\) and paying \(1\) at time \(t_n\).
+</span>
+</p>
+
+<h4>Solution</h4>
+<p>
+We have 
+\(
+E\sum_{0\le j\lt n} F_{j,j,j+1}\delta_{j,j+1} \Pi_{j+1}
+= E\sum_{0\le j\lt n} (E_j \Pi_j/\Pi_{j+1} - 1) \Pi_{j+1}
+= E\sum_{0\le j\lt n} (\Pi_j - \Pi_{j+1})
+= 1 - E\Pi_n\).
+</p>
+
+</body>
+</html>
+

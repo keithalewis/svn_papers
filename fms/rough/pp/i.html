@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>Independence</title>
+</head>
+
+<body>
+<h1>Independence</h1>
+<p>
+Two algebras, \({\cal A}\) and \({\cal B}\), are <em>independent</em> under the probability
+measure \(P\) if \(P(A\cap B) = P(A) P(B)\) for every \(A\in{\cal A}\) and \(B\in{\cal B}\). 
+A random variable \(X\) is <em>independent</em> of an algebra \({\cal A}\) if the smallest 
+algebra making \(X\) measurable is independent of \({\cal A}\). 
+Two random variables are <em>independent</em> if the smallest algebras under which they 
+are measurable are independent.
+</p>
+<p>
+One nice feature of independent random variables is that their marginal distributions
+determine their joint distribution. If \(X\) has cdf \(F\) and \(Y\) has cdf \(G\)
+then their joint distribution is \(H(x,y) = P(X\le x,Y\le y) = F(x)G(y)\).
+</p>
+<h2>Copulas</h2>
+<p>
+Maybe this section should be titled Dependence. Copulas contain precisely the information
+required to connect marginal distributions into joint distributions. With notation
+as above, the <em>copula</em> of \(X\) and \(Y\) is the joint distribution of
+\(F(X)\) and \(G(Y)\), \(C(u, v) = P(F(X)\le u, G(Y)\le v)\), \(0\le u,v\le 1\). 
+Recall both of these random variables are uniformly distributed on \([0,1]\).
+</p>
+<p>
+<span class="ex">Exercise.</span>
+<span class="it">
+With \(F\), \(G\), \(H\) and \(C\) as above, show \(H(x,y) = C(F(x),G(y))\).
+</span>
+</p>
+<p>
+<span class="ex">Exercise.</span>
+<span class="it">
+If \(X\) and \(Y\) are independent, show \(C(u, v) = uv\).
+</span>
+</p>
+<p>
+<span class="ex">Exercise.</span>
+<span class="it">
+If \(Y = \phi(X)\) where \(\phi\) is an increasing function, show \(C(u, v) = \min\{u,v\} =: M(u,v)\).
+</span>
+</p>
+<p>
+<span class="ex">Exercise.</span>
+<span class="it">
+If \(Y = \phi(X)\) where \(\phi\) is a decreasing function, show \(C(u, v) = \max\{u + v - 1, 0\} =: W(u,v)\).
+</span>
+</p>
+<p>
+<span class="ex">Exercise.</span> (Fr&eacute;chet&ndash;Hoeffding bounds)
+<span class="it">
+For any copula \(C\), show \(W\le C\le M\).
+</span>
+</p>
+<h3>Remarks</h3>
+<p>
+<a href="./pp/papers/Kac1959.pdf">Mark Kac</a> wrote a marvelous monograph
+about independence.
+</p>
+</body>
+</html>

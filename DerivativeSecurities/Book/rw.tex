@@ -1,0 +1,38 @@
+\chapter{Random Walk}
+
+A (Bernoulli) {\em random walk} is a stochastic process $(W_n)_{n\ge0}$
+where $W_0 = 0$ and increments $Z_j = (W_{j + 1} - W_j)_{j\ge0}$ that are 
+independent Bernoulli random variables. Recall that a Bernoulli random
+variable, $Z$, has distribution $P(Z = 1) = p$ and $P(Z = 0) = 1 - p$
+for some $p$ with $0\le p\le 1$.
+Note $E[W_n] = np$ and $\Var(W_n) = np(1 - p)$.
+The distribution is $P(W_n = k) = \binom{n}{k} p^k(1 - p)^{n - k}$.
+
+\subsection{Construction}
+Let $x\mod 1$ be the fractional part of $x\in\R$ and
+define $Z\colon\R\to\R$ by $Z(x) = 1_{[1/2, 1)}(x\mod 1)$.Fix the probability
+space $\Omega = [0,1)$, with $P$ Lebesgue measure on $\Omega$ and $\F$ the
+$\sigma$-algebra of Borel measurable sets.
+Define $Z_j(\omega) = Z(2^{j - 1}\omega)$, $j > 0$.
+
+Let $\F_n$ be the smallest algebra of sets on $\Omega$ for which $Z_1$, \dots, $Z_n$ are
+measurable. The atoms of this algebra are $A_{i,n} = [i2^{-n},(i + 1)2^{-n})$ for $0\le i < 2^n$.
+Note $Z_n = 0$ on $A_{i,n}$ when $i$ is even and $Z_n = 1$ on $A_{i,n}$ when $i$ is odd. This shows
+$P(Z_n = 0) = 1/2 = P(Z_n = 1)$.
+
+\begin{exercise}
+Show $\omega - 2^{-n} < \sum_{j = 1}^n Z_j(\omega) 2^{-j} \le \omega + 2^n$ for $0\le\omega<1$.
+\end{exercise}
+
+This shows $Z_j(\omega)$ is the $j-th$ digit of $\omega$ in its base 2 decimal representation.
+
+\begin{exercise}
+Show that if $i < j$, then either $A_{i,n}\subset A_{j,n}$ or
+$A_{i,n}\cap A_{j,n} = \emptyset$
+\end{exercise}
+
+\section{The Binomial Model}
+The binomial model is $X_j = (R^j, S_j)$ where $R$ is the constant
+one period realized return and $S_j = su^{W_j}d^{j-W_j}$, where
+$s$ is the initial stock price, $u$ is the `up' factor and
+$d$ is the `down' factor.

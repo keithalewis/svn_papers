@@ -1,0 +1,97 @@
+\documentclass[11pt,fleqn]{amsproc}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 2}
+\author{Due 7:10PM, 14 Feb 2011}
+
+\maketitle
+
+\begin{xca}{(20 points)}
+If $P_1$, $P_2$, \dots, $P_n$ are points in Euclidean space, show by
+induction that $P_1(P_1 + P_2)\cdots(P_1 + P_2 + \cdots + P_n) = P_1
+P_2 \cdots P_n$.
+
+\end{xca}
+True for $n = 1$. Assume true for $n$. We have
+$P_1(P_1 + P_2)\cdots(P_1 + P_2 + \cdots + P_{n+1})
+= P_1P_2 \cdots P_n(P_1 + P_2 + \cdots + P_{n+1})
+= P_1P_2 \cdots P_n P_{n+1}$
+
+\begin{xca}{(20 points)}
+If $P$, $P_1$, \dots, $P_n$ are points in Euclidean space, show by
+induction that $P(P + P_1)\cdots(P + P_n) = PP_1\cdots P_n$.
+
+\end{xca}
+
+True for $n = 1$. Assume true for $n$. We have
+$P(P + P_1)\cdots(P + P_{n+1}) = PP_1\cdots P_n(P + P_{n+1})
+= PP_1\cdots P_n P_{n+1}$.
+
+\begin{xca}{(20 points)}
+If $Q = P + tv$ and $R = P + uv$, where $P$ is a point, $v$ is a vector,
+and $t$, $u$ are scalars, find conditions on the scalar $w$ such that $P +
+wv$ is between $Q$ and $R$.
+
+\end{xca}
+
+From the Grassmann Calculus notes, $S = P + wv$ is between $Q$ and
+$R$ if and only if $SR/QR > 0$ and $QS/QR > 0$. Since
+$QR = P(uv) + tvP = (u - t)Pv$, $SR = (u - w)Pv$, and
+$QS = (w - t)Pv$ we have the conditions $u - w > 0$ and
+$w - t > 0$, where we assume, as we may, $u > t$.
+This gives $t < w < u$ as the condition.
+
+\begin{xca}{(20 points)}
+If $K_j < \omega < K_{j+1}$ show that $X(\omega)$ is between $X(K_j)$
+and $X(K_{j+1})$, $1\le j < n$.
+
+\end{xca}
+
+Claim $X(\omega) = (1 - t)X(K_j) + t X(K_{j+1})$ where $t$ is
+chosen so that $\omega = (1 - t)K_j + tK_{j+1}$, i.e.,
+$t = (\omega - K_j)/(K_{j+1} - K_j)$. Note the condition on $\omega$
+implies $0 < t < 1$ so $X(\omega)$ is between $X(K_j)$ and $X(K_{j+1})$
+by exercise 3. To verify the claim we look at the components
+of the vectors. Clearly $O = (1-t)O + tO$ and $Re_b = (1 - t)Re_b
++ tRe_b$. For the stock component $\omega e_s = (1 - t)K_je_s + tK_{j + 1}e_s$.
+For the first call, $(\omega - K_1)e_1 = (1 - t)(K_j - K_1)e_1 + t(K_{j+1} - K_1)e_1$ since $\omega = (1 - t)K_j + tK_{j+1}$ and $K_1 = (1 - t)K_1 + tK_1$.
+Similarly for $i < j$. All terms vanish beyond the $e_j$ term
+and $(\omega - K_j)e_{j + 1} = 0 + t(K_{j+1} - K_j)e_j$ so we have
+proved the claim.
+
+\begin{xca}{(20 points)}
+Calculate $X(L)X(K_1)\cdots X(K_n)X(H)$, where $X(L) = O + Re_b + Le_s$,
+$X(K_1) = O + Re_b + K_1e_s$, \dots, $X(K_n) = O + Re_b + K_ne_s + (K_n -
+K_1)e_1 + \cdots + (K_n - K_{n-1})e_{n-1}$, and $X(H) = O + Re_b + He_s +
+(H - K_1)e_1 + \cdots + (H - K_n)e_n$.
+
+\end{xca}
+
+We can generalize exercise 1 to the claim
+$P(P + t_{11}v_1)(P + t_{21}v_1 + t_{22}v_2)\cdots
+(P + t_{n1}v_1 + t_{n2}v_2 + \cdots t_{nn}v_n)
+= t_{11}t_{22}\cdots t_{nn} Pv_1v_2\dots v_n$, where
+$P$ is a point, $v_j$ are vectors, and $t_{ij}$ are scalars.
+
+Let $P = X(L)$ then $X(K_1) = P + (K_1 - L)e_s = P + t_{11}e_s$, $X(K_2)
+= P + (K_2 - L)e_s + (K_2 - K_1)e_1 = P + t_{21}e_s + t_{22}e_1$,
+\dots, $X(K_n) = P + (K_n - L)e_s + (K_n - K_1)e_1 + \cdots + (K_n -
+K_{n-1})e_{n - 1} = P + t_{n1}e_s + t_{n2}e_1 + \cdots + t_{nn}e_{n-1}$,
+$X(H)   = P + (H - L)e_s + (H - K_1)e_1 + \cdots + (H - K_{n-1})e_{n
+- 1} + (H - K_n) e_n$.  Using the generalization of exercise 1 we have
+$X(L)X(K_1)\cdots X(K_n)X(H) = (O + Re_b + Le_s)\cdot(K_1 - L)e_s \cdot
+(K_2 - K_1)e_1 \cdots (K_n - K_{n-1})e_{n - 1}\cdot (H - K_n) e_n = (K_1 -
+L)(K_2 - K_1)\cdots(K_n - K_{n-1})(H - K_n)(O + Re_b)e_se_1\cdots e_n$.
+
+\end{document}

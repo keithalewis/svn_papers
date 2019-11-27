@@ -1,0 +1,135 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Final Exam}
+\author{11 May 2009}
+
+\maketitle
+
+For each question, circle the letter corresponding to the answer that is most correct. Each question is worth 12.5 points.
+
+\begin{xca}
+Consider the payoff $f(x) = -10$, $0 \le x \le 90$; $f(x) = x - 100$, $90 \le x \le 110$; and $f(x) = 10$, $x \ge 110$. In order to produce
+this payoff using a cash position, futures contract, and options, it is necessary that
+\begin{enumerate}
+\item one call with strike 110 be sold,
+\item a nonzero cash position be used,
+\item a nonzero futures position be used,
+\item none of the above,
+\item all of the above.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}
+Define a continuous time model $(X_t)_{t\ge0}$ where $X_t = (R_t, S_t)$ with $R_t = \exp(rt)$ and
+$S_t = S_0\exp((\mu - \sigma^2/2)t + \sigma B_t)$. Consider the price deflater $\Pi_t = \exp((\nu - \theta^2/2)t
++ \theta B_t)$. The model is arbitrage free
+\begin{enumerate}
+\item for $\nu = -r$ and any value of $\theta$.
+\item for $\nu = -r$ and $\theta = (\mu - r)/\sigma.$
+\item only if $\nu = -r$, $\mu = r$, and $\theta = 0$.
+\item none of the above.
+\end{enumerate}
+
+\end{xca}
+
+\begin{xca}
+Consider the one period model $x = (1, 105, 4)$ and $X(\omega) = (1, \omega, (\omega - 100)^+)$ where $90\le\omega\le 110$.
+\begin{enumerate}
+\item This model is arbitrage free.
+\item There is an arbitrage involving buying two calls and selling one share of stock.
+\item There is an arbitrage involving selling two calls and buying one share of stock.
+\item There is an arbitrage involving buying one call and selling one share of stock.
+\item There is an arbitrage involving selling one call and buying one share of stock.
+\item none of the above.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}
+As an option approaches expiration and the underlying tends to the strike,
+\begin{enumerate}
+\item the delta hedge may become unbounded.
+\item the gamma hedge may oscillate between positive and negative values.
+\item the option value tends to zero.
+\item none of the above.
+\item one of (a), (b), (c) is true.
+\item two of (a), (b), (c) are true.
+\item (a), (b), (c) are all true.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}
+The dual cone of $\P = \{(p_1,p_2):0<p_1<p_2\}$ is
+\begin{enumerate}
+\item $\{(q_1,q_2):0<q_1<q_2\}$.
+\item $\{(q_1,q_2):q_1<q_2\}$.
+\item $\{(q_1,q_2):0<q_1 + q_2,q_2>0\}$.
+\item $\{(q_1,q_2):0< q_1- q_2,q_2>0\}$.
+\item none of the above.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}
+Define the function $F$ that takes a matrix to its square, $F(X) = X^2$. The Fr\'echet derivative of $F$ is
+\begin{enumerate}
+\item $DF(X)H = 2XH$.
+\item $DF(X)H = XH + HX$.
+\item $DF(X)H = 2HX$.
+\item all of the above.
+\item none of the above.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}
+Let $(B_t)_{t\ge0}$ be standard Brownian motion, then $\int_0^t B_s^2\,dB_s$ equals
+\begin{enumerate}
+\item $(B^3_t - t^{3/2})/3$.
+\item $(B^3_t - t/2)/3$.
+\item $(B^3_t - t^2)/3$.
+\item $(B^3_t - t)/3$.
+\item $(B^3_t - B_t)/3$.
+\item $(B^3_t - tB_t)/3$.
+\item none of the above.
+\end{enumerate}
+
+\end{xca}
+
+\begin{xca}
+Suppose a derivative contract is written against a risky zero coupon bond having 100 units notional, 
+one year maturity, and no recovery 
+that pays 1 unit if the bond is trading between 10 and 90 one day before maturity.
+You may suppose the risk-free rate is 3\% and the hazard rate of default is 2\%.
+The value of this derivative
+\begin{enumerate}
+\item is close to zero.
+\item close to the one times the one year risk-free discount.
+\item approximately 0.8 times the one year risk-free discount.
+\item none of the above.
+\item cannot be accurately determined from the given data.
+\end{enumerate}
+\end{xca}
+
+\end{document}

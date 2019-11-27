@@ -1,0 +1,63 @@
+\documentclass[11pt,fleqn]{article}
+\usepackage{amsmath}
+
+\def\tr{\qopname\relax n{tr}}
+
+\begin{document}
+
+\title{Notes on the Kelly Criterion}
+\author{Keith A. Lewis}
+\maketitle
+
+\begin{abstract}
+Notes on J. L. Kelly, Jr.'s paper
+{\it A New Interpretation of Information Rate}
+\end{abstract}
+
+\section{The Gambler with a Private Wire}
+
+Kelly considers the following problem.  Suppose you have initial capital
+$V_0$ and can bet any fraction on a game that pays even money with
+probability $q$ and zero with probability $1 - q$.  How should you bet
+your money?
+
+The Kelly criteria suggest betting to maximize your expected gain with
+gain defined
+as $G = \lim_{N\to\infty}(1/N)\log V_N/V_0$, where $V_N$ is your capital
+after $N$ bets. He assumes each time you bet some fraction of your wealth,
+$l$. In this case $V_N = V_0 (1 + l)^{W_N} (1 - l)^{N - W_N}$ where
+$W_N$ is the number of wins after $N$ bets.
+
+He shows that $l = 2q - 1$ for $q \ge 1/2$ and $l = 0$ for $q < 1/2$.
+One criticism of the Kelly Criterion is that it is defined using the
+limit as $N$ tends to infinity. In fact, this value for $l$ also maximizes
+the gain to time $N$, $G_N = (1/N)\log V_N/V_0$.
+
+We can write $V_1 = V_0 (1 + l)^X (1 - l)^{1 - X}$ where $X$ is a
+Bernoulli random variables with $P(X = 1) = q$ and $P(X_j = 0) = 1 -
+q$. Note $P(V_1 = V_0(1 + l)) = q$ and $P(V_1 = V_0(1 - l)) = 1 - q$.
+
+In general $V_N = V_0 \prod_{j=1}^N (1 + l)^{X_j} (1 - l)^{1 - X_j}
+= V_0 (1 + l)^{W_N}(1 - l)^{N - W_N}$, where $W_N = X_1 + \cdots + X_N$
+and the $X_j$ are independent Bernoulli random variables with
+$P(X_j = 1) = q$ and $P(X_j = 0) = 1 - q$.  Since $E[W_N] = Nq$, we
+have $E[G_N] = q\log(1 + l) + (1 - q)\log(1 - l)$, which is identical
+to Kelly's formula for $G$.
+
+
+One can also bet to maximimize expected return. Define the average return
+over $N$ bets as  $R_N = (1/N)\sum_1^N (V_j/V_{j - 1} - 1)$. Recall
+that $x - 1 \approx \log x$ if $x \approx 1$. Using this formula on
+the summands we have $R_N \approx (1/N)\sum_1^N \log V_j/V_{j - 1} =
+(1/N)\log V_N/V_0 = G_N$.
+
+Since $E[(1 + l)^{X_j} (1 - l)^{1 - X_j}] = (1 + l)q + (1 - l)(1 - q)$
+we have $E[R_N] = (1 + l)q + (1 - l)(1 - q) - 1 = (2q - 1)l$. If $q >
+1/2$ then we should clearly take $l = 1$ in order to maximize the return
+and if $q < 1/2$ we should take $l = 0$. This is not a very satisfactory
+answer.
+
+Maximizing the expected return seems to ignore how risky the betting
+strategy is. 
+
+\end{document}

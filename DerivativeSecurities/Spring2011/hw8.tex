@@ -1,0 +1,69 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 8}
+\author{Due 7:10PM, 11 April 2011}
+
+\maketitle
+
+The Ho-Lee model with constant rate and volatility has short rate
+process $r_t = r + \sigma B_t$, stochastic discount
+$D_t = e^{-rt - \int_0^t\sigma B_u\,du}$, and zero coupon bond prices
+$D(s, t) = e^{-r(t - s) + \sigma^2(t - s)^3/6 - \sigma(t - s)B_s}$.
+
+\begin{xca}{(25 points)}
+The value of a caplet that pays
+$\max\{F_{\delta(t,u)}(t;t, u) - f, 0\}$ at time $u$ 
+is $E[(F_{\delta(t,u)}(t;t, u) - f)^+ D_u]$.
+Find a formula for this of the form
+$E[(1/\delta - (1/\delta + f)D(t, u)e^\gamma)^+]D(0, t)$
+for an appropriate $\gamma$.
+({\em Hint: use the fact $E[E[X\mid\F_t]] = E[X]$.})
+
+\end{xca}
+
+\begin{xca}{(25 points)}
+Find $s$, $k$, $\sigma$, $r$, and $t$ (not necessarily the same as in
+exercise 1) such that the caplet value is given by the Black-Scholes/Merton
+put price $p(s, k, \sigma, r, t) = e^{-rt}E[(k - se^{(r - \sigma^2/2)t +
+\sigma B_t})^+]$.
+
+\end{xca}
+
+\begin{xca}{(25 points)}
+Find a closed form formula for $\Cov(F(t;t,u), D_t)/D(0,t)$,
+where $F(t;t, u) = (1/D(t, u) - 1)/(u - t)$.
+\end{xca}
+
+\begin{xca}{(25 points)}
+Use Tukhi and the Ho-Lee functions from the yc project in
+{\tt http://xll.codeplex.com}
+to verify your formula in exercise 3 for $t = 1$, $u = 1.25$, $r = 0.02$,
+$\sigma = 0.03$.
+
+\end{xca}
+
+\end{document}

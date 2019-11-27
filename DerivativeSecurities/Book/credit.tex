@@ -1,0 +1,49 @@
+\chapter{Credit Risk}
+
+\section{Introduction}
+Let $(R_t)_{t\ge0}$ be the short rate process. Define the stochastic
+discount $D_t = \exp(-\int_0^t R_u\,du)$. In the absence of arbitrage,
+the price, $(X_t)_{t\ge0}$, of a non cash flow paying instrument has
+the property $(X_t D_t)_{t\ge0}$ is a martingale. In particular $X_s =
+E[X_t D_t|\F_s]/D_s$ for $s < t$.
+
+Let $T$ be the random time a counterparty defaults and assume there
+is a constant, $R$, that specifies the fraction of recover on remaining
+asset value when default occurs. The value at time $s$ of a risky zero coupon
+bond paying 1 unit at $t$, assuming $T > s$, is
+\begin{equation*}
+D_{T,R}(s, t) = E[1_{\{T>t\}} D_t + RD(T, t)1_{\{s < T\le t\}} D_T|\F_s]/D_s.
+\end{equation*}
+If we assume the default time is independent of the short rate process then
+\begin{equation*}
+D_{T,R}(s, t) = D(s, t)E[1_{\{T>t\}} + R1_{\{s < T\le t\}}|\G_s],
+\end{equation*}
+where
+$(\G_t)$ is the filtration associated with the default time. Note
+that if $R = 1$,
+$D_{T,R}(s, t) = D(s, t)$.
+
+There is a canonical filtration associated with with any default time.
+Clearly any measurable set $E\subset\{T\le t\}$ should belong to $\G_t$
+and it is conservative to assume $\{T > t\}\in\G_t$.
+
+\begin{lemma}
+If $(\G_t)_{t\ge0}$ is the canonical filtration for the random time $T$,
+then $E[1_{\{T > t\}}|\G_s] = P(T > t)/P(T > s) 1_{\{T > s\}}$.
+\end{lemma}
+\begin{proof}
+If $E\subset\{T \le s\}$
+then $\int_E 1_{\{T > t\}}\,dP = 0$ and
+$\int_{T > s} 1_{\{T > t\}}\,dP = P(T > t) 
+= \int_{T > s} P(T > t)/P(T > s) 1_{\{T > s\}}\,dP$.
+Since the right hand side is $\G_s$ measurable, the lemma is proved.
+\end{proof}
+
+This result shows the the dynamics of a risky zero coupon bond are
+given by 
+\begin{eqnarray*}
+D_{T,R}(s, t) &=& D(s,t)(\frac{P(T>t)}{P(T>s)} + R(1 - \frac{P(T>t)}{P(T>s)})1_{\{T > s\}}\\
+	&=& D(s,t)((1 - R)\frac{P(T>t)}{P(T>s)} + R)1_{\{T > s\}}.
+\end{eqnarray*}
+%\section*{Notes}
+%http://www.maths.univ-evry.fr/pages_perso/jeanblanc/pubs/ejy99.pdf

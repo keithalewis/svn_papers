@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>Cumulative Distribution Functions</title>
+</head>
+
+<body>
+<h1>Cumulative Distribution Functions</h1>
+<p>
+Every random variable is completely deterimined by its <em>cumulative
+distribution function</em>.  A cdf is a function \(F:\R\to[0,1]\) that
+is non-decreasing, right continuous, \(\lim_{x\to-\infty}F(x) = 0\),
+and \(\lim_{x\to\infty}F(x) = 1\).  If \(X\) is a random variable then
+\(F_X(x) = P(X\le x) = P(\{\omega\in\Omega\colon X(\omega)\le x\})\)
+is a cdf.  Two random variables having the same cdf are said to have
+the same <em>law</em> since they are statistically indistinguishable.
+
+</p>
+<p>
+<span class="ex">Exercise.</span>
+<span class="it">
+Let \(X\) be a random variable and define \(F(x) = P(X\le x)\). If \(P\) is
+countably additive show \(F\) is a cdf.
+</span>
+</p>
+<p>
+<span class="ex">Exercise.</span>
+<span class="it">
+Let \(F\) be a cdf, define \(X\colon\R\to\R\) by \(X(x) = x\) and the
+probabity measure \(P\) by
+\(P((-\infty,x]) = \int_{-\infty}^x dF(x)\). Show \(F\) is the cdf of \(X\).
+</span>
+</p>
+<p>
+<span class="ex">Exercise.</span>
+<span class="it">
+Let \(F\) be a cdf and let \(U\) be uniformly distribute on \([0,1]\). Define
+\(X = F^{-1}(U)\). Show \(F\) is the cdf of \(X\).
+</span>
+</p>
+<p>
+The last exercise shows that the randomness of any random variable is
+contained in a uniformly distributed random variable. BTW, there is no
+such thing as a random random variable.
+
+</p>
+<span class="ex">Exercise.</span>
+<span class="it">
+If \(X\) has cdf \(F\) show \(F(X)\) is uniformly distributed on \([0,1]\).
+</span>
+</p>
+<p>
+Not every random variable can be defined by a <em>probability density
+function</em>, i.e., it is not always the case the cdf \(F(x) =
+\int_{-\infty}^x f(u)\,du\) for some integrable function \(f\). If so,
+\(f\) is the pdf. It can be shown the cdf comes from a pdf if and only
+if \(dF\) is absolutely continuous (\(\int_E dF = 0\) if \(m(E) = 0\)
+where \(m\) is Lesbegue measure).
+
+</p>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>
+Homework 2
+</title>
+
+</head>
+<body>
+
+<h1>
+Math 628 Sp12 Homework 2
+</h1>
+<h4>
+Due Feb. 9, 2012 at 6:40PM
+</h4>
+<p>
+Your job is to provide a convincing argument that what you claim
+is correct.
+</p>
+
+<p>
+<span class="ex">Exercise 1.</span>
+<span class="it">
+In the one period model described in the FTAP reading, show
+\(\Xi_0\cdot X_0 = E[\sum_{j=1}^n A_j \Pi_j]\), where 
+\(A_j = \Xi_{j-1}\cdot(X_j + C_j) - \Xi_j\cdot X_j\), \(0\le j\le n\) and
+\(\Xi_{-1} = 0 = \Xi_n\).
+</span>
+</p>
+
+<p>
+<span class="ex">Exercise 2.</span>
+<span class="it">
+Update
+</span>
+<code>fmspwflat</code>
+<span class="it">
+and
+</span>
+<code>xllpwflat</code>.
+<span class="it">
+Add swaps USSW21, USSW22,..., USSW29 and linearly interpolate
+the swap par coupons from USSW20 and USSW30 in
+</span>
+<code>LIBOR.xlsx</code>.
+<span class="it">
+Do you think that is an improvement?
+</span>
+(Hint: you can use the function <code>ARRAY.INTERVAL</code> to
+linearly interpolate.)
+</p>
+
+<p>
+<span class="ex">Exercise 3.</span>
+<span class="it">
+Write an Excel add-in function
+</span>
+<code>PWFLAT.FORWARD.RATE</code>
+<span class="it">that computes the forward rate
+given a handle to a
+</span>
+<code>pwflat::forward_curve</code>
+<span class="it">
+and a handle to a
+</span>
+<code>forward_rate_agreement</code>.
+</p>
+
+<span class="ex">Exercise 4.</span>
+<span class="it">
+Write
+</span>
+and document
+<span class="it">
+an add-in function
+</span>
+<code>PWFLAT.CAPLET.VALUE</code>
+<span class="it">
+that calculates the present value
+of a caplet
+given a handle to a
+</span>
+<code>pwflat::forward_curve</code>,
+<span class="it">
+a handle to a
+</span>
+<code>forward_rate_agreement</code>,
+<span class="it">
+a volatility, and a strike. Assume the risk-neutral distribution
+of the forward is \(F = f\exp(-\sigma^2u/2 + \sigma B_u)\), where
+\(f\) is the forward rate, \(\sigma\) is the (Black-Scholes/Merton)
+volatility and \(B_u\) is Brownian motion at effective time \(u\).
+</span>
+(Hint: You are computing the forward rate \(F_{\delta(u,v)}(t;u,v)\)
+where \(t\) is today, \(u\) is the effective date, and \(v\) is
+the termination date of the underlying forward.)
+</p>
+
+</span>
+</p>
+
+</body>
+</html>
+

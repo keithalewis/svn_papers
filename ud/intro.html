@@ -1,0 +1,37 @@
+This slim pamphlette describes a unified approach to pricing, hedging,
+and evaluating the risk of derivative securities.  There is only one
+model for a derivative securitie, a vector-valued stochastic process. It
+is simply a matter of how you parameterize it. The goal of this
+book is to make that claim obvious to you.
+
+Before diving into the mathematics it is important to have some
+picture of the who, what, when and where of the financial world.
+The first chapter describes the various market participants,
+the types of instruments involved, and the mechanics of transactions.
+Fischer Black was a fan of defining vocabulary and so am I. First
+and foremost a quant needs to be able to communicate effectively
+with the business people he or she interacts with.
+
+Chapter 2 introduces the one-period model and the Fundamental Theorem
+of Asset Pricing in that context. Arbitrage is always defined relative
+to a model and arbitrage free models have constraints on the dynamics of
+prices, as Black and Scholes showed in 1973. The theorem is then used to
+prove basic facts such as the cost-of-carry formula. One unique feature of
+our approach is that it can be used to find an arbitrage if one exists.
+
+In chapter 3 the multi-period model is defined and the FTAP for it is
+proved using relatively elementary mathematics. By using finitely additive
+measures instead of countably additive the application of the Hanh-Banach
+theorem, as first used by Stephen Ross in 1978, is greatly simplified.
+The model is used to understand exactly how forwards and futures differ
+and to indicate the pivotal role of the short rate process in fixed
+income derivatives.
+
+Continuous time models are discussed in chapter 4 and the classical
+Black-Scholes/Merton model is rigourously deduced. L\'evy models
+are introduced and...
+
+The only way to really learn mathematical finance is to implement models
+using software. No business person has ever paid me to write a paper. They
+want something they can use to make decisions. We will use C++ and Excel
+since they are the most common tools used by quants and traders.

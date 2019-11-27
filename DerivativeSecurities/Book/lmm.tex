@@ -1,0 +1,51 @@
+
+\chapter{LIBOR Market Model}
+
+\section{Introduction}
+The LIBOR Market Model was developed at Bankers Trust in the early
+1990's. It has the advantage of having parameters that correspond closely
+to market data. It has the disadvantage that there is no direct formula
+for the underlying short rate process.
+
+\section{The Model}
+Let $t_0$ be today and $t_1$, $t_2$, be the IMM dates (3rd Wednesday
+of months divisible by 3: March, June, September, and December.)
+going out to the longest maturity 3 month
+Eurodollar futures being used to construct the model. Let $\Phi_j$ be the
+`price' at time $t_0$ of the Eurodollar futures expiring at $t_j$,
+let $\sigma_j$ be the ATM Black-Scholes volatility corresponding
+to the $j$-th Eurodollar futures, and let $\theta_j$ be arbitrary
+parameters. The LIBOR Market Model specifies the dynamics of the 3-month
+Eurodollar futures: $\Phi_j(t) = \Phi_j \exp(-|\Sigma_j|^2t/2 + \Sigma_j
+\cdot B_t)$, where $\Sigma_j = \sigma_j(\cos\theta_j, \sin\theta_j)$,
+and $B_t = (B_t^1, B_t^2)$ is 2-dimensional Brownian motion.
+
+The values for $\Phi_j$ are $F(t_0; t_j, t_j + 3months)$ minus the
+Eurodollar convexity. (Typically proportional to $t_j^2$.) Note that
+for each $j$, $\Phi_j(t)$ is geometric Brownian motion so $\sigma_j$
+is just the Black-Scholes implied volatility corresponding to, say,
+the ATM caplet corresponding to Eurodollar $j$.
+
+The values of $\theta_j$ are determined by swaptions or mid-curve options
+by calibration. A particularly simple parametrization is to assume
+$\theta_j = \alpha t_j$ for some $\alpha$ and just fit one swaption
+with effective date in the middle of the curve on a swap having
+maturity close to the length of the spot curve.
+
+\section{Stochastic Discount}
+So how does one compute the stochastic discount?  One method
+is $D_{t_j} = D(t_0, t_1)/((1 + \Phi_1(t_1)\delta_1)\cdots (1 +
+\Phi_{j-1}(t_{j-1})\delta_{j-1}))$, just use a fixed rate up to $t_1$
+and compound the forwards at settlement. It is also not a correct
+method.
+
+A better method is to use a Ho-Lee style short rate over $t_0$
+to $t_1$ using the same volatility as the front caplet then
+bootstrap a yield curve using the forwards at settlement so you
+can sample the stochastic discount at any point in time.
+
+This tends to underestimate the volatility.
+
+\section{Extensions}
+One possible extension is to permit more general processes than
+geometric Brownian motion, such as L\'evy processes.

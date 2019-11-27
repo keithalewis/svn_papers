@@ -1,0 +1,56 @@
+\documentclass[11pt,fleqn]{amsproc}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 1}
+\author{Due 7:10PM, 2 Feb 2009}
+
+\maketitle
+
+\begin{xca}{(20 points)}
+If today's EUR/USD exchange rate is $1.3$, the one year USD zero price is 99,
+and the one year EUR zero price is 98, what is today's one year forward 
+EUR/USD exchange rate assuming no arbitrage and perfect liquidity?
+\end{xca}
+
+\begin{xca}{(20 points)}
+Let $D(t; u, v)$ denote the price at time $t$ of a zero coupon bond
+effective at time $u$ and terminating at time $v$. I.e.,
+a contract for the sequence of cash flows $-D(t; u, v)$ at time 
+$u$ and $1$ at time $v$, has zero price at time $t$.
+Show $D(t; u, v) D(t; v, w) = D(t; u, w)$ for $t\le u\le v\le w$
+assuming no arbitrage and perfect liquidity.
+\end{xca}
+
+\begin{xca}{(30 points)}
+Use the fact 
+\begin{equation*}
+f(x) = f(a) + f'(a)(x - a) + \int_0^a (k - x)^+ f''(k)\,dk 
++ \int_a^\infty (x - k)^+ f''(k)\,dk
+\end{equation*}
+for $f\colon[0,\infty)\to\R$ twice 
+differentiable to find a portfolio of puts with strikes less than or equal 
+to 100 and calls with strikes greater than or equal to 100 that has a piecewise 
+linear and continuous payoff taking on the values $(x - 100)^2$ at $x = 0$, $10$, \dots, $200$ and having $f'(x) = 200$ for $x \ge 200$. {\rm [Hint: use put call parity to get rid of the futures at $x = 100$.]}
+\end{xca}
+
+\begin{xca}{(30 points)}
+Let $c(s, k, t)$ be the price of a European call on a non dividend paying stock with current price $s$, strike $k$, and maturity $t$. Show that in the absence of arbitrage and assuming perfect liquidity
+\begin{enumerate}
+\item $c(s, k, t) \le s$.
+\item $0 \le c(s, k, t) - c(s, k', t) \le k' - k$ when $k < k'$.
+\item $c(s, k, t) \le c(s, k, t')$ when $t < t'$.
+\end{enumerate}
+\end{xca}
+
+\end{document}

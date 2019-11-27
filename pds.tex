@@ -1,0 +1,95 @@
+\documentclass[fleqn]{amsart}
+\usepackage{amssymb,amsmath,amsthm,hyperref}
+\def\Var{\mathop{\rm Var}}
+\def\Cov{\mathop{\rm Cov}}
+\def\ker{\mathop{\rm ker}}
+\def\ran{\mathop{\rm ran}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\onehalf}{\frac{1}{2}}
+
+\newtheorem{definition}{Definition}[section]
+%\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
+
+\title{Pricing Derivative Securities}
+\author{Keith A. Lewis}
+\email{kal@kalx.net}
+\address{KALX, LLC \tt{\url{http://kalx.net}}}
+
+\begin{document}
+\maketitle
+
+\begin{section}{The Game Plan}
+
+The (so-called) risk-neutral approach to pricing derivative securities
+(without cash flows) consists of specifying a vector-valued stochastic
+process $(X_t)_{0\le t\le T}$ for market instruments,
+and finding a scalar stochastic
+process $(\Pi_t)_{0\le t\le T}$ of positive {\em deflators} such that
+$(X_t\Pi_t)_{0\le t\le T}$ is a martingale. If there is a self-financing
+strategy $(\Xi_t)_{0\le t\le T}$ such that $F_T = \int_0^T \Xi_s\cdot
+\,dX_s$, then the cost of setting up the initial hedge is $\Xi_0\cdot
+X_0 = E[F_T\Pi_T]$. To find $\Xi_0$ we can compute
+the derivative with respect to $X_0$ of the right-hand side.
+This is the Black-Scholes/Merton delta hedge.
+
+\end{section}
+
+\begin{section}{Ito Processes}
+This section contains the bare bones facts you need to know about
+Ito processes. The {\em stochastic differential equation}
+$dX = \mu\,dt + \sigma\,dB$ with $X_0 = x_0$ is the same
+as saying $X_t = x_0 + \int_0^t \mu\,ds + \int_0^t \sigma\,dB_s$
+where the second integral is an {\em Ito Integral}. Such an
+$(X_t)_{t\ge0}$ is called an {\em Ito Process}.
+
+The {\em Ito Lemma} states that if $(X_t)_{t\ge0}$ is an Ito process and
+$f\colon\R\times\R\to R$ is sufficiently smooth, then $Y_t = f(t, X_t)$
+is also an Ito process and $dY_t = (f_t + \mu f_x + \onehalf\sigma^2
+f_{xx})\,dt + \sigma f_x\,dB$.	Here $f_t = \partial f/\partial t$,
+$f_{xx} = \partial^2 f/\partial x^2$.  If one uses the {\em Ito Calculus}
+$dt\,dt = dt\,dB = dB\,dt = 0$ and $dB\,dB = dt$, then one can derive
+this formula as follows using Taylor series by \begin{eqnarray*} df(t,
+X) &=& f_t\,dt + f_x\,dX + \onehalf f_{xx} (dX)^2\\ &=& f_t\,dt +
+f_x\,(\mu\,dt + \sigma\,dB)
+	+ \onehalf f_{xx} (\mu\,dt + \sigma\,dB)^2\\
+&=& (f_t\,dt + f_x \mu + \onehalf f_{xx} \sigma^2)dt + f_x\sigma\,
+dB,\\
+\end{eqnarray*}
+since $(\mu\,dt + \sigma\,dB)^2 = \sigma^2\,dt$
+by the Ito calculus.
+
+Whenever $\mu = 0$, $(X_t)_{t\ge0}$ is a martingale. If we take $\mu(t,x)
+= \sigma x$ and let $dS_t = \mu(t,S_t)\,dB_t$, $S_0 = 1$, then $dS/S =
+\sigma\,dB$. By Ito's formula $d\log S = (1/S)\,dS - \onehalf (1/S^2)
+(dS)^2 = \sigma\,dB - \onehalf\sigma^2\,dt$. Integrating we get $\log S_t
+= \sigma B_t - \onehalf\sigma^2 t$ so $S_t = e^{\sigma B_t - \sigma^2t/2}$
+is a martingale.
+
+\end{section}
+
+\begin{section}{The Black-Scholes/Merton Model}
+The B-S/M model specifies a bond and a stock price process $X_t = (\rho
+e^{rt}, se^{\mu t + \sigma B_t})$ where $r$ is the risk-free (funding)
+rate and $\rho$, $s$, $\mu$, and $\sigma$ are parameters. If we take the
+deflator $\Pi_t = e^{-rt}$ then clearly the bond process deflates to
+a martingale.
+
+\begin{exercise}
+Show $se^{\mu t + \sigma B_t} e^{-rt}$ is a martingale if and only
+if $\mu = r - \sigma^2/2$.
+\end{exercise}
+
+Sticking to the game plan gives the price of a call with strike
+$K$ expiring at time $T$ as $C(K,T) = e^{-rt}E[(S_T - K)^+]$.
+
+\end{section}
+
+\end{document}

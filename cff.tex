@@ -1,0 +1,181 @@
+\documentclass[12pt,letterpaper,fleqn]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{lmodern}
+\usepackage{kpfonts}
+\DeclareMathOperator{\sgn}{sgn}
+
+\title{Cash Flow Framework}
+\author{Keith A. Lewis}
+\date{\today}
+\begin{document}
+\maketitle
+This document describes a unified approach to describing all securities and
+derivative instruments and their basic accounting. The term {\em instrument}
+is used for both primary securities and their derivatives.
+
+Mathematical notation for accurately describing the dependencies between
+primary securities and their derivative is introduced and used for stocks, bonds, convertible
+bonds, foreign exchange, commodities, options (including Bermudan and American),
+and in fact all known instruments.
+
+Section 1 defines transactions for recording historical exchanges between counterparties. 
+Section 2 specifies {\em contracts} used to define derivatives securities. 
+Section 3 introduces {\em models} for primary securities. 
+Section 4 uses trades and positions to specify derivative securities
+The last section describes
+the interaction between models and valuation.
+
+\section{Transaction}
+A {\em transaction} is an exchange at a time between a {\em buyer}
+and a {\em seller}',
+\(\tau = \langle t;a,i,c;a',i',c'\rangle\),
+where \(t\) is the time of the transaction,
+\(a\) represents the {\em amount}, 
+\(i\) the {\em instrument}, 
+and \(c\) the {\em counterparty}. 
+As far as mathematical models go, this is
+quite accurate. Account statements and order blotters contain these items.
+There are also commissions such as brokers fees where a better name for
+seller might be {\em intermediary}.
+
+Buyers play an active role whereas sellers play a passive role, at least
+until after the initial transaction. Buyers are price takers and sellers
+are price makers. Broker-dealers play both roles.
+
+Transactions determine {\em profit and loss}. Given
+transactions \(\{\tau_j\}\) define
+\begin{align*}
+A_t(i) &= \sum_{t_j = t, i_j = i} a_j
++ \sum_{t_j = t, i_j' = i} a_j'\\
+B_t(i) &= \sum_{s \le t} A_s(i)\\
+\end{align*}
+where we assume the counterparties \(c_j = c\) and \(c_j' = c'\) are fixed,
+something easy to undo.
+The first quantity is the {\em account} of how much in instrument \(i\)
+the buyer transacted at time \(t\). The second is the current {\em balance}
+in instrument \(i\) at time \(t\).
+
+\section{Contracts}
+A {\em contract} specifies three processes \((C_t)\), \((C^<_t)\),
+and \((C^>_t)\) that are non-zero at a finite number of times. The first is
+the set of non-optional cash flows, the second is the set of buyer determined
+cash flows and the third is the set of seller determined cash flows.
+
+If the buyer holds amount \(a\) at time \(t\) they receive \(aC_t\) from
+the counterparty. The buyer has the right to specify how much of
+\(C^<_t\) they want depending on how much they hold, and the seller
+can decide how much of \(C^>_t\) depending on the outstanding position.
+
+Unlike transactions that simply record historical facts, contracts depend on
+what occurs in the future. This is modeled as a {\em sample space} \(\Omega\).
+The information available at time \(t\) is modeled as an {\em algebra} of
+subsets of \(\Omega\). Subsets of \(\Omega\) are {\em events} and in the real
+world people know if two events have both happened (set intersection), 
+whether one or the other event happened (set union), and if an event didn't
+happen (set complement with respect to \(\Omega\)). An algebra is just a collection
+of subsets that is closed under these operations.
+
+The processes are {\em adapted} to the algebras in that they can only depend
+on the information available at the time of the cash flow.
+Let \(\mathcal{A}_t\) be the algebra of information available
+at time \(t\), and 
+let \(\mathcal{A}^<_t\) and \(\mathcal{A}^>_t\) 
+be sub-algebras indicating the information the
+buyer and seller can decide, respectively, at time \(t\).
+The mathematical definition of adapted is that \(\{C_t = c\}\) is
+a set in the algebra \(\mathcal{A}_t\) for any number \(c\).
+
+\subsection{Notes}
+The buyer's algebra is not available to the seller, and vice versa. Modulo insider trading.
+
+\section{Models}
+A {\em model} of market prices is a function 
+\(X\colon \mathbf{T}\times\mathbb{R}\times\mathbf{I}\times\mathbf{C}
+\times\mathbf{I}\times\mathbf{C}\to\mathbb{R}\) where \(\mathbf{T}\) is the set of {\em trading times},
+\(\mathbf{I}\) is the set of available
+instruments, and \(\mathbf{C}\) is the set of counterparties. It represents the
+notion that the buyer has the transaction
+\(\langle t;a,i,c;-aX(t;a,i,c;i',c'),i',c'\rangle\) available at time \(t\).
+Classical models assume 
+\(X(t;a,i,c;i',c') = X(t,i)\) where \(i'\) is the base currency.
+A simple model incorporating a bid-ask spread is
+\(X(t;a,i,c;i',c') = X(t,i)(1 + \epsilon\sgn(a))\).
+
+Fix up the sample space being implicit!!!
+
+\section{Trades and Positions}
+A buyer specifies a finite number of {\em trades} 
+\(\Gamma_{t_k}\) and \(\Gamma^<_{u_k}\)
+while a seller specifies \(\Gamma^>_{v_k}\). If we let
+\(\Gamma_t = \Gamma_{t_k}1(t = t_k)\) and similarly
+for the optional cash flows we can
+define the {\em position} \(\Xi_t = \sum_{s < t}\Gamma_s
+-\Gamma^<_s - \Gamma^>_s\).
+Note \(\Xi\) is piecewise constant and left continuous. Positions
+are not executed immediately.
+Contracts can specify constraints on \(\Gamma^<\) and/or \(\Gamma^>\).
+E.g., \(0\le \Gamma^<_t\le\Xi_t\) -- you can't exercise options you
+don't own.
+The account process is 
+\[
+A_t(i) = (\Xi_t - \Gamma^<_t - \Gamma^>_t)C(t) - \Gamma_t X_t + \Gamma^<_tC^<_t + \Gamma^>_tC^>_t
+\]
+You get paid the fixed coupons on your current position, pay for your new trades,
+and receive option cash flows based on your and the issuers exercise choices. Note
+this model does not make any assumptions about optimal exercise, it only tries to
+faithfully represent the relevant real-world possibilities.
+
+An {\em elementary trade} is a pair of transactions of the form
+\(\langle t;\Gamma,i,c;-\Gamma X,i',c'\rangle\), 
+\(\langle u;-\Gamma;i,c;\Gamma X',i',c'\rangle\)
+where \(t<u\), \(X\) is the price of getting in, and \(X'\) is the price of
+getting out. The buyer's profit/loss on the trade is \(B_u(i)\) in units
+of \(i'\) at time \(u\). If there are no cash flows in the interval
+then \(B_u(i) = \Gamma(X' - X)\).
+Typically \(i'\) is the {\em base currency}.
+
+{\em Marking to market} is done by specifying a model that can convert every
+instrument to a base currency and trading out of every open position into
+that currency. The formulas for the account and balance still hold if we
+consider positions and prices to be vectors indexed by \(i\) and replace scalar
+products with inner products.
+
+A {\em closed out} trading strategy is one where \(\Xi_t\) is zero in all
+indices except for the base currency after some point in time. 
+We say {\em arbitrage} exists if there is a closed out trading strategy such that
+\(A_0 > 0\) and \(A_t \ge 0\) for all \(t\).
+
+\section{Bonds}
+Schematically, a bond has a price \(P\) at time \(t_0\) and
+pays coupon \(c\) at \(t_j\), \(0<j\le n\) plus principal 1 at \(t_n\).
+In the notation above, \(X_0 = P\) and \(C_j = c\) for \(0<j<n\) and \(C_n = 1 + c\).
+
+If the bond is callable at time \(u < t_n\) for price \(p\), the issuer
+has that cash flow available. The seller's sample space is \(\Omega^> = \{u,\infty\}\)
+representing calling at time \(u\) or not. The algebras associated
+with that are \(\mathcal{A}_t = \{\{u,\infty\}\}\) if \(t < u\)
+and \(\mathcal{A}_t = \{\{u\},\{\infty\}\}\) if \(t\ge u\). (Recall a finite
+algebra is specified by a {\em partition} of the sample space consisting
+of its {\em atoms}.) 
+The non-optional cash flows are 
+\(C_j = c1(t_j < \omega) + 1(j = n, t_n < \omega)\) and the seller determined
+cash flows are
+\(C^>_j = p1(t_j = \omega)\).
+
+If the bond is putable at time \(v\) for price \(q\), the buyer
+has that cash flow available. Their sample space is \(\Omega^< = \{v,\infty\}\)
+representing returning the bond to the issuer at time \(v\) or not. The
+algebras and cash flows are similar to the above.
+
+More generally, bonds can have call and put schedules: \(\{u_k,p_k\}\) and
+\(\{v_l,q_l\}\). The seller's sample space is \(\Omega^> = \{u_1,...,\infty\}\)
+with algebras \(\mathcal{A}^>_t = \cup_{u_k<t}\{\{u_k\}\}\cup\{\{u_k\ge t\}\}\)
+and similarly for \(\mathcal{A}^<_t\). The non-optional cash flows are
+\(C_j = c1(t_j < \min\{\omega^<,\omega^>\}) + 1(j = n, t_n < \min\{\omega^<,\omega^>\})\),
+the seller cash flows are \(C_j^> = p_j1(t_j = \omega^>)\) and the buyer cash
+flows are \(C_j^< = q_j1(t_j = \omega^<)\).
+
+\end{document}

@@ -1,0 +1,26 @@
+p { text-align: justify; line-height: 1.2; }
+.math, i.mi, .math td, .math th {
+	font-family: freeserif, "times new roman", serif;
+	white-space: nowrap;
+}
+.math, i.mi { word-spacing: -0.2ex; }
+span.math { padding-left: 0.15ex; padding-right: 0.15ex }
+div.math {
+	margin-left: 2em; width: 100%; word-spacing: normal;
+}
+td.lceil {
+	border: solid thin black;
+	border-right: none;
+	border-bottom: none;
+}
+td.lbar {
+	border: solid thin black;
+	border-top: none;
+	border-right: none;
+	border-bottom: none;
+}
+td.lfloor {
+	border: solid thin black;
+	border-right: none;
+	border-top: none;
+}

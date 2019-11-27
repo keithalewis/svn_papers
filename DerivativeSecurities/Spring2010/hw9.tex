@@ -1,0 +1,68 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+\renewcommand{\ker}{\mathop{\rm{ker}}}
+\newcommand{\ran}{\mathop{\rm{ran}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 9}
+\author{Due 7:10PM, 12 April 2010}
+
+\maketitle
+
+
+\begin{xca}{(30 points)}
+Let $f = F(0;t,u)$ be the forward rate now and $F = F(t;t,u)$
+be the forward rate expiration $t$ over the interval $[t,u]$.
+In risk-neutral models, the futures rate at time zero is
+$E[F]$. Find a formula for $E[F] - f$ involving $D_u$, the
+stochastic discount to time $u$, and determine
+under what conditions this difference is positive.
+\end{xca}
+
+\begin{xca}{(30 points)}
+For any $\rho\in[-1,1]$ there exists $\theta\in[0,\pi]$ such
+that $\rho = \cos\theta$ so we can parametrize the LMM as
+$dF^j_t/F^j_t = \sigma_j(\cos\theta_j\,dB^1_t + \sin\theta_j\,dB^2_t)$
+where $\sigma_j$ and $\theta_j$ are constants and $B^1$, $B^2$
+are independent standard Brownian motions.
+\begin{enumerate}
+\item Show $(\cos\theta)B^1_t + (\sin\theta)B^2_t$ is a standard
+Brownian motion. You may assume a linear combination of independent
+Brownian motions is also a Brownian motion.
+\item Find a simple formula for $\Cov(dF^j_t/F^j_t,dF^k_t/F^k_t)$.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}{(40 points)}
+Consider the short rate model $R_t = r + \sigma B_t$, where $r$
+and $\sigma$ are constants and $B_t$ is standard Brownian motion.
+\begin{enumerate}
+\item Show $\int_s^t B_u\,du = tB_t - sB_s - \int_s^t u\,dB_u$.
+\item Using the fact $e^{-\int_0^t\theta(u)\,dB_u - \int_0^t\theta^2(u)/2\,du}$
+is a martingale, find a closed form formula for
+$D(s,t) = E[D_t/D_s|\F_s]$ where $D_t = e^{-\int_0^t R_u\,du}$ is
+the stochastic discount.
+\end{enumerate}
+\end{xca}
+
+\end{document}

@@ -1,0 +1,225 @@
+\chapter{Derivative Securities} 
+\label{ds} 
+
+% how to transfer risky future cash flows to certain cash flows today.
+% contract to pay amount equal to price of Goog one year from today
+% zero coupon bond is extreme example
+
+% the price of a futures is zero
+
+\section{Introduction}
+%A {\em derivative security} is a contract between two counterparties that
+%specifies an exchange of cash flows. A {\em cash flow} is a quantity
+%of an instrument at a given time. These notes discuss the theory of valuing,
+%hedging, and managing the risk of derivative securities.
+%
+Derivative Securities are tools for shaping risk. Just as with any tool,
+they can be used well or poorly, but in today's world they are 
+used routinely. Futures, swaps and options on stocks, interest
+rates and foreign exchange now trade in huge, liquid markets and are
+used as a matter of course by most large companies for managing
+their risk.
+
+It didn't used to be that way. Exchanges that match speculators with risk
+averse customers have been around for quite some time, but never with
+the size, transparency, and speed of execution that currently exists.
+The Chicago Board Options Exchange only began trading options on stocks
+in 1973.  One of the triumphs of financial engineering in the 70's and
+80's was the explosive growth of exchanges and the standardization of many
+over-the-counter markets for derivative securities.
+
+%International Securities Exchange traded 4 millon contracts per day
+%in 2008.
+%http://www.ise.com/assets/documents/AboutISE/PressRelease/CompanyNews/2009/20090102$ISE_Reports_Record_Options_Volume_for_2008.pdf
+
+%In 2007 the Bank for International Settlements reported
+%an notional of $xxx trillion in FX options traded.
+
+\section{Definitions}
+A {\em derivative security} is a contract between a buyer and
+a seller to make a sequence of transactions.
+A {\em transaction} is an amount received by the buyer from the seller
+and and an amount paid by the buyer to the seller on a specified date.
+An {\em amount} is a quantity and unit
+where the {\em unit} can be cash in a given currency,
+a stock, bond, or commodity. It is also possible to have
+derivatives based on an index, or any agreed upon number.
+There are derivatives based on the weather, the first such
+depended on the temperatures recorded at a particular
+weather station in New York's Central Park.
+
+\section{Trading}
+Derivative securities can be {\em exchange traded} or {\em
+over-the-counter} (OTC). Exchanges anonymously match counterparties
+whereas OTC derivatives are contracts directly between two
+counterparties. Both employ mechanisms to reduce the risk of the
+transactions.
+
+Exchanges use margin accounts to mitigate risk. Every client is required
+to post an initial margin. At regular intervals, usually daily, the
+value of unwinding all positions under current market conditions is
+computed, that is, {\em marked to market}.  As this value changes from the
+initial mark to market, the margin is adjusted. The most common method
+charges/credits the margin by this difference divided by a constant
+factor, the {\em leverage}.
+
+Typical values of leverage range from 5 on single stock futures
+to 100 or more on foreign exchange spot contracts.
+
+Marking to market is trivial to do for an exchange. They simply
+use the current price of the instrument on the exchange. Since
+most products trade many times per day, or even second, there
+is little uncertainty about the cost of unwinding the position.
+
+OTC derivatives are usually purchased by companies that wish to reduce
+the uncertainty in their future cash flows.  Many OTC derivatives, such as
+interest rate swaps, are standardized and quoted with very tight spreads,
+however it is not uncommon for sophisticated derivative transactions to
+take months to negotiate.
+
+The customer typically posts initial {\em collateral} to the bank
+with which they do the transaction, similar to how exchanges require
+margin. After executing the contract, market conditions can affect the
+value of the cash flows that have not yet been exchanged. Marking to
+market usually requires an analytic model developed by the bank and
+the rules for collateral adjustments are more involved than those for
+exchanges.
+
+\section{Assumptions}
+The Black-Merton-Scholes theory relies on market traded instruments to
+value and hedge derivative securities.  As with any theory, there are
+assumptions that must hold for the theory to apply.  One assumption
+is that markets are perfectly liquid: trades occur instantaneously at
+exactly the specified price, no matter the quantity. In particular prices
+are assumed to be infinitely divisible.  An assumption that is required
+to get a unique price is that markets are complete: the derivative can
+be replicated by hedging using market instruments. Additionally, the
+theory assumes there is a riskless asset that can be bought or sold in
+any quantity in order to finance the replicating strategy.
+
+This section discusses how reality varies from the assumptions behind
+the theory of Derivative Securities.
+
+\subsection{Spread}
+The standard theory assumes trades occur instantaneously at exactly
+the specified price, no matter the quantity.  As anyone that has ever
+traded knows, prices are quoted at the {\em bid} and {\em ask/offer}
+price. When a market for a security exists, {\em market makers} indicate
+at what price they are willing to buy the security, the bid, and at what
+price they are willing to sell the security, the ask or offer. In the
+absence of arbitrage, the bid is less than the ask price, otherwise
+a counterparty could buy at the ask, sell at the bid and pocket the
+difference.  Market makers make this spread on each matching buy and sell
+transaction. The greater their {\em volume} of trades, the more they make.
+
+\subsection{Quantity}
+Trades also involve a quantity on number of shares/contracts. Typically,
+the larger the quantity a market maker is asked to trade, the wider the
+bid/ask spread they will quote in order to lay off the risk involved in
+taking on a one side of a large position.
+
+Unlike market makers, exchanges typically match up buyers and sellers and
+do not take the opposite side of any trade. They make money based on the
+bid/ask spread and perhaps commissions or other fees. They maintain an
+{\em order book} containing {\em limit orders} and match them with {\em
+market orders}. A limit order is an agreement to buy or sell an instrument
+at a given price and quantity. Market orders specify a quantity to sell
+(buy) at the highest (lowest) bid (ask) price of the limit orders on
+the book.  While market orders get executed within seconds, there is no
+guarantee they will get done at the quoted price. Other market orders may
+arrive earlier and soak up existing limit orders, or limit orders might
+be canceled.  Limit orders are guaranteed to be executed at the specified
+level, but there is no guarantee when they will be executed, if ever.
+
+\subsection{Completeness}
+As the market aphorism goes, ``Hedge when you can, not when you have
+to.''  Another assumption made in the standard theory that is required
+to get a unique price is that markets are complete: the derivative can
+be replicated by hedging using market instruments. This never happens,
+it is just a question of how bad the hedge is.
+
+Unfortunately, the theory does not have much to say about this
+question. Monte Carlo simulation for a 3 month, 20\% volatility
+at-the-money option with daily rehedging has an average hedging error of
+around 4\%. This is much larger than the bid/ask spread in the option
+price. Fortunately the hedging errors tend to be normally distributed
+and unbiased so when running a large option book there is significant
+diversification.
+
+\subsection{Funding}
+The assumption there is a riskless asset that can be bought or sold in
+any quantity at one price is not true. Typically the rate that traders
+are quoted from the funding desk is a short term LIBOR rate plus a spread
+of approximately 30 basis points.  There are also fixed limits imposed
+by risk management on how much they are allowed to borrow.
+
+%The funding desk in turn uses repurchase agreements to fund the traders.
+%[...more about repos...]
+
+If you are using your credit card to fund your trading, then your
+so-called risk-free rate is whatever your credit card company charges
+you. The standard theory does not allow two different risk-free rates,
+but in the real world there are barriers that make it impossible to
+exploit the apparent arbitrage.
+
+This is related to the fact that the standard theory does not explicitly
+take into account different counterparties having different levels of
+access to markets. An institutional investor gets better quotes than a
+day trader sitting in front of his computer at home.
+
+\section{Caution}
+When Black, Merton, and Scholes derived their famous equation for pricing
+options, they used it to identify mispriced options, and all of them lost
+money! (Black claims to have lost the least.) Their `mispriced' options
+were reflecting the fact that the market had priced in information about
+future stock movements that their theory did not take into account.
+
+To his dying day, Fischer Black believed markets were efficient, even
+if they were sloppy to within a factor of 2 in pricing.  Recent events
+notwithstanding, the price of a futures contract is still zero so at
+least one market is efficient.
+
+%Joe Doob's optional stopping theorem is a rigourous version
+%of the notion that it is not possible to beat the market.
+
+
+%\section{Examples}
+%
+%\subsection{European Options}
+%A {\em forward} contract specifies an exchange of underlying
+%for a fixed amount, the {\em forward}, at a specific future date, 
+%the {\em expiration}.
+%
+%A {\em futures} is closely related to a forward contract and
+%is usually traded on an exchange. Like a forward, a futures 
+%has an underlying and an expiration. The exchange guarantees
+%that on expiration the futures ``price'' will equal the price
+%of the underlying. Prior to that date the ``price'' is
+%determined by the market that is provided by the exchange to
+%its clients.
+%
+%The price of a futures contract is always zero. It costs nothing
+%to enter the contract. Each day as the quoted ``price'' moves
+%your account is credited/debited by the change in the ``price''.
+%
+%A {\em call option} is the right, but not the obligation to
+%exchange the underlying at a fixed amount, the {\em strike}
+%at a given expiration.
+%
+%A {\em digital option} ...
+%
+%% digital vs binary european vs american
+%
+%More generally, an option can pay any function of the underlying
+%at expiration. We will see later how to combine calls, puts,
+%and digital options to reprice any piecewise linear payoff function.
+%
+%A {\em barrier option} ...
+%
+%\subsection{American Options}
+%
+%\subsection{Bermudan Options}
+%
+%\subsection{Exotic Options}
+%
+%\subsection{Variance Swaps}

@@ -1,0 +1,64 @@
+\documentclass[11pt,fleqn]{amsproc}
+\usepackage{textcomp}
+
+\newcommand{\R}{{\bf R}}
+\newcommand{\Var}{\mathop{\rm{Var}}}
+\newcommand{\Cov}{\mathop{\rm{Cov}}}
+
+%\newtheorem{prob}{Problem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+\newtheorem{xca}{Exercise}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\begin{document}
+
+\title{Derivative Securities Homework 3}
+\author{Due 7:10PM, 23 Feb 2009}
+
+\maketitle
+
+\begin{xca}{(30 points)}
+Define the wedge product of vectors, $v\wedge w$, by $v\mapsto v\wedge w$ and
+$w\mapsto v\wedge w$ are linear, and $v\wedge v = 0$.
+\begin{enumerate}
+\item Show $v\wedge w = -w\wedge v$ for any vectors $v$, $w$.
+\item Show $(a e_1 + b e_2)\wedge (c e_1 + d e_2) = (ad - bc)e_1\wedge e_2$ for
+vectors $e_1$, $e_2$ and scalars $a$, $b$, $c$, $d$. (Note $ad - bc$ is the
+area of the parallelogram defined by the two vectors.)
+\item Let $e_1$, $e_2$, $e_3$ be a basis for a 3-dimensional vector space.
+Define a linear function by $(e_1\wedge e_2)^\perp = e_3$, $(e_2\wedge e_3)^\perp = e_1$,
+and $(e_3\wedge e_1)^\perp = e_2$. 
+Let $u = u_1 e_1 + u_2 e_2 + u_3 e_3$ and $v = v_1 e_1 + v_2 e_2 + v_3 e_3$.
+Find $w = w_1 e_1 + w_2 e_2 + w_3 e_3$ such that $(u\wedge v)^\perp = w$. Show $u\cdot w = 0$ and $v\cdot w = 0$.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}{(40 points)}
+Consider the one period model $x = (\sigma_1, \sigma_2, \sigma_3)$, $\Omega = [1/2,2] \times [1/2, 2]$, $X(\omega_1, \omega_2)
+= (|1 - \omega_1|, |1 - \omega_2|, |\omega_1 - \omega_2|)$.
+\begin{enumerate}
+\item Compute $X(\omega_1,\omega_2)$ for $\omega_1$, $\omega_2 \in \{1/2,1,2\}$.
+\item Describe the range of $X$, $X(\Omega)$.
+\item Find an arbitrage if $x = (0.2, 0.2, 0.5)$.
+\end{enumerate}
+\end{xca}
+
+\begin{xca}{(30 points)}
+Suppose the current exchange rates are {\small\tt EUR|GBP} $1.1$, {\small\tt EUR|USD} $0.78$, and 
+{\small\tt GBP|USD} $0.78/1.1 \approx 0.709$. An at-the-money
+straddle costs $\sigma_{\alpha|\beta}$ in currency $\alpha$ at the beginning of the period and
+and pays $|X_{\alpha|\beta} - x_{\alpha|\beta}|$ in currency $\beta$ at the end of the period,
+where $x_{\alpha|\beta}$ is the exchange rate at the beginning of the period and $X_{\alpha|\beta}$
+is the exchange rate at the end of the period. Assume no arbitrage and the {\small\tt EUR|GBP} rate will be
+in the interval $[0.55, 2.2]$ and the {\small\tt EUR|USD} rate will be in the interval $[0.36, 1.56]$ at the
+end of the period. 
+\begin{enumerate}
+\item Express the cash flows on the straddles in the three currency pairs above in terms of {\small\tt EUR} by converting at the
+appropriate exchange rates.
+\item Show $\sigma_{\tt GBP|USD} > \sigma_{\tt EUR|GBP} + \sigma_{\tt EUR|USD}$ implies an arbitrage
+exists and find one.
+\end{enumerate}
+\end{xca}
+
+\end{document}

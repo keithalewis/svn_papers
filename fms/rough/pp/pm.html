@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>Probability Measures</title>
+</head>
+
+<body>
+<h1>Probability Measures</h1>
+<p>
+We only consider <em>finitely additive</em> probability measures to
+avoid the technical issues invovled with countably additive measures.
+
+</p>
+<p>
+A <em>probability measure</em> is a function \(P\colon\mathcal{A}\to[0,1]\)
+such that \(P(\Omega) = 1\) and \(P(A\cup B) = P(A) + P(B)\) if \(A\)
+and \(B\) are disjoint (\(A\cap B = \emptyset\)).
+
+</p>
+<p>
+<span class="ex">Exercise.</span>
+<span class="it">Show \(P(\Omega\setminus A) = 1 - P(A)\).</span>
+</p>
+<p>
+<span class="ex">Exercise.</span>
+<span class="it">Show \(P(A\cup B) = P(A) + P(B) - P(A\cap B)\).</span>
+</p>
+<p>
+<span class="ex">Exercise.</span>
+<span class="it">Show \(P(\cup_{i=1}^n A_i) = \sum_i P(A_i)
+- \sum_{i\lt j} P(A_i\cap A_j)
++ \sum_{i\lt j\lt k} P(A_i\cap A_j\cap A_k) - \cdots
+\pm P(\cap_i A_i)\).</span>
+</p>
+<p>
+<span class="ex">Exercise.</span>
+<span class="it">Show that if
+\(g(A) = \sum_{B\subseteq A} f(B)\) then
+\(f(B) = \sum_{A\subseteq B} (-1)^{|B| - |A|} g(A)\)
+where \(|A|\) is the cardinality of the set \(A\).</span>
+</p>
+
+<h3>Remarks</h3>
+<p>
+What <em>is</em> a probability? Is it frequency of occurence? Is it a
+degree of belief?  Can it be represented by a number between 0 and 1?
+
+</p>
+<h3>References</h3>
+<p>
+E. T. Jaynes, <i>Probability Theory: The Logic of Science</i>,
+Cambridge University Press (2003).
+<a href="http://bayes.wustl.edu/etj/prob/book.pdf" target="_blank">
+link
+</a>
+&nbsp;
+<a href="http://ksvanhorn.com/bayes/jaynes/" target="_blank">errata</a>
+</p>
+
+</body>
+</html>

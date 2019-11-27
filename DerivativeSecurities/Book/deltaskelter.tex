@@ -1,0 +1,213 @@
+% ds.tex - notes on computing delta
+\documentclass[12pt,fleqn]{amsart}
+\usepackage{amsmath}
+
+\newcommand{\Var}{\mathop{\rm Var}}
+\newcommand{\Cov}{\mathop{\rm Cov}}
+
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{lemma}{Lemma}
+
+\begin{document}
+
+\title{Delta Skelter}
+\author{Keith A. Lewis}
+\maketitle
+
+\begin{abstract}
+The delta hedge of an option is the derivative of the option value
+with respect to the price of the underlying for many models used in
+mathematical finance. We show that the standard one period binomial
+model commonly taught to beginning MBA students does not belong to
+this class. The more general formula that the dollar delta is the
+derivative of the future value of the option with respect to return 
+is shown to hold for this and several other models.
+\end{abstract}
+
+The theory of risk-neutral pricing is based on the notion of delta
+hedging. Changes in the price of an option are related to the changes
+in the price the instrument underlying the option. The ratio of these
+changes is called delta. Holding delta shares of the underlying
+guarantees this hedge will match the option price change, under
+certain assumptions.
+
+...
+
+\section{One Period Binomial}
+
+The one period binomial model assumes there is a stock with price $s$
+at the beginning of a period and that the stock price will be either
+$S^+$ with probability $p$ or $S^-$ with probability $1 - p$ at the
+end of the period. The only other parameter is the return, $R$, over the
+period. This represents a risk-free zero coupon bond having price $1/R$ at
+the beginning of the period that pays one unit at the end of the period.
+We could write $R = \exp(rt)$, where $t$ is the timespan of the period
+and $r$ is the continuously compounded interest rate, but don't.
+
+Options pay some function, $f$, of the final stock price.  Let $V^+ =
+f(S^+)$ and $V^- = f(S^-)$. We can find an investment strategy using only
+the zero coupon bond and the stock that replicates the option payoff.
+Let $m$ be the amount of cash invested in the bond and $n$ the number
+of shares purchased at the beginning of the period.  We require that
+the value of this porfolio matches the option payoff at the end of the
+period, i.e., $mR + nS^+ = V^+$ and $mR + nS^- = V^-$.
+
+In the absence of arbitrage, the value of the option is the cost of the
+replicating portfolio, $v = m + ns$. Solving the two linear equations
+for the two unknowns yields $n = (V^+ - V^-)/(S^+ - S^-)$, $m
+= (S^+V^- - S^-V^+)/R(S^+ - S^-)$, and
+
+\begin{equation}
+v = \frac{1}{R}\left(\frac{S^+ - Rs}{S^+ - S^-} V^- 
+		+ \frac{Rs - S^-}{S^+ - S^-} V^+\right).
+\end{equation}
+
+Note that $\partial v/\partial s = (V^+ - V^-)/(S^+ - S^-) = n$, so for
+this model the derivative of the option value with respect to the
+underlying stock price does result in the correct delta. It even
+looks right, delta is the difference in option value divided by the difference
+in underlying value.
+
+Just to get some idea of the typical size of these terms, take $s = 100$,
+$R = 1.01$, $S^+ = 103$, and $S^- = 99$. For a call with strike $101$,
+$m = -49$, $n = 0.5$, and $v = 0.99$. For a put having the same
+strike, $m = 51$, $n = 0.5$, and $v = 0.99$.
+
+This is not the parameterization for the one period binomial model
+as commonly taught in beginning MBA courses. (\cite{opb}) Instead of $S^+$
+and $S^-$, these parameters are replace with $u$ (up) and $d$ (down)
+where $S^+ = su$ and $S^- = sd$. For this model, the formula for the
+option value is
+\begin{equation}
+v = \frac{1}{R}\left(\frac{u - R}{u - d} f(sd) 
+		+ \frac{R - d}{u - d} f(su)\right).
+\end{equation}
+
+Note that, unlike the previous parameterization, the option
+payoff depends on the initial stock price. In this case
+\begin{equation*}
+\frac{\partial v}{\partial s} = \frac{1}{R}
+	\left(\frac{u - R}{u - d} f'(sd)d + \frac{R - d}{u - d} f'(su)u\right)
+\end{equation*}
+so in general $\partial v/\partial s \not= n$. Note also that if $f$ is
+a call or put payoff and the up or down stock price is equal to the
+strike, this formula becomes problematic because the derivative does
+not exist at the strike.
+
+At this point you may think I am trying to trick you, or that
+I am simply wrong. There is no trick and the math is so simple
+that you can easily convince yourself it it correct. I was surprised
+when I stumbled across this result. How can something so simple
+be overlooked?
+
+One possible answer is that nobody uses the one period binomial
+model to trade. The multiperiod binomial masks this fact since it is
+a reasonable approximation to the classical Black-Scholes method of
+option pricing.
+
+It is natural to look for one formula that works for both model
+parameterizations.  The formula that recovers the correct dollar delta,
+$ns$, in both cases is $\partial (Rv)/\partial R$. The dollar delta (the
+amount of money required to purchase the delta hedge) is the derivative
+of the future value of the option at expiration with respect to the
+return over the period.
+
+In the case of formula (1)
+\begin{equation*}
+\frac{\partial(Rv)}{\partial R} = \left(\frac{-s}{S^+ - S^-} V^- 
+		+ \frac{s}{S^+ - S^-} V^+\right) = \frac{V^+ - V^-}{S^+ - S^-}s.
+\end{equation*}
+and in the case of formula (2)
+\begin{equation*}
+\frac{\partial(Rv)}{\partial R} = \left(\frac{-1}{u - d} f(sd) 
+		+ \frac{1}{u - d} f(su)\right) = \frac{f(su) - f(sd)}{su - sd}s.
+\end{equation*}
+
+Surprisingly, this formula also works in a number of other situations,
+including ones outside the domain of the theory of risk-neutral pricing.
+
+\section{One Period Model}
+
+The one period model assumes there is a stock with price $s$ at the
+beginning of the period and that the stock price will be a random
+variable $S$ at the end of the period. We again denote the return over
+the period by $R$ and the option payoff by $V = f(S)$ at the end of the
+period. If the stock takes on only two values with nonzero probability,
+this reduces to the one period binomial model. In general it is not
+possible to replicate the option using cash and the stock, however it
+is not unreasonable to try to find $m$ and $n$ that minimize
+$E[(mR + nS - V)^2]$.
+
+Taking partial derivative with respect to $m$ and $n$ and setting
+these equal to zero gives
+\begin{eqnarray*}
+E[(mR + nS - V)R] &=& 0\\
+E[(mR + nS - V)S] &=& 0
+\end{eqnarray*}
+so $mR + nE[S] = E[V]$ and $mR + nE[S^2] = E[VS]$. Solving these
+two linear equations for the unknowns gives
+$n = \Cov(V,S)/\Var(S)$ and $m = (E[V] - nE[S])/R$. The cost of
+setting up the optimal portfolio is $v = m + ns = E[V]/R - n(E[S]/R -
+s)$.
+
+The formula for the minimum give a measure of how well the
+hedge performs. Using the conditions on the partial derivatives
+vanishing shows the mininum $E[(mR + nS - V)^2]
+= E[(mR + nS - V)(mR + nS - V)] = E[(V - mR + nS)V]$
+
+Assuming $S$ does not depend on $s$, it is simple to see that
+the same formula for the delta hedge in the stock holds as in the risk
+neutral case. Likewise for the dollar delta.
+
+\section{Appendix}
+
+Recall that a random variable, $X$, having a standard normal distribution
+has density function $f(x) = \exp(-x^2/2)/\sqrt{2\pi}$, $-\infty < x <
+\infty$ \cite{normal}. In this case the mean of $X$ is zero and the
+variance of $X$ is one.  Every normally distributed random variable can
+be written as $N = \mu + \sigma X$, where $\mu$ is the mean and $\sigma^2$
+is the variance of $N$.
+
+\begin{lemma}
+If $N$ is a normally distributed random variable,
+then $E[\exp(N)] = \exp(E[N] + \Var(N)/2)$.
+\end{lemma}
+
+\begin{proof}
+The proof involves completing the square and the substitution
+$x\to x + \sigma$.
+\begin{eqnarray*}
+E[\exp(N)]
+ &=& \int_{-\infty}^\infty e^{\mu + \sigma x}
+ 	e^{-x^2/2}\, dx/\sqrt{2\pi}\\
+ &=& e^{\sigma^2/2}\int_{-\infty}^\infty e^\mu
+ 	e^{-(x - \sigma)^2/2}\, dx/\sqrt{2\pi}\\
+ &=& e^{\mu + \sigma^2/2}\int_{-\infty}^\infty
+ 	e^{-x^2/2}\, dx/\sqrt{2\pi}\\
+ &=& e^{\mu + \sigma^2/2}
+\end{eqnarray*}
+\end{proof}
+
+\begin{lemma}
+If $N$ is a normally distributed random variable and $f$ is a function,
+then $E[\exp(N)f(N)] = E[\exp(N)]E[f(N + Var(N)]$.
+\end{lemma}
+
+\begin{proof}
+The proof is essentially the same as in the previous lemma.
+Assume $\mu = 0$ for now.
+\begin{eqnarray*}
+E[\exp(N)f(N)]
+ &=& \int_{-\infty}^\infty e^{\sigma x} f(\sigma x)
+    e^{-x^2/2}\, dx/\sqrt{2\pi}\\
+ &=& e^{\sigma^2/2}\int_{-\infty}^\infty f(\sigma x)
+    e^{-(x - \sigma)^2/2}\, dx/\sqrt{2\pi}\\
+ &=& e^{\sigma^2/2}\int_{-\infty}^\infty
+    f(\sigma(x + \sigma))e^{-x^2/2}\, dx/\sqrt{2\pi}\\
+ &=& E[e^N] E[f(N + \sigma^2)]
+\end{eqnarray*}
+Replacing $N$ by $N + \mu$ and noting $\Var(N) = \Var(N + \mu)$
+completes the proof.
+\end{proof}
+
+\end{document}

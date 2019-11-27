@@ -1,0 +1,265 @@
+%\documentclass[fleqn]{article}
+\documentclass[fleqn]{amsart}
+\usepackage{amssymb,amsmath,amsthm,hyperref,setspace}
+
+\newcommand{\R}{\mathbf{R}}
+
+\newcommand{\BB}{\mathcal{B}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\GG}{\mathcal{G}}
+\newcommand{\HH}{\mathcal{H}}
+\newcommand{\PP}{\mathcal{P}}
+\newcommand{\QQ}{\mathcal{Q}}
+\newcommand{\XX}{\mathcal{X}}
+
+\newcommand{\weakstar}{weak$^*$\ }
+
+\newcommand{\ran}{\mathop{\mathrm{ran}}}
+\renewcommand{\ker}{\mathop{\mathrm{ker}}}
+\providecommand{\Var}{\mathop{\mathrm{Var}}}
+\renewcommand{\Re}{\mathop{\mathrm{Re}}}
+\renewcommand{\Im}{\mathop{\mathrm{Im}}}
+\newcommand{\Arg}{\mathop{\mathrm{Arg}}}
+
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\providecommand{\norm}[1]{\lVert#1\rVert}
+\providecommand{\pair}[1]{\langle#1\rangle}
+
+\newcommand{\onehalf}{\frac{1}{2}}
+
+\newtheorem{definition}{Definition}[section]
+%\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{example}{Example}
+
+%\doublespace
+
+\title{Option Pricing}
+\author{Keith A. Lewis}
+\date{\today}
+\begin{document}
+%\begin{abstract}
+%\end{abstract}
+\address{KALX, LLC \tt{\url{http://kalx.net}}}
+%\thanks{
+%For the memories.
+%}
+
+\maketitle
+
+\section{Introduction}
+As my friend Peter Carr admonishes me at regular intervals, ``Never use
+the word `volatility' without an adjective.'' Black-Scholes implied
+volatility is so seductively useful we often forget how limited it
+is when it comes to pricing options in the real world.
+Perhaps we should banish the word altogether and talk only about
+`distribution' instead. As pointed out by Ross (other cite?), the so-called
+risk-neutral cumulative distribution of the underlying is the 
+derivative of put price with respect to strike. After all, this
+gives us a direct method of obtaining the distribution from market
+data.
+
+Unfortunately, this parameterization is not very tractable. Options
+trade at only a limited number of strikes and taking a derivative
+introduces more noise. The Holy Grail is to find a model
+that fits current prices and does not have parameters that
+change over time. 
+
+\section{General Model}
+Let \((X_t)_{t\ge0}\) be any stochastic process having independent
+increments. Define the
+futures process to be
+\[
+	F_t = f e^{-\kappa_t(s) + s X_t}
+\]
+where \(\kappa_t(s) = \log E e^{s X_t}\) so \(E F_t = f\) for all \(t\).
+Futures are martingales because their price is always zero.
+If \(X_t\) is Brownian motion, then \(\kappa_t(s) = s^2t/2.\)
+
+Recall \(\kappa(s) = \log E e^{sX}\) is the {\em cumulant} of the
+random variable \(X\). Note \(\kappa'(0) = E[X]\) and \(\kappa''(0) =
+\Var(X)\). The higher order derivatives have a less cogent relationship
+with the moments.
+
+The price of a put with strike $k$ expiring at time $t$, assuming zero
+interest rates, is
+\begin{align*}
+E\max\{k - F_t, 0\} &= E(k - F_t)1(F_t \le k) \\
+&= kE1(F_t \le k) - E F_t1(F_t \le k)\\
+&= kP(F_t \le k) - f P^*(F_t \le k),\\
+\end{align*}
+where \(dP^*/dP = e^{-\kappa_t(s) + s X_t}\).
+Note \(P^*\) is a probability measure. This trivial result
+goes by the name Esscher transform.
+
+The {\em characteristic} function of the random variable \(X\)
+is \(\phi(u) = \log E e^{iuX}\). Note \(\phi(u) = \kappa(iu)\)
+where \(\kappa\) is the cumulant so \(E X = -i\phi'(0)\)
+and \(\Var X = -\phi''(0)\).
+
+If \((X_t)\) is a L\'evy process then \(E e^{iuX_t} = e^{t\phi(u)}\)
+where \(\phi(u)\) is the characteristic function of \(X_1\).
+It is also the case that \(X_1\) is infinitely divisible and we
+can derive a more interesting and useful result.
+
+Prior to L\'evy and Khintchine, Kolomogorov (cite?) derived a
+parameterization for the characteristic function of infinitely divisible
+distributions having finite variance. There exists a number \(\gamma\)
+and a non-decreasing function \(G(x)\) such that
+
+\[
+\phi(u) = i\gamma u + \int_{-\infty}^\infty K_u(x)\,dG(x),
+\]
+where \(K_u(x) = (e^{iux} - 1 - iux)/x^2\).
+Note \(\phi'(u) = i\gamma + i\int_{-\infty}^\infty (e^{iux} - 1)/x\,dG(x)\)
+and \(\phi''(u) = -\int_{-\infty}^\infty e^{iux}\,dG(x)\)
+so \(E X = -i\phi'(0) = \gamma\) and \(\Var X = -\phi''(0)
+= \int_{-\infty}^\infty dG(x) = G(\infty) - G(-\infty)\).
+
+\begin{lemma}
+If \(X\) is infinitely divisible with Kolomogorov parameters \(\gamma\)
+and \(G\), then \(Ee^{isX}e^{iuX} = Ee^{isX}Ee^{iuX^*}\) where
+\(X^*\) has Kolomogorov parameters \(\gamma^*
+= \gamma + \int_{-\infty}^\infty (e^{isx} - 1)/x\,dG(x) = -i\phi'(s)\)
+and \(dG^*(x) = e^{isx}dG(x)\).
+\end{lemma}
+\begin{proof}
+We have
+\begin{align*}
+E e^{isX}e^{iuX} &= E e^{i\gamma(s+u) + \int_{-\infty}^\infty K_{s+u}(x)\,dG(x)}\\
+	&= Ee^{isX} e^{i\gamma u
+		+ \int_{-\infty}^\infty (K_{s+u}(x) - K_s(x))\,dG(x)}
+\end{align*}
+A simple calculation shows
+\(K_{s+u}(x) - K_s(x) = iu(e^{isx} - 1)/x + e^{isx}K_u(x)\)
+so \(E e^{isX}e^{iuX} = Ee^{isX}Ee^{iuX^*}\) where \(X^*\) is
+infinitely divisible with Kolomogorov parameters
+\(\gamma^* = -i\phi'(s)\) and \(dG^*(x) = e^{isx}\,dG(x)\).
+\end{proof}
+
+We call \(X^*\) the \(K\)-transform of \(X\).
+
+If \(X\) is standard normal, then \(\gamma = 0\), \(G = 1_{[0,\infty)}\)
+and \(\phi(u) = -u^2/2\) so \(\gamma^* = is\) and \(dG^* = dG\).
+We have \(e^{-s^2/2}Ee^{iu(is + X)} = e^{-s^2/2}e^{-su - u^2/2}
+= e^{-(s + u)^2/2} = Ee^{isX}e^{iuX}\).
+
+\begin{corollary}
+If \(f\) and its Fourier transform are integrable, then
+\(Ee^{isX}f(X) = Ee^{isX} Ef(X^*)\) where \(X^*\) is the
+K-transform of \(X\).
+\end{corollary}
+\begin{proof}
+If \(f\) and its Fourier transform are integrable, then
+\(f(x) = \int_{-\infty}^\infty e^{iux}\hat{f}(u)\,du/2\pi\), where
+\(\hat{f}(u) = \int_{-\infty}^\infty e^{-iux}f(x)\,dx\) is the
+Fourier transform of \(f\).
+\begin{align*}
+E e^{isX}f(X) &= \int_{-\infty}^\infty E e^{iuX}e^{iuX} \hat{f}(u)\,du/2\pi\\
+	&= Ee^{isX}\int_{-\infty}^\infty E e^{iuX^*} \hat{f}(u)\,du/2\pi\\
+	&= Ee^{isX} E f(X^*)
+\end{align*}
+\end{proof}
+
+If \((X_t)\) is Brownian motion, then the usual formula for the
+Black-Scholes/Merton put price is \(E\max\{k - F_t, 0\}
+= kN(-d_1) - fN(-d_2)\) where \(N\) is the standard normal
+cumulative distribution, \(d_1 = (\log f/k + \sigma^2t/2)/\sigma\sqrt{t}\)
+and \(d_2 = d_1 - \sigma\sqrt{t}\).
+The next corollary generalizes this
+to any L\'evy distribution.
+
+\begin{corollary}
+If \((X_t)\) is a L\'evy process and \(X_1\) has Kolomogorov
+parameters \(\gamma\), \(G\),
+then \(E[e^{\sigma X_t}f(X_t)] = E[e^{\sigma X_t}] E[f(X_t^*)]\) where
+\((X_t^*)\) is L\'evy and \(X_t^*\) has Kolomogorov
+parameters \(\gamma^* = -it\kappa'(\sigma)\)
+and \(dG^*(x) = te^{\sigma x}\,dG(x)\).
+\end{corollary}
+\begin{proof}
+Apply the lemma with \(s = -i\sigma\) using \(\phi_t(u) = t\phi(u)\).
+\end{proof}
+
+%For a put option we want \(f = 1_{(-\infty, z]}\), however this is
+%not integrable. If we use \(f(x) = e^{\zeta x}1_{(-\infty, z]}(x)\)
+%which is integrable when \(\zeta > 0\), as is its Fourier transform
+%\(\hat{f}(u) = e^{(\zeta - iu)z}/(\zeta - iu)\) we get
+%\(Ef(X_t) = \int_{-\infty}^\infty Ee^{iuX_t}
+%e^{(\zeta - iu)z}/(\zeta - iu)\,du\) and
+%\(dEf(X_t)/dz = \int_{-\infty}^\infty Ee^{iuX_t}
+%e^{(\zeta - iu)z}\,du\).
+
+\section{\(K\) Model}
+We propose a model where \(X_1\) has the Kolomogorov parameters
+\(\gamma = 0\) and 
+\begin{equation*}
+G(x) =
+\begin{cases}
+ae^{x/\alpha} & \text{if $x < 0$,}\\
+1 - be^{-x/\beta} & \text{if $x > 0$.}
+\end{cases}
+\end{equation*}
+so
+\begin{equation*}
+G'(x) =
+\begin{cases}
+a/\alpha e^{x/\alpha} & \text{if $x < 0$,}\\
+(1 - a - b)\delta_0 & \text{if $x = 0$,}\\
+b/\beta e^{-x/\beta} & \text{if $x > 0$}\\
+\end{cases}
+\end{equation*}
+Note that this paramterization is preserved under the
+\(K\)-transformation.
+The characteristic function
+of the \(K\) model has a closed form solution:
+%\[
+%\kappa(s) =
+%\frac{a}{\alpha}(-s + k_\alpha(u))
+%+(1 - a - b)s^2/2
+%+\frac{b}{\beta}(s - k_{-\beta}(u)),
+%\]
+%where \(k_\alpha(s) = (1/\alpha + s)\log (1 + \alpha s)\).
+%Note \(k_\alpha(s) = k_1(\alpha s)/\alpha\).
+\[
+\phi(u) =
+\frac{a}{\alpha}(-iu + k_\alpha(u))
+-(1 - a - b)u^2/2
++\frac{b}{\beta}(iu - k_{-\beta}(u)),
+\]
+where \(k_\alpha(u) = (1/\alpha + iu)\log (1 + i\alpha u)\).
+
+%Next note that
+%\(\Re e^{k_1(u)}
+%= e^{-u\arctan u}\sqrt{1 + u^2} \cos(\arctan u + u\log\sqrt{1 + u^2})\).
+%It turns out \(e^{k_1(u)}\) is well approximated by \(e^{iBu - Au^2}\)
+%where \(A = 1 - 1/\sqrt{2}\) and \(B = \sqrt[4]{2}\).
+%In particular the power series expansions agree to fourth order.
+% < 5e-6 on [0,0.3], 1e-4 on [0,0.5] and .004 on [0,1], 0.011 on [0,1.5]
+
+Recall that the density function of \(X_t\) is
+\begin{align*}
+f_t(x) &= \int_{-\infty}^\infty E e^{iuX_t} e^{-iux}\,du/2\pi \\
+	&= \int_{-\infty}^\infty e^{t\phi(u) - iux}\,du/2\pi \\
+	&= \int_{-\infty}^\infty e^{
+		i(\frac{-at}{\alpha} + \frac{bt}{\beta} - x)u
+		+ \frac{atk_1(\alpha u)}{\alpha^2}
+		+ \frac{btk_1(-\beta u)}{\beta^2}
+		- \frac{1}{2}(1 - a - b)u^2t
+		}\,du/2\pi \\
+\end{align*}
+where we use \(k_\alpha(u) = k_1(\alpha u)/\alpha\).
+
+It turns out that \(\Re e^{b k_1(a u)}\) is well approximated by
+\(e^{-Au^2}\cos Bu\) where
+\(A = \frac{1}{2}(a^2b + a^2b^2 - a^2\sqrt{b(b^3 + 2b - 1)})\) and
+\(B = a\sqrt[4]{b^4 + 2b^2 - b}\).
+
+\end{document}
+
+% Ross - distribution
+% Esscher, F. (1932). "On the Probability Function in the Collective Theory of Risk". Skandinavisk Aktuarietidskrift 15: 175–95.
+

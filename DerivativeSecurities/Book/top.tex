@@ -1,0 +1,22 @@
+\chapter{Topology}
+
+{\em Topology} is the mathematical study of the word near. Everything in (classical) mathematics
+is a set. A {\em metric} on a set, $S$, specifies the distance between two points. It is a function 
+$d\colon S\times S\to\R$ such that $d(x,y) = 0$ implies $x = y$, $d(x,y) = d(y,x)$ and $d(x,y) + d(y,z) \ge d(x,z)$.
+The last condition is the {\em triangle inequality} which generalizes the Euclidean notion that the shortest 
+distance between two points is a line. 
+
+\begin{excercise}
+If $d$ is a metric, then $d(x,y) \ge 0$ for all $x$, $y$.
+\end{exercise}
+
+In a metric space, a sequence $(x_n)_{n\ge0}$ converges to a point $x$ if $\lim_{n\to\infty} d(x_n,x) = 0$.
+A sequence, $(x_n)_{n\ge)}$ is a {\em Cauchy sequence} if for every $\epsilon > 0$ there exists
+$N$ such that $d(x_m, x_n) < \epsilon$ when $m, n > N$. 
+A metric space is {\em complete} if every Cauchy sequence converges.
+
+Define $B(x, r)$, the open ball of radius $r$ centered at $x$, to be $\{y\in S : d(x, y) < r\}$.
+A set, $U$, is {\em open} if for every $x\in U$, there exists $r > 0$ such that $B(x, r) \subset U$.
+The collection of open sets of a metric space are closed under arbitrary union and under finite
+intersection. Any collection of sets having these two properties is called a {\em topology}.
+

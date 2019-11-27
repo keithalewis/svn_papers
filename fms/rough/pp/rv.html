@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+<title>Random Variables</title>
+</head>
+
+<body>
+<h1>Random Variables</h1>
+<p>
+The modern definition of a <em>random variable</em> is that it is a
+function from a probability space to the real numbers.
+
+</p>
+<p>
+It will probably be no surprise this was not the first definition of a
+random variable.  In its early stages, probability theory was considered
+a disreputable branch of mathematics useful only for wagering on games of
+chance. It wasn't until the 1930's when it was placed on mathematically
+sound measure theoretic standings by Kolomogorov and others that it
+became a respectable branch of mathematics. We've seem to have come full
+circle now.
+
+</p>
+<p>
+The first definition was more closely related to cumulative distribution
+functions.  A random variable is like the variable we all learned in high
+school algebra.  It is a placeholder for a number in equations, but with
+additional information about the probability of what values it can take.
+
+</p>
+<p>
+The <em>expected value</em> of the random variable \(X\)
+that takes on only a finite number of values \(\{x_i\}\) is
+
+\[
+E[X] = \sum_i x_i\,P(X = x_i) = \sum_i x_i\,P(X^{-1}(\{x_i\})).
+\]
+More generally, if \(f\) is a real-valued function we can define
+\[
+E[f(X)] = \sum_i f(x_i)\,P(X = x_i).
+\]
+If you know something about measure theory and
+Riemann-Stieltjes integration, you
+can show \(\int_\Omega f\,dP = \int_\R f(x)\,dF(x)\) where
+\(F\) is the cdf of \(X\).
+</p>
+
+</body>
+</html>

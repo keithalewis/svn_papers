@@ -1,0 +1,100 @@
+\documentclass[11pt,fleqn]{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\title{Splines}
+\author{Keith A. Lewis}
+\maketitle
+
+\begin{abstract}
+Notes describing how to represent and compute piecewise polynomial
+univariate functions using basis splines.
+\end{abstract}
+
+\section{Newton Form}
+Fix a polynomial, $p(x)$, of order $n + 1$, so the highest power of $x$
+in $p(x)$ is $n$. Choose $n$ points $\xi_0$, \dots, $\xi_{n-1}$. Then
+there exist unique coefficients $a_0$, \dots, $a_n$ such that
+$p(x) = a_0 + (x - \xi_0)a_1 + (x - \xi_0)(x - \xi_1)a_1 + \cdots
+ + (x - \xi_0)(x - \xi_1)\cdots(x - \xi_{n-1})a_n$.
+We can also write this formula as
+\begin{equation}
+p(x) = \sum_{j=0}^n(x - \xi_0)\cdots(x - \xi_{j-1})a_j.
+\end{equation}
+The $a_k$ are called the Newton coefficients of the polynomial at $\xi_0$,
+\dots, $\xi_{n-1}$.
+
+It is clear that $a_0 = p(\xi_0)$. It is slightly less clear $a_1 =
+(p(\xi_1) - p(\xi_0))/(\xi_1 - \xi_0)$, if $\xi_0\not=\xi_1$.  To get
+the general algorithm for computing the Newton coefficients in the case
+that all $\xi_k$ are distinct, define the 0-th divided difference
+to be $[\xi_i]p = p(\xi_i)$, and the first divided difference to be
+$[\xi_i,\xi_{i+1}]p = (p(\xi_{i+1}) - p(\xi_i))/(\xi_{i+1} - \xi_i)$.
+Define the $k$-th divided difference
+\begin{equation}
+[\xi_i,\dots,\xi_{i+k}]p = \frac{[\xi_{i+1},\dots,\xi_{i+k}]p
+	- [\xi_{i},\dots,\xi_{i+k - 1}]p}{t_{i+k} - t_i}.
+\end{equation}
+We have $a_k = [\xi_0,\dots,\xi_k]p$.
+
+These coefficients provide an efficient way to compute the value of
+the polynomial at a point, $\xi$.  Define $b_n = a_n$ and $b_k = a_k +
+(\xi - \xi_k)b_{k+1}$ for $k < n$, then $b_0$ is the value of the
+polynomial at $\xi$.  Using a single variable, $b$, instead of $b_k$
+in this algorithm is called the Horner method, however the intermediate
+values are also interesting.
+
+The $b_k$ are the Newton coefficients of $p$ at $\xi$, $\xi_0$, \dots,
+$\xi_{n-2}$, so $p(x) = b_0 + (x - \xi)b_1 + (x - \xi)(x - \xi_0)b_2 +
+\cdots + (x - \xi)(x - \xi_0)\cdots(x - \xi_{n - 2})b_n$ for any $x$,
+not just $x = \xi$. This can be seen by using the divided difference
+formulas: $b_0 = [\xi]p$, $b_1 = [\xi, \xi_0]p$, etc.
+
+Rolle's theorem implies there exists $\zeta$
+in the smallest interval containing $\xi_i$, \dots, $\xi_{i+k}$
+such that $[\xi_i,\dots,\xi_{i+k}]p = p^{(k)}(\zeta)/k!$.
+This leads to the general definition of the divided difference as
+\begin{equation}
+[\xi_i,\dots,\xi_{i+k}]p =
+	\begin{cases}
+		p^{(k)}(\xi_i)/k! & \text{if $\xi_i = \cdots = \xi_{i+k}$},\\
+		\displaystyle{
+		 \frac{[\xi_{i},\dots,\hat{\xi_{s}},\dots,\xi_{i+k}]p
+		 - [\xi_{i},\dots,\hat{\xi_{r}},\dots,\xi_{i+k}]p}{t_s - t_r}}
+		& \text{if $\xi_r \not= \xi_s$,}
+	\end{cases}
+\end{equation}
+where the hat indicates a missing term. There is no restriction on
+the ordering of the $\xi_k$.
+
+For computation it is convenient to define
+$p_{i,k} = [\xi_i,\dots,\xi_{i+k}]p$. The formula used in the
+generalized Horner method is
+$p_{i,k-1} = p_{i+1,k-1} + (t_{i+k} - t_i)p_{i,k}$.
+
+\subsection{Examples}
+This section illustrates how to use the Newton form
+and divided differences to evaluate a polynomial and its derivatives.
+
+Let $p(x) = 1 + 2x + 3x^2 + 4x^3$ and choose $\xi_0 = \xi_1 = \xi_2 = 0$,
+$\xi_3 = 1$.
+
+\section{Representations}
+Polynomials can be represented in various ways. Suppose we want to find
+the polynomial of order $n$ with $p(\xi_i) = \eta_i$, for $0 \le i \le
+n$. The method due to Lagrange is to find polynomials $\lambda_i(x)$
+of order $n$ with
+$\lambda_i(\xi_j) = \delta_{ij}$, where $\delta_{ij}$ is the Kronecker
+delta function. Then clearly $p(x) = \sum_0^n \eta_i\lambda_i(x)$
+interpolates the given values.
+
+A formula for the $\lambda_i$ is $\lambda_i(x) = \prod_{j\not=i}(x -
+\xi_j)/(\xi_i - \xi_j)$, but this is not efficient. It involves
+more computations than the Horner method. (Quantify) It gets even
+worse when you want to compute derivatives.
+
+Note $a_0 = [\xi_0]p$, $a_1 = [\xi_0, \xi_1]p$, \dots,
+$a_n = [\xi_0, \dots, \xi_n]p$.
+
+\end{document}

@@ -1,0 +1,64 @@
+\documentclass[12pt,letterpaper]{report}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{lmodern}
+\usepackage{kpfonts}
+\author{Keith A. Lewis}
+\title{Trinomial Model}
+\begin{document}
+\maketitle
+Fix \(t_0 < t_1 < \cdots < t_n\) and let \(R_j\) be the realized return
+from \(t_j\) to \(t_{j+1}\), i.e., 1 unit invested at time \(t_j\)
+pays \(R_j\) at time \(t_{j+1}\) where \(R_j\) is known at
+time \(t_j\). The stochastic discount to time \(t_j\)
+is \(D_j = \Pi_{i<j}1/R_i\).
+
+If the price of an instrument at time \(t_j\) is \(X_j\) and pays a cash flow
+\(C_j\) then an arbitrage free model satisfies
+\[
+X_j D_j = E_j\left[\sum_{j<i\le k} C_i D_i + X_k D_k\right]
+\]
+where \(E_j\) is the conditional expectation at time \(t_j\).
+
+If \(D(i,j)\) is the price at time \(t_i\) of a zero coupon bond maturing at
+time \(t_j\) then 
+\[D(i,j) = E_iD_j/D_i.
+\]
+Assume we are given \(D(0,j)\)
+for all \(j\). Define \(f_j\) by \(D(0,j) = \Pi_{i<j}e^{-f_i\Delta t_i}\)
+and \(r_j\) by \(D_j = \Pi_{i<j}e^{-r_i\Delta t_i}\).
+
+A forward contract has price \(0\) at time \(t_i\) and has cash flows
+\(-1\) at time \(t_j\) and \(1 + F(i;j,k)\delta_{jk}\) at time \(t_k\)
+where \(\delta_{jk}\) is the day count fraction from \(t_j\) to
+\(t_k\). Assuming no arbitrage, 
+\[
+	F(i;j,k) = \frac{1}{\delta_{jk}}\left(D(i,j)/D(i,k) - 1\right).
+\]
+
+The state space for the trinomial model is \(\Omega = \{(i,j)\colon 1\le i\le n, -i\le j\le i\}\)
+and probabilities \(p_{ij}^\delta\) for the
+transitions \((i,j)\to (i + 1,j + \delta)\) for \(\delta\in\{1,0,-1\}\).
+Suppose \(D_{ij}\) is the value of \(D_i\) in state \((i-1,j)\).
+(Recall \(D_j\) is predictable.)
+To tune the model to the spot curve we require \(D(0,j) = E D_j\).
+Recall \(D_0 = 1\). Since \(E D_1 = D_1\) we have \(D_1 = D(0,1)\).
+From \(D(0,2) = ED_2\) we have \(D(0,2) = D_{11}p_1^+ + D_{10}p_1 + D_{1-1}p_1^-\).
+
+The trinomial model is \(r_j = f_j(1 + \delta\sigma)\) where
+\(\delta = \epsilon\) with probability \(p_\epsilon\) for
+\(\epsilon\in\{-1,0,1\}\).
+
+Clearly \(f_0 = r_0\). Since \(D(0,2) = ED_2\) we have
+\(e^{-f_1\Delta t_1} = Ee^{-r_1\Delta t_1}\) so \(
+1 = e^{\Delta\phi}p_- + (1 - p_- - p_+) +e^{-\Delta\phi}p_+
+\) where \(\Delta\phi = f\sigma\Delta t\), hence
+\(p_+ = e^{\Delta\phi} p_-\).
+
+Start with \(D_j = \Pi_{i<j}e^{-f_i(1+\sigma)^{W_i}\Delta t_i}\).
+If \(\sigma = 0\) then \(D_j = D(0,t_j)\).
+Note \(dED_j/d\sigma = \Pi_{i<j}e^{-f_i(1+\sigma)^{W_i}\Delta t_i}\).
+
+\end{document}

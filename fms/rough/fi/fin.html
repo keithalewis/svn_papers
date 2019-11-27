@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+<link rel="stylesheet" href="http://kalx.net/fms/mathjax.css" type="text/css">
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full.js,http://kalx.net/fms/mathjax.js">
+</script>
+
+</head>
+<body>
+
+<title>
+Fixed Income Notation
+</title>
+
+</head>
+<body>
+
+<h1>
+Fixed Income Notation
+</h1>
+<p>
+The <em>short rate process</em> \((r_t)_{t\ge0}\) represents a series
+of instruments that cost 1 unit at time \(t\) and pay \(1 + r_t\,dt =
+\exp(r_t\,dt)\) at time \(t + dt\).  The <em>stochastic discount</em> is
+defined to be
+\[
+D_t = e^{-\int_0^t r_s\,ds}.
+\]
+If \((X_t)_{t\ge0}\) is
+the price of an instrument that pays no cash flows, then the fundamental
+theorem of asset pricing implies \((X_tD_t)_{t\ge0}\) is a martingale.
+Note that one unit invested at time 0 and rolled over at the short rate
+grows to \(1/D_t\) at time t. Clearly \((1/D_t) D_t = 1\) is a martingale.
+
+</p>
+<p>
+Let \(D(t,u)\) be the price at time \(t\) of a <em>zero coupon bond</em>
+that pays 1 unit at time \(u\). Since \(t\mapsto D(t,u)D_t\) is a
+martingale we have \(D(t, u)D_t = E_t D(u,u)D_u = E_t D_u\) so
+\[
+D(t, u) = \frac{E_t D_u}{D_t}.
+\]
+A forward starting zero coupon bond starting at \(u\)
+and terminating at \(v\) represents a zero cost contract at time \(t\)
+to pay \(D(t;u,v)\) at time \(u\) and receive a payment of 1 unit
+at time \(v\). This is equivalent to being short \(D(t;u,v)\) a zero
+coupon bond maturing at \(u\) and being long a zero coupon bond maturing
+at \(v\), hence \(0 = -D(t;u,v)D(t,u) + D(t,v)\) and so \(D(t;u,v)
+= D(t,v)/D(t,u)\).
+
+</p>
+<p>
+A <em>forward rate agreement</em> is a zero cost contract at time \(t\)
+over the interval \([u,v]\) to pay 1 unit at time \(u\) and receive \(1 +
+F_\delta(t;u,v)\delta(u,v)\) at time \(v\), where \(\delta(u,v)\) is the
+<em>day count fraction</em> (approximately equal to \(v - u\) in years)
+for the interval. Scaling the payoffs by dividing by \(1 +
+F_\delta(t;u,v)\delta(u,v)\) is equivalent to a forward starting
+zero coupon bond so we have \(D(t;u,v) = 1/(1 + F\delta)\) hence
+\[
+F_\delta(t;u,v) = \frac{1}{\delta(u,v)}(\frak{D(t,u)}{D(t,v)} - 1)
+\]
+
+</p>
+</body>
+</html>
